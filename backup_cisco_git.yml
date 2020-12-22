@@ -33,6 +33,18 @@
       regexp: 'Current configuration.*'
       state: absent
 
+  - name: REMOVE enable password
+    lineinfile:
+      path: "{{ config_output.backup_path }}"
+      regexp: 'enable password.*'
+      state: absent
+
+  - name: REMOVE username and password
+    lineinfile:
+      path: "{{ config_output.backup_path }}"
+      regexp: 'username.*'
+      state: absent
+
   - name: Update git repo with backup
     shell: git add * && git commit -m "Synching new backup to repo" && git push
     args:
