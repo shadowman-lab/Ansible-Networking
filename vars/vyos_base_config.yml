@@ -1,0 +1,185 @@
+firewall_global:
+    config_trap: true
+    group:
+        address_group:
+        -   description: Sales office hosts address list
+            members:
+            -   address: 192.0.3.1
+            -   address: 192.0.3.2
+            name: ENG-HOSTS
+        -   description: Sales office hosts address list
+            members:
+            -   address: 192.0.2.1
+            -   address: 192.0.2.2
+            -   address: 192.0.2.3
+            name: SALES-HOSTS
+        network_group:
+        -   description: This group has the Management network addresses
+            members:
+            -   address: 192.0.1.0/24
+            name: MGMT
+    log_martians: true
+    ping:
+        all: true
+        broadcast: true
+    route_redirects:
+    -   afi: ipv4
+        icmp_redirects:
+            receive: false
+            send: true
+        ip_src_route: true
+    state_policy:
+    -   action: accept
+        connection_type: established
+        log: true
+    -   action: reject
+        connection_type: invalid
+    syn_cookies: true
+    twa_hazards_protection: true
+    validation: strict
+firewall_interfaces:
+-   name: eth0
+-   access_rules:
+    -   afi: ipv4
+        rules:
+        -   direction: in
+            name: INBOUND
+        -   direction: local
+            name: LOCAL
+        -   direction: out
+            name: OUTBOUND
+    name: eth1
+firewall_rules:
+-   afi: ipv4
+    rule_sets:
+    -   default_action: accept
+        description: IPv4 INBOUND rule set
+        name: INBOUND
+        rules:
+        -   action: accept
+            description: Rule 101 is configured by Ansible
+            ipsec: match-ipsec
+            number: 101
+        -   action: reject
+            description: Rule 102 is configured by Ansible
+            ipsec: match-ipsec
+            number: 102
+    -   default_action: accept
+        description: IPv4 OUTBOUND rule set
+        name: OUTBOUND
+        rules:
+        -   action: accept
+            description: Rule 201 is configured by Ansible
+            ipsec: match-ipsec
+            number: 201
+        -   action: reject
+            description: Rule 202 is configured by Ansible
+            ipsec: match-ipsec
+            number: 202
+    -   default_action: accept
+        description: IPv4 LOCAL rule set
+        name: LOCAL
+        rules:
+        -   action: accept
+            description: Rule 301 is configured by Ansible
+            ipsec: match-ipsec
+            number: 301
+        -   action: reject
+            description: Rule 302 is configured by Ansible
+            ipsec: match-ipsec
+            number: 302
+interfaces:
+-   description: This is the configured by Ansible
+    enabled: true
+    name: lo
+-   description: This is the configured by Ansible
+    enabled: true
+    name: eth1
+-   description: This is the base config configured by Ansible
+    duplex: auto
+    enabled: true
+    name: eth0
+    speed: auto
+l3_interfaces:
+-   ipv4:
+    -   address: 192.16.4.194/28
+    name: eth1
+-   ipv4:
+    -   address: dhcp
+    name: eth0
+lldp_global:
+    enable: true
+    legacy_protocols:
+    - cdp
+    - fdp
+ospf_interfaces:
+-   name: eth0
+-   name: eth1
+-   name: lo
+ospfv2:
+    areas:
+    -   area_id: '2'
+        area_type:
+            normal: true
+        authentication: plaintext-password
+        shortcut: enable
+    -   area_id: '4'
+        area_type:
+            stub:
+                default_cost: 20
+                set: true
+        network:
+        -   address: 192.0.12.0/24
+        -   address: 192.0.2.0/24
+        -   address: 192.0.22.0/24
+        -   address: 192.0.32.0/24
+        range:
+        -   address: 192.0.42.0/24
+            cost: 10
+    auto_cost:
+        reference_bandwidth: 2
+    default_information:
+        originate:
+            always: true
+            metric: 10
+            metric_type: 2
+            route_map: ingress
+    log_adjacency_changes: detail
+    max_metric:
+        router_lsa:
+            administrative: true
+            on_shutdown: 10
+            on_startup: 10
+    mpls_te:
+        router_address: 192.0.22.22
+    neighbor:
+    -   neighbor_id: 192.0.11.12
+        poll_interval: 10
+        priority: 2
+    parameters:
+        abr_type: cisco
+        opaque_lsa: true
+        rfc1583_compatibility: true
+        router_id: 192.0.1.1
+    passive_interface:
+    - eth1
+    redistribute:
+    -   metric: 10
+        metric_type: 2
+        route_type: bgp
+ospfv3:
+    areas:
+    -   area_id: '2'
+        export_list: export1
+        import_list: import1
+        range:
+        -   address: 2001:db10::/32
+        -   address: 2001:db30::/32
+        -   address: 2001:db50::/32
+    -   area_id: '4'
+        range:
+        -   address: 2001:db60::/32
+    parameters:
+        router_id: 192.0.2.10
+    redistribute:
+    -   route_type: bgp

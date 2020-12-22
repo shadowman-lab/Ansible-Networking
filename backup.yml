@@ -1,0 +1,76 @@
+- name: Device Backup
+  hosts: all
+  gather_facts: false
+  collections:
+    - vyos.vyos
+    - cisco.ios
+    - arista.eos
+
+  tasks:
+
+  - name: Backup vyos
+    block:
+      - name: Backup vyos device
+        vyos_config:
+          backup: yes
+          backup_options:
+            filename: "{{ inventory_hostname }}.cfg"
+            dir_path: /home/network
+
+      - name: Grab vyos interface facts for new backup type
+        vyos_facts:
+          gather_subset: 
+            - '!all'
+            - '!min'
+          gather_network_resources: all
+
+      - name: Backup using resource modules on vyos
+        copy:
+          content: "{{ ansible_network_resources | to_nice_yaml }}"
+          dest: "/home/network/{{ inventory_hostname }}.yml"
+    when: ansible_network_os == 'vyos.vyos.vyos'
+
+  - name: Backup ios
+    block:
+      - name: Backup ios device
+        ios_config:
+          backup: yes
+          backup_options:
+            filename: "{{ inventory_hostname }}.cfg"
+            dir_path: /home/network 
+
+      - name: Grab ios interface facts for new backup type
+        ios_facts:
+          gather_subset:
+            - '!all'
+            - '!min'
+          gather_network_resources: '!vlans'
+
+      - name: Backup using resource modules on ios
+        copy:
+          content: "{{ ansible_network_resources | to_nice_yaml }}"
+          dest: "/home/network/{{ inventory_hostname }}.yml"
+    when: ansible_network_os == 'cisco.ios.ios'
+
+
+  - name: Backup eos
+    block:
+      - name: Backup eos device
+        eos_config:
+          backup: yes
+          backup_options:
+            filename: "{{ inventory_hostname }}.cfg"
+            dir_path: /home/network 
+
+      - name: Grab eos interface facts for new backup type
+        eos_facts:
+          gather_subset:
+            - '!all'
+            - '!min'
+          gather_network_resources: all
+
+      - name: Backup using resource modules on eos
+        copy:
+          content: "{{ ansible_network_resources | to_nice_yaml }}"
+          dest: "/home/network/{{ inventory_hostname }}.yml"
+    when: ansible_network_os == 'arista.eos.eos'

@@ -1,0 +1,13 @@
+- name: Restart Docker service and container for EOS
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+  - name: Restart Docker service
+    command:
+      cmd: systemctl start docker
+
+  - name: Start docker container with EOS
+    command:
+      cmd: docker start ceos1

@@ -1,0 +1,14 @@
+transceiver qsfp default-mode 4x10G
+agent Bfd shutdown
+agent PowerManager shutdown
+agent LedPolicy shutdown
+agent Thermostat shutdown
+agent PowerFuse shutdown
+agent StandbyCpld shutdown
+agent LicenseManager shutdown
+hostname {{ inventory_hostname }}
+spanning-tree mode mstp
+no aaa root
+interface Ethernet1
+interface Ethernet2
+no ip routing

@@ -1,0 +1,11 @@
+- name: Device Restore
+  hosts: os_cisco
+  gather_facts: false
+  collections:
+    - cisco.ios
+
+  tasks:
+
+  - name: Restore ios device
+    ios_config:
+      src: "{{ playbook_dir }}/backup/{{ rollback_date }}"

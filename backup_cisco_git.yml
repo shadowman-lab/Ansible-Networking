@@ -1,0 +1,72 @@
+- name: Device Backup
+  hosts: os_cisco
+  gather_facts: false
+  collections:
+    - cisco.ios
+
+  tasks:
+
+  - name: Sync with Gitrepo      
+    git:
+      repo: 'https://github.com/shadowman-lab/Ansible-Networking.git'
+      dest: /home/network
+      force: yes
+    connection: tower.shadowman.dev
+
+  - name: Backup ios device
+    ios_config:
+      backup: yes
+      backup_options:
+        dir_path: /home/network/backup
+    become: yes
+    register: config_output
+
+  - name: REMOVE NON CONFIG LINES - REGEXP
+    lineinfile:
+      path: "{{ config_output.backup_path }}"
+      line: "Building configuration..."
+      state: absent
+
+  - name: REMOVE NON CONFIG LINES - REGEXP
+    lineinfile:
+      path: "{{ config_output.backup_path }}"
+      regexp: 'Current configuration.*'
+      state: absent
+
+  - name: Update git repo with backup
+    shell: git add * && git commit -m "Synching new backup to repo" && git push
+    args:
+      chdir: /home/network
+    delegate_to: tower.shadowman.dev
+
+- name: Create Tower Restore Job
+  hosts: tower.shadowman.dev
+  gather_facts: no
+
+  tasks:
+    - name: Find Current Backups
+      find:
+        paths: /home/network/backup
+      register: backups
+      run_once: true
+      become: yes
+
+    - name: Create Restore Job Template
+      ansible.tower.tower_job_template:
+        name: "Network Restore"
+        job_type: "run"
+        inventory: "Network Inventory"
+        project: "SSP Networking Project"
+        playbook: "network_restore.yml"
+        credentials: 
+          - "Cisco Credentials" 
+          - "VYOS Credentials"
+          - "Arista Credential"
+        limit: "os_cisco"
+        survey_enabled: true
+        become_enabled: yes
+        survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"
+        validate_certs: no
+        tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
+        tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+        tower_host: "{{ lookup('env', 'TOWER_HOST') }}"

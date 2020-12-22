@@ -1,0 +1,71 @@
+{
+    "acl_interfaces": [
+        {
+            "name": "Ethernet1"
+        },
+        {
+            "name": "Ethernet2"
+        }
+    ],
+    "interfaces": [
+        {
+            "enabled": true,
+            "description": "This is {{ configured_by }}",
+            "name": "Ethernet1"
+        },
+        {
+            "enabled": true,
+            "description": "This is {{ configured_by }}",
+            "name": "Ethernet2"
+        }
+    ],
+    "l3_interfaces": [
+        {
+            "ipv4": [
+                {
+                    "address": "{{ gigabit1 }}/28"
+                }
+            ],
+            "name": "Ethernet1"
+        },
+        {
+            "ipv4": [
+                {
+                    "address": "{{ gigabit2 }}/28"
+                }
+            ],
+            "name": "Ethernet2"
+        }
+    ],
+    "lldp_global": {},
+    "ospfv2": {},
+    "ospfv3": [],
+    "lacp": {},
+    "l2_interfaces": [
+        {
+            "name": "Ethernet1",
+            "trunk": {
+                "native_vlan": 20
+            }
+        },
+        {
+            "access": {
+                "vlan": 30
+            },
+            "name": "Ethernet2"
+        }
+    ],
+    "vlans": [
+        {
+            "state": "active",
+            "name": "Desktop",
+            "vlan_id": 20
+        },
+        {
+            "state": "active",
+            "name": "Server",
+            "vlan_id": 30
+        }
+    ],
+    "lag_interfaces": []
+}

@@ -1,0 +1,24 @@
+---
+- name: Disable hosts on F5 Load Balancer
+  hosts: "{{ vm_name | default('all') }}"
+  gather_facts: false
+
+  tasks:
+
+  - name: Setup provider
+    set_fact:
+     provider:
+      server: "{{ f5_ip }}"
+      user: "{{ f5_user }}"
+      password: "{{ f5_pass }}"
+      validate_certs: "no"
+  
+  - name: Disable Pool Members
+    bigip_pool_member:
+      provider: "{{ provider }}"
+      state: "forced_offline"
+      host: "{{ ansible_host }}"
+      name: "{{ inventory_hostname }}"
+      port: "80"
+      pool: "http_pool"
+    delegate_to: localhost

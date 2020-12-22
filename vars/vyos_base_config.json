@@ -1,0 +1,333 @@
+{
+    "firewall_rules": [
+        {
+            "rule_sets": [
+                {
+                    "rules": [
+                        {
+                            "action": "accept",
+                            "number": 101,
+                            "description": "Rule 101 is {{ configured_by }}",
+                            "ipsec": "match-ipsec"
+                        },
+                        {
+                            "action": "reject",
+                            "number": 102,
+                            "description": "Rule 102 is {{ configured_by }}",
+                            "ipsec": "match-ipsec"
+                        }
+                    ],
+                    "default_action": "accept",
+                    "description": "IPv4 INBOUND rule set",
+                    "name": "INBOUND"
+                },
+                {
+                    "rules": [
+                        {
+                            "action": "accept",
+                            "number": 201,
+                            "description": "Rule 201 is {{ configured_by }}",
+                            "ipsec": "match-ipsec"
+                        },
+                        {
+                            "action": "reject",
+                            "number": 202,
+                            "description": "Rule 202 is {{ configured_by }}",
+                            "ipsec": "match-ipsec"
+                        }
+                    ],
+                    "default_action": "accept",
+                    "description": "IPv4 OUTBOUND rule set",
+                    "name": "OUTBOUND"
+                },
+                {
+                    "rules": [
+                        {
+                            "action": "accept",
+                            "number": 301,
+                            "description": "Rule 301 is {{ configured_by }}",
+                            "ipsec": "match-ipsec"
+                        },
+                        {
+                            "action": "reject",
+                            "number": 302,
+                            "description": "Rule 302 is {{ configured_by }}",
+                            "ipsec": "match-ipsec"
+                        }
+                    ],
+                    "default_action": "accept",
+                    "description": "IPv4 LOCAL rule set",
+                    "name": "LOCAL"
+                }
+            ],
+            "afi": "ipv4"
+        }
+    ],
+    "interfaces": [
+        {
+            "enabled": true,
+            "description": "This is the {{ configured_by }}",
+            "name": "lo"
+        },
+        {
+            "enabled": true,
+            "description": "This is the {{ configured_by }}",
+            "name": "eth1"
+        },
+        {
+            "duplex": "auto",
+            "enabled": true,
+            "speed": "auto",
+            "description": "This is the base config {{ configured_by }}",
+            "name": "eth0"
+        }
+    ],
+    "l3_interfaces": [
+        {
+            "ipv4": [
+                {
+                    "address": "{{ gigabit1 }}/28"
+                }
+            ],
+            "name": "eth1"
+        },
+        {
+            "ipv4": [
+                {
+                    "address": "dhcp"
+                }
+            ],
+            "name": "eth0"
+        }
+    ],
+    "lldp_global": {
+        "enable": true,
+        "legacy_protocols": [
+            "cdp",
+            "fdp"
+        ]
+    },
+    "ospfv2": {
+        "mpls_te": {
+            "router_address": "192.0.22.22"
+        },
+        "redistribute": [
+            {
+                "metric_type": 2,
+                "route_type": "bgp",
+                "metric": 10
+            }
+        ],
+        "neighbor": [
+            {
+                "priority": 2,
+                "poll_interval": 10,
+                "neighbor_id": "192.0.11.12"
+            }
+        ],
+        "parameters": {
+            "router_id": "192.0.1.1",
+            "opaque_lsa": true,
+            "abr_type": "cisco",
+            "rfc1583_compatibility": true
+        },
+        "default_information": {
+            "originate": {
+                "metric_type": 2,
+                "always": true,
+                "metric": 10,
+                "route_map": "ingress"
+            }
+        },
+        "max_metric": {
+            "router_lsa": {
+                "on_startup": 10,
+                "administrative": true,
+                "on_shutdown": 10
+            }
+        },
+        "log_adjacency_changes": "detail",
+        "auto_cost": {
+            "reference_bandwidth": 2
+        },
+        "passive_interface": [
+            "eth1"
+        ],
+        "areas": [
+            {
+                "area_id": "2",
+                "authentication": "plaintext-password",
+                "shortcut": "enable",
+                "area_type": {
+                    "normal": true
+                }
+            },
+            {
+                "area_id": "4",
+                "range": [
+                    {
+                        "cost": 10,
+                        "address": "192.0.42.0/24"
+                    }
+                ],
+                "network": [
+                    {
+                        "address": "192.0.12.0/24"
+                    },
+                    {
+                        "address": "192.0.2.0/24"
+                    },
+                    {
+                        "address": "192.0.22.0/24"
+                    },
+                    {
+                        "address": "192.0.32.0/24"
+                    }
+                ],
+                "area_type": {
+                    "stub": {
+                        "default_cost": 20,
+                        "set": true
+                    }
+                }
+            }
+        ]
+    },
+    "ospfv3": {
+        "redistribute": [
+            {
+                "route_type": "bgp"
+            }
+        ],
+        "parameters": {
+            "router_id": "192.0.2.10"
+        },
+        "areas": [
+            {
+                "area_id": "2",
+                "range": [
+                    {
+                        "address": "2001:db10::/32"
+                    },
+                    {
+                        "address": "2001:db30::/32"
+                    },
+                    {
+                        "address": "2001:db50::/32"
+                    }
+                ],
+                "export_list": "export1",
+                "import_list": "import1"
+            },
+            {
+                "range": [
+                    {
+                        "address": "2001:db60::/32"
+                    }
+                ],
+                "area_id": "4"
+            }
+        ]
+    },
+    "firewall_interfaces": [
+        {
+            "name": "eth0"
+        },
+        {
+            "name": "eth1",
+            "access_rules": [
+                {
+                    "rules": [
+                        {
+                            "direction": "in",
+                            "name": "INBOUND"
+                        },
+                        {
+                            "direction": "local",
+                            "name": "LOCAL"
+                        },
+                        {
+                            "direction": "out",
+                            "name": "OUTBOUND"
+                        }
+                    ],
+                    "afi": "ipv4"
+                }
+            ]
+        }
+    ],
+    "firewall_global": {
+        "group": {
+            "address_group": [
+                {
+                    "description": "Sales office hosts address list",
+                    "members": [
+                        {
+                            "address": "192.0.3.1"
+                        },
+                        {
+                            "address": "192.0.3.2"
+                        }
+                    ],
+                    "name": "ENG-HOSTS"
+                },
+                {
+                    "description": "Sales office hosts address list",
+                    "members": [
+                        {
+                            "address": "192.0.2.1"
+                        },
+                        {
+                            "address": "192.0.2.2"
+                        },
+                        {
+                            "address": "192.0.2.3"
+                        }
+                    ],
+                    "name": "SALES-HOSTS"
+                }
+            ],
+            "network_group": [
+                {
+                    "description": "This group has the Management network addresses",
+                    "members": [
+                        {
+                            "address": "192.0.1.0/24"
+                        }
+                    ],
+                    "name": "MGMT"
+                }
+            ]
+        },
+        "route_redirects": [
+            {
+                "afi": "ipv4",
+                "ip_src_route": true,
+                "icmp_redirects": {
+                    "receive": false,
+                    "send": true
+                }
+            }
+        ],
+        "config_trap": true,
+        "ping": {
+            "broadcast": true,
+            "all": true
+        },
+        "state_policy": [
+            {
+                "action": "accept",
+                "connection_type": "established",
+                "log": true
+            },
+            {
+                "action": "reject",
+                "connection_type": "invalid"
+            }
+        ],
+        "twa_hazards_protection": true,
+        "log_martians": true,
+        "syn_cookies": true,
+        "validation": "strict"
+    }
+}

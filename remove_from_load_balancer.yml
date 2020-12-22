@@ -1,0 +1,38 @@
+---
+- name: Remove hosts from F5 Load Balancer
+  hosts: "{{ vm_name | default('all') }}"
+  gather_facts: false
+
+  tasks:
+
+  - name: Setup provider
+    set_fact:
+     provider:
+      server: "{{ f5_ip }}"
+      user: "{{ f5_user }}"
+      password: "{{ f5_pass }}"
+      validate_certs: "no"
+
+  - name: Remove Pool Members
+    bigip_pool_member:
+      provider: "{{ provider }}"
+      state: absent
+      host: "{{ ansible_host }}"
+      name: "{{ inventory_hostname }}"
+      port: "80"
+      pool: "http_pool"
+    delegate_to: localhost
+  
+  - name: Delete Nodes
+    bigip_node:
+      provider: "{{ provider }}"
+      host: "{{ ansible_host }}"
+      name: "{{ inventory_hostname }}"
+      state: absent
+    delegate_to: localhost
+
+  - name: Save Running Config
+    bigip_config:
+      provider: "{{ provider }}"
+      save: yes
+    delegate_to: localhost

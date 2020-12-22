@@ -1,0 +1,38 @@
+- name: Gather facts for devices
+  hosts: tag_Router
+  gather_facts: false
+  collections:
+    - vyos.vyos
+    - cisco.ios
+    - arista.eos
+
+  tasks:
+
+    - name: Grab vyos facts
+      vyos_facts:
+        gather_subset: min
+        gather_network_resources: all
+      when: ansible_network_os == 'vyos.vyos.vyos'
+
+    - name: Grab Cisco ios facts
+      ios_facts:
+        gather_subset: min
+        gather_network_resources: '!vlans'
+      when: ansible_network_os == 'cisco.ios.ios'
+
+    - name: Grab Arista eos facts
+      eos_facts:
+        gather_subset: min
+        gather_network_resources: all
+      when: ansible_network_os == 'arista.eos.eos'
+
+
+
+- name: Build report with facts
+  hosts: report.shadowman.dev
+  gather_facts: no
+  tasks:
+
+    - name: build a report
+      include_role:
+        name: build_report_network
