@@ -40,7 +40,7 @@
       state: "present"
       host: "{{ ansible_host }}"
       name: "{{ inventory_hostname }}"
-      port: "443"
+      port: "80"
       pool: "http_pool"
     delegate_to: localhost
 
