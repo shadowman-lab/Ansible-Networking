@@ -20,6 +20,7 @@
       name: "{{ inventory_hostname }}"
       monitors:
         - /Common/icmp
+        - /Common/https_443
     delegate_to: localhost
 
   - name: Create Pool
@@ -27,7 +28,9 @@
       provider: "{{ provider }}"
       name: "http_pool"
       lb_method: "round-robin"
-      monitors: "/Common/http"
+      monitors: 
+        - "/Common/http"
+        - "/Common/https_443"
       monitor_type: "and_list"
     delegate_to: localhost
 
@@ -37,7 +40,7 @@
       state: "present"
       host: "{{ ansible_host }}"
       name: "{{ inventory_hostname }}"
-      port: "80"
+      port: "443"
       pool: "http_pool"
     delegate_to: localhost
 
