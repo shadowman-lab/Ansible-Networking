@@ -50,7 +50,6 @@
       destination: "172.16.3.121"
       port: "443"
       enabled_vlans: "all"
-      all_profiles: ['oneconnect']
       pool: "https_pool"
       snat: "Automap"
     delegate_to: localhost
