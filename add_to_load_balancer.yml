@@ -59,3 +59,9 @@
       provider: "{{ provider }}"
       save: yes
     delegate_to: localhost
+
+  - name: Set stats for the e-mail body and ServiceNow
+    set_stats:
+      data:
+        email_body: "Load Balancer: https://lb.shadowman.dev"
+        work_notes: "[code]<a href='https://lb.shadowman.dev'>Load Balancer</a>[/code]"
