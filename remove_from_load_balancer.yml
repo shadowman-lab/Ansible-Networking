@@ -19,8 +19,8 @@
       state: absent
       host: "{{ ansible_host }}"
       name: "{{ inventory_hostname }}"
-      port: "80"
-      pool: "http_pool"
+      port: "443"
+      pool: "https_pool"
     delegate_to: localhost
   
   - name: Delete Nodes
