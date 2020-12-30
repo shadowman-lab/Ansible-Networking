@@ -23,7 +23,7 @@
       pool_name: app_pool
       virtual_server_name: poolapp
       virtual_server_ip: 172.16.3.122
-    when: "appserver in vm_name"
+    when: inventory_hostname is match("appserver.*")
   
   - name: Create Nodes
     bigip_node:
