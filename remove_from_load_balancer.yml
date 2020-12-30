@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-  pool_name: https_pool
+    pool_name: https_pool
 
   tasks:
 
