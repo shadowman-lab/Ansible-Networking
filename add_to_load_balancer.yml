@@ -7,6 +7,7 @@
     pool_name: https_pool
     virtual_server_name: webapp
     virtual_server_ip: 172.16.3.121
+    virtual_server_fqdn: lb.shadowman.dev
   
   tasks:
 
@@ -23,6 +24,7 @@
       pool_name: app_pool
       virtual_server_name: poolapp
       virtual_server_ip: 172.16.3.122
+      virtual_server_fqdn: f5lb.shadowman.dev
     when: inventory_hostname is match("appserver.*")
   
   - name: Create Nodes
@@ -75,6 +77,6 @@
   - name: Set stats for the e-mail body and ServiceNow
     set_stats:
       data:
-        email_body: "{{ email_body }} Load Balancer: https://lb.shadowman.dev"
-        work_notes: "{{ work_notes }} [code]<a href='https://lb.shadowman.dev'>Load Balancer</a>[/code]"
+        email_body: "{{ email_body }} Load Balancer: https://{{ virtual_server_fqdn }}"
+        work_notes: "{{ work_notes }} [code]<a href='https://{{ virtual_server_fqdn }}'>Load Balancer</a>[/code]"
     when: email_body is defined
