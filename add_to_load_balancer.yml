@@ -80,6 +80,7 @@
       data:
         email_body: "{{ email_body }} Load Balancer: https://{{ virtual_server_fqdn }}"
         work_notes: "{{ work_notes }} [code]<a href='https://{{ virtual_server_fqdn }}'>Load Balancer</a>[/code]"
+    run_once: true      
     when: email_body is defined
 
   handlers:
