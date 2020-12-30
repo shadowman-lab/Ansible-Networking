@@ -3,6 +3,9 @@
   hosts: "{{ vm_name | default('all') }}"
   gather_facts: false
 
+  vars:
+  pool_name: https_pool
+
   tasks:
 
   - name: Setup provider
@@ -13,6 +16,11 @@
       password: "{{ f5_pass }}"
       validate_certs: "no"
 
+  - name: Set facts if removing appserver
+    set_fact:
+      pool_name: app_pool
+    when: "appserver in vm_name"
+
   - name: Remove Pool Members
     bigip_pool_member:
       provider: "{{ provider }}"
@@ -20,7 +28,7 @@
       host: "{{ ansible_host }}"
       name: "{{ inventory_hostname }}"
       port: "443"
-      pool: "https_pool"
+      pool: "{{ pool_name }}"
     delegate_to: localhost
   
   - name: Delete Nodes

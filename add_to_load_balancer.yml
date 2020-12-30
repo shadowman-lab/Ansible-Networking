@@ -3,6 +3,11 @@
   hosts: "{{ vm_name | default('all') }}"
   gather_facts: false
 
+  vars:
+    pool_name: https_pool
+    virtual_server_name: webapp
+    virtual_server_ip: 172.16.3.121
+  
   tasks:
 
   - name: Setup provider
@@ -12,6 +17,13 @@
       user: "{{ f5_user }}"
       password: "{{ f5_pass }}"
       validate_certs: "no"
+
+  - name: Set facts if creating appserver
+    set_fact:
+      pool_name: app_pool
+      virtual_server_name: poolapp
+      virtual_server_ip: 172.16.3.122
+    when: "appserver in vm_name"
   
   - name: Create Nodes
     bigip_node:
@@ -26,7 +38,7 @@
   - name: Create Pool
     bigip_pool:
       provider: "{{ provider }}"
-      name: "https_pool"
+      name: "{{ pool_name }}"
       lb_method: "round-robin"
       monitors: 
         - "/Common/https_443"
@@ -40,17 +52,17 @@
       host: "{{ ansible_host }}"
       name: "{{ inventory_hostname }}"
       port: "443"
-      pool: "https_pool"
+      pool: "{{ pool_name }}"
     delegate_to: localhost
 
   - name: Add Virtual Server
     bigip_virtual_server:
       provider: "{{ provider }}"
-      name: "webapp"
-      destination: "172.16.3.121"
+      name: "{{ virtual_server_name }}"
+      destination: "{{ virtual_server_ip }}"
       port: "443"
       enabled_vlans: "all"
-      pool: "https_pool"
+      pool: "{{ pool_name }}"
       snat: "Automap"
     delegate_to: localhost
 
