@@ -3,6 +3,9 @@
   hosts: "{{ vm_name | default('all') }}"
   gather_facts: false
 
+  vars:
+    pool_name: https_pool
+
   tasks:
 
   - name: Setup provider
@@ -12,6 +15,11 @@
       user: "{{ f5_user }}"
       password: "{{ f5_pass }}"
       validate_certs: "no"
+
+  - name: Set facts if enabling appserver
+    set_fact:
+      pool_name: app_pool
+    when: inventory_hostname is match("appserver.*")
   
   - name: Enable Pool Members
     bigip_pool_member:
@@ -19,6 +27,6 @@
       state: "enabled"
       host: "{{ ansible_host }}"
       name: "{{ inventory_hostname }}"
-      port: "80"
-      pool: "http_pool"
+      port: "443"
+      pool: "{{ pool_name }}"
     delegate_to: localhost
