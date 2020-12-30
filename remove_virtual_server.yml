@@ -3,6 +3,9 @@
   hosts: localhost
   gather_facts: false
 
+  vars:
+    virtual_server_fqdn: lb.shadowman.dev
+
   tasks:
 
   - name: Setup provider
@@ -12,6 +15,11 @@
       user: "{{ f5_user }}"
       password: "{{ f5_pass }}"
       validate_certs: "no"
+
+  - name: Setup fact for app server
+    set_fact:
+      virtual_server_fqdn: f5lb.shadowman.dev
+    when: virtual_server_name == "poolapp"
 
   - name: Delete Virtual Server
     bigip_virtual_server:
