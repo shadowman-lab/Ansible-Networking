@@ -18,6 +18,7 @@
       provider: "{{ provider }}"
       name: "{{ virtual_server_name }}"
       state: absent
+    notify: IDM_update
 
   - name: Delete Pool
     bigip_pool:
@@ -29,3 +30,13 @@
     bigip_config:
       provider: "{{ provider }}"
       save: yes
+
+  handlers:
+    - name: IDM_update      
+      ipa_host:
+        name: "{{ virtual_server_fqdn }}"
+        state: absent
+        ipa_pass: "{{ IPA_PASS }}"
+        ipa_host: "{{ IPA_HOST }}"
+        ipa_user: "{{ IPA_USER }}"
+        update_dns: True

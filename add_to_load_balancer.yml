@@ -67,6 +67,7 @@
       pool: "{{ pool_name }}"
       snat: "Automap"
     delegate_to: localhost
+    notify: IDM_update
 
   - name: Save Running Config
     bigip_config:
@@ -80,3 +81,17 @@
         email_body: "{{ email_body }} Load Balancer: https://{{ virtual_server_fqdn }}"
         work_notes: "{{ work_notes }} [code]<a href='https://{{ virtual_server_fqdn }}'>Load Balancer</a>[/code]"
     when: email_body is defined
+
+  handlers:
+    - name: IDM_update      
+      ipa_host:
+        name: "{{ virtual_server_fqdn }}"
+        ip_address: "{{ virtual_server_ip }}"
+        ipa_pass: "{{ IPA_PASS }}"
+        ipa_host: "{{ IPA_HOST }}"
+        ipa_user: "{{ IPA_USER }}"
+        state: present
+        force: yes
+      delegate_to: localhost
+      no_log: true
+      become: no
