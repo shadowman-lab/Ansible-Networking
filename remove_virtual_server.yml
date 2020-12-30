@@ -16,13 +16,13 @@
   - name: Delete Virtual Server
     bigip_virtual_server:
       provider: "{{ provider }}"
-      name: "webapp"
+      name: "{{ virtual_server_name }}"
       state: absent
 
   - name: Delete Pool
     bigip_pool:
       provider: "{{ provider }}"
-      name: "http_pool"
+      name: "{{ pool_name }}"
       state: absent
 
   - name: Save Running Config
