@@ -77,3 +77,4 @@
       data:
         email_body: "{{ email_body }} Load Balancer: https://lb.shadowman.dev"
         work_notes: "{{ work_notes }} [code]<a href='https://lb.shadowman.dev'>Load Balancer</a>[/code]"
+    when: email_body is defined

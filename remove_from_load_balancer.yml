@@ -19,7 +19,7 @@
   - name: Set facts if removing appserver
     set_fact:
       pool_name: app_pool
-    when: "appserver in vm_name"
+    when: inventory_hostname is match("appserver.*")
 
   - name: Remove Pool Members
     bigip_pool_member:
