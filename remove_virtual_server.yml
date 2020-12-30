@@ -48,4 +48,4 @@
         ipa_host: "{{ IPA_HOST }}"
         ipa_user: "{{ IPA_USER }}"
         update_dns: True
-        no_log: true
+      no_log: true
