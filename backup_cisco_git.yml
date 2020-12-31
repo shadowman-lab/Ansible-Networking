@@ -49,6 +49,13 @@
     find:
       paths: /home/network/backup
       recurse: yes
+    register: old_backups
+
+  - name: Delete backup files older than 7 days
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    loop: "{{ old_backups }}"
 
   - name: Update git repo with backup
     shell: git add * && git commit -m "Synching new backup to repo" && git push
