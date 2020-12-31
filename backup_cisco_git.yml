@@ -45,6 +45,12 @@
       regexp: 'username.*'
       state: absent
 
+  - name: Find backup files older than 7 days
+    find:
+      paths: /home/network/backup
+      age: 7d
+      recurse: yes
+
   - name: Update git repo with backup
     shell: git add * && git commit -m "Synching new backup to repo" && git push
     args:
