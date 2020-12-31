@@ -48,7 +48,6 @@
   - name: Find backup files older than 7 days
     find:
       paths: /home/network/backup
-      age: 7d
       recurse: yes
 
   - name: Update git repo with backup
