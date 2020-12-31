@@ -56,9 +56,11 @@
       path: "{{ item.path }}"
       state: absent
     loop: "{{ old_backups.files }}"
+    loop_control:
+      label: "{{ item.path }}"
 
   - name: Update git repo with backup
-    shell: git add * && git commit -m "Synching new backup to repo" && git push
+    shell: git add -A && git commit -m "Synching new backup to repo" && git push
     args:
       chdir: /home/network
     delegate_to: tower.shadowman.dev
