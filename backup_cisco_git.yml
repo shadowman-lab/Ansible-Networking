@@ -49,6 +49,7 @@
     find:
       paths: /home/network/backup
       recurse: yes
+      age: 7d
     register: old_backups
 
   - name: Delete backup files older than 7 days
