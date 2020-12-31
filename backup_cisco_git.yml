@@ -55,7 +55,7 @@
     file:
       path: "{{ item.path }}"
       state: absent
-    loop: "{{ old_backups }}"
+    loop: "{{ old_backups.files }}"
 
   - name: Update git repo with backup
     shell: git add * && git commit -m "Synching new backup to repo" && git push
