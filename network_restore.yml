@@ -8,4 +8,4 @@
 
   - name: Restore ios device
     ios_config:
-      src: "{{ playbook_dir }}/backup/{{ rollback_date }}"
+      src: "backup/{{ rollback_date }}"
