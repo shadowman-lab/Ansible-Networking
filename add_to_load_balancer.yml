@@ -30,7 +30,7 @@
   - name: Create Nodes
     bigip_node:
       provider: "{{ provider }}"
-      host: "{{ ansible_host }}"
+      host: "{{ ip_addr }}"
       name: "{{ inventory_hostname }}"
       monitors:
         - /Common/icmp
@@ -51,7 +51,7 @@
     bigip_pool_member:
       provider: "{{ provider }}"
       state: "present"
-      host: "{{ ansible_host }}"
+      host: "{{ ip_addr }}"
       name: "{{ inventory_hostname }}"
       port: "443"
       pool: "{{ pool_name }}"

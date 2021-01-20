@@ -25,7 +25,7 @@
     bigip_pool_member:
       provider: "{{ provider }}"
       state: "forced_offline"
-      host: "{{ ansible_host }}"
+      host: "{{ ip_addr }}"
       name: "{{ inventory_hostname }}"
       port: "443"
       pool: "{{ pool_name }}"
