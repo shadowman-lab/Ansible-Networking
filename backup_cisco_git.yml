@@ -14,7 +14,7 @@
     connection: tower.shadowman.dev
 
   - name: Backup ios device
-    ios_config:
+    cisco.ios.ios_config:
       backup: yes
       backup_options:
         dir_path: /home/network/backup
