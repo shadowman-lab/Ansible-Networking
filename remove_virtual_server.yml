@@ -22,20 +22,20 @@
     when: virtual_server_name == "poolapp"
 
   - name: Delete Virtual Server
-    bigip_virtual_server:
+    f5networks.f5_modules.bigip_virtual_server:
       provider: "{{ provider }}"
       name: "{{ virtual_server_name }}"
       state: absent
     notify: IDM_update
 
   - name: Delete Pool
-    bigip_pool:
+    f5networks.f5_modules.bigip_pool:
       provider: "{{ provider }}"
       name: "{{ pool_name }}"
       state: absent
 
   - name: Save Running Config
-    bigip_config:
+    f5networks.f5_modules.bigip_config:
       provider: "{{ provider }}"
       save: yes
 

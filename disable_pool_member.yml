@@ -22,7 +22,7 @@
     when: inventory_hostname is match("appserver.*")
   
   - name: Disable Pool Members
-    bigip_pool_member:
+    f5networks.f5_modules.bigip_pool_member:
       provider: "{{ provider }}"
       state: "forced_offline"
       host: "{{ ip_addr }}"
