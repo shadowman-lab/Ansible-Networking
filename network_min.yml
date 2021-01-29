@@ -11,11 +11,11 @@
   - name: Configure vyos
     block:
       - name: Configure hostname on vyos
-        vyos_system:
+        vyos.vyos.vyos_system:
           host_name: "{{ inventory_hostname }}"
 
       - name: Push min l3 interfaces to vyos
-        vyos_l3_interfaces:
+        vyos.vyos.vyos_l3_interfaces:
           state: overridden
           config:
           - name: eth0
@@ -26,7 +26,7 @@
             - address: "{{ gigabit1 }}/28"
 
       - name: Push min interfaces to vyos
-        vyos_interfaces:
+        vyos.vyos.vyos_interfaces:
           state: overridden
           config:
           - name: eth0
@@ -37,15 +37,15 @@
             enabled: true
 
       - name: Delete firewall interfaces on vyos
-        vyos_firewall_interfaces:
+        vyos.vyos.vyos_firewall_interfaces:
           state: deleted
 
       - name: Delete firewall rules on vyos
-        vyos_firewall_rules:
+        vyos.vyos.vyos_firewall_rules:
           state: deleted
 
       - name: Delete firewall global attributes configuration on vyos
-        vyos_firewall_global:
+        vyos.vyos.vyos_firewall_global:
           config:
             config_trap: 
             log_martians:
@@ -58,15 +58,15 @@
           state: deleted
 
       - name: Delete lldp global on vyos
-        vyos_lldp_global:
+        vyos.vyos.vyos_lldp_global:
           state: deleted
 
       - name: Delete ospfv2 routes attributes configuration on vyos
-        vyos_ospfv2:
+        vyos.vyos.vyos_ospfv2:
           state: deleted
 
       - name: Delete ospfv3 routes attributes configuration on vyos
-        vyos_ospfv3:
+        vyos.vyos.vyos_ospfv3:
           state: deleted
     when: ansible_network_os == 'vyos.vyos.vyos'
 
@@ -74,11 +74,11 @@
     block:
 
       - name: Configure hostname on ios
-        ios_system:
+        cisco.ios.ios_system:
           hostname: "{{ inventory_hostname }}"
 
       - name: Set min l3 interfaces on ios
-        ios_l3_interfaces:
+        cisco.ios.ios_l3_interfaces:
           state: overridden
           config:
           - name: GigabitEthernet1
@@ -89,7 +89,7 @@
             - address: "{{ gigabit2 }}/28"
 
       - name: Set min interfaces on ios
-        ios_interfaces:
+        cisco.ios.ios_interfaces:
           state: overridden
           config:
           - name: GigabitEthernet1
@@ -98,15 +98,15 @@
             enabled: true
 
       - name: Delete all lldp global on ios
-        ios_lldp_global:
+        cisco.ios.ios_lldp_global:
           state: deleted
 
       - name: Delete all lacp interfaces on ios
-        ios_lacp_interfaces:
+        cisco.ios.ios_lacp_interfaces:
           state: deleted
 
       - name: Delete all static_routes on ios
-        ios_static_routes:
+        cisco.ios.ios_static_routes:
           state: deleted
         ignore_errors: true
     when: ansible_network_os == 'cisco.ios.ios'
@@ -115,11 +115,11 @@
     block:
 
       - name: Configure hostname on eos
-        eos_system:
+        arista.eos.eos_system:
           hostname: "{{ inventory_hostname }}"
 
       - name: Set min l3 interfaces on eos
-        eos_l3_interfaces:
+        arista.eos.eos_l3_interfaces:
           state: overridden
           config:
           - name: Ethernet1
@@ -130,7 +130,7 @@
             - address: "{{ gigabit2 }}/28"
 
       - name: Set min interfaces on eos
-        eos_interfaces:
+        arista.eos.eos_interfaces:
           state: overridden
           config:
           - name: Ethernet1
@@ -139,14 +139,14 @@
             enabled: true
 
       - name: Delete l2 interfaces on eos
-        eos_l2_interfaces:
+        arista.eos.eos_l2_interfaces:
           config:
           - name: Ethernet1
           state: deleted
         ignore_errors: true
 
       - name: Delete VLAN on eos
-        eos_vlans:
+        arista.eos.eos_vlans:
           config:
           - vlan_id: 20
           - vlan_id: 30

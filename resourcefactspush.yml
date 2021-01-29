@@ -8,37 +8,37 @@
 
   tasks:
   - name: Grab vyos interface facts
-    vyos_facts:
+    vyos.vyos.vyos_facts:
       gather_subset: min
       gather_network_resources: interfaces
     when: ansible_network_os == 'vyos.vyos.vyos'
 
   - name: Push the network interfaces to vyos
-    vyos_interfaces:
+    vyos.vyos.vyos_interfaces:
       config: "{{ ansible_network_resources['interfaces'] }}"
     register: result
     when: ansible_network_os == 'vyos.vyos.vyos'
 
   - name: Grab Cisco ios interface facts
-    ios_facts:
+    cisco.ios.ios_facts:
       gather_subset: min
       gather_network_resources: interfaces
     when: ansible_network_os == 'cisco.ios.ios'
     
   - name: Push the network interfaces to ios
-    ios_interfaces:
+    cisco.ios.ios_interfaces:
       config: "{{ ansible_network_resources['interfaces'] }}"
     register: result
     when: ansible_network_os == 'cisco.ios.ios'
 
   - name: Grab Arista interface facts
-    eos_facts:
+    arista.eos.eos_facts:
       gather_subset: min
       gather_network_resources: interfaces
     when: ansible_network_os == 'arista.eos.eos'
     
   - name: Push the network interfaces to eos
-    eos_interfaces:
+    arista.eos.eos_interfaces:
       config: "{{ ansible_network_resources['interfaces'] }}"
     register: result
     when: ansible_network_os == 'arista.eos.eos'

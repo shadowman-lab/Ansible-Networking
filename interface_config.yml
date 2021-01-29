@@ -9,7 +9,7 @@
 
   tasks:
     - name: Update interfaces on vyos
-      vyos_interfaces:
+      vyos.vyos.vyos_interfaces:
         state: "{{ state }}"
         config:
         - name: "{{ interface_name_vyos }}"
@@ -19,7 +19,7 @@
       when: ansible_network_os == 'vyos.vyos.vyos'
 
     - name: Update interfaces on ios
-      ios_interfaces:
+      cisco.ios.ios_interfaces:
         state: "{{ state }}"
         config:
         - name: "{{ interface_name_ios }}"
@@ -28,7 +28,7 @@
       when: ansible_network_os == 'cisco.ios.ios'
 
     - name: Update interfaces on eos
-      eos_interfaces:
+      arista.eos.eos_interfaces:
         state: "{{ state }}"
         config:
         - name: "{{ interface_name_eos }}"

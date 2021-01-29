@@ -8,14 +8,14 @@
 
   tasks:
     - name: Update LLDP on vyos
-      vyos_lldp_global:
+      vyos.vyos.vyos_lldp_global:
         state: "{{ state }}"
         config:
           legacy_protocols: "{{ protocol | default(omit) }}"
       when: ansible_network_os == 'vyos.vyos.vyos'
 
     - name: Update LLDP on ios
-      ios_lldp_global:
+      cisco.ios.ios_lldp_global:
         state: "{{ state }}"
         config:
           holdtime: "{{ holdtime }}"

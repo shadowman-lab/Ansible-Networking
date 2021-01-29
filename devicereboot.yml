@@ -8,7 +8,7 @@
   tasks:
   
   - name: Reboot VYOS
-    vyos_command:
+    vyos.vyos.vyos_command:
       commands:
       - reboot now
     when: ansible_network_os == 'vyos.vyos.vyos'

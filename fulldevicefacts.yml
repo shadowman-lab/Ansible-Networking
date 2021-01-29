@@ -11,7 +11,7 @@
   - name: Vyos Facts
     block: 
       - name: Grab vyos facts
-        vyos_facts:
+        vyos.vyos.vyos_facts:
           gather_subset: 
             - '!all'
             - '!min'
@@ -26,7 +26,7 @@
   - name: Ios Facts
     block: 
       - name: Grab Cisco ios facts
-        ios_facts:
+        cisco.ios.ios_facts:
           gather_subset:
             - '!all'
             - '!min'
@@ -41,7 +41,7 @@
   - name: Eos Facts
     block: 
       - name: Grab Arista eos facts
-        eos_facts:
+        arista.eos.eos_facts:
           gather_subset: 'min'
           gather_network_resources: all
         register: eosfacts

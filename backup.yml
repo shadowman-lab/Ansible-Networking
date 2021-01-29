@@ -11,7 +11,7 @@
   - name: Backup vyos
     block:
       - name: Backup vyos device
-        vyos_config:
+        vyos.vyos.vyos_config:
           backup: yes
           backup_options:
             filename: "{{ inventory_hostname }}.cfg"
@@ -30,7 +30,7 @@
           state: absent
 
       - name: Grab vyos interface facts for new backup type
-        vyos_facts:
+        vyos.vyos.vyos_facts:
           gather_subset: 
             - '!all'
             - '!min'
@@ -45,7 +45,7 @@
   - name: Backup ios
     block:
       - name: Backup ios device
-        ios_config:
+        cisco.ios.ios_config:
           backup: yes
           backup_options:
             filename: "{{ inventory_hostname }}.cfg"
@@ -76,7 +76,7 @@
           state: absent
 
       - name: Grab ios interface facts for new backup type
-        ios_facts:
+        cisco.ios.ios_facts:
           gather_subset:
             - '!all'
             - '!min'
@@ -92,7 +92,7 @@
   - name: Backup eos
     block:
       - name: Backup eos device
-        eos_config:
+        arista.eos.eos_config:
           backup: yes
           backup_options:
             filename: "{{ inventory_hostname }}.cfg"
@@ -111,7 +111,7 @@
           state: absent
 
       - name: Grab eos interface facts for new backup type
-        eos_facts:
+        arista.eos.eos_facts:
           gather_subset:
             - '!all'
             - '!min'

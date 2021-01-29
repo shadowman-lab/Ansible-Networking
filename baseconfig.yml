@@ -9,19 +9,19 @@
   tasks:
   
   - name: Push base vyos config
-    vyos_config:
+    vyos.vyos.vyos_config:
       src: templates/vyos_template.j2
       save: yes
     when: ansible_network_os == 'vyos.vyos.vyos'
 
   - name: Push base ios config
-    ios_config:
+    cisco.ios.ios_config:
       src: templates/ios_template.j2
       save_when: changed
     when: ansible_network_os == 'cisco.ios.ios'
 
   - name: Push base eos config
-    eos_config:
+    arista.eos.eos_config:
       src: templates/eos_template.j2
       save_when: changed
     when: ansible_network_os == 'arista.eos.eos'

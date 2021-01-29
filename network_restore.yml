@@ -7,5 +7,5 @@
   tasks:
 
   - name: Restore ios device
-    ios_config:
+    cisco.ios.ios_config:
       src: "backup/{{ rollback_date }}"

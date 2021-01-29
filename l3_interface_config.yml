@@ -9,7 +9,7 @@
 
   tasks:
     - name: Update l3 interfaces on vyos
-      vyos_l3_interfaces:
+      vyos.vyos.vyos_l3_interfaces:
         state: "{{ state }}"
         config:
         - name: eth1
@@ -18,7 +18,7 @@
       when: ansible_network_os == 'vyos.vyos.vyos'
 
     - name: Update l3 interfaces on ios
-      ios_l3_interfaces:
+      cisco.ios.ios_l3_interfaces:
         state: "{{ state }}"
         config:
         - name: GigabitEthernet2
@@ -27,7 +27,7 @@
       when: ansible_network_os == 'cisco.ios.ios'
 
     - name: Update l3 interfaces on eos
-      eos_l3_interfaces:
+      arista.eos.eos_l3_interfaces:
         state: "{{ state }}"
         config:
         - name: Ethernet2

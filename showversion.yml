@@ -8,7 +8,7 @@
 
   tasks:
   - name: Retrieve VyOS version
-    vyos_command:
+    vyos.vyos.vyos_command:
       commands: show version
     when: ansible_network_os == 'vyos.vyos.vyos'
     register: version
@@ -19,7 +19,7 @@
     when: ansible_network_os == 'vyos.vyos.vyos'
 
   - name: Retrieve ios version
-    ios_command:
+    cisco.ios.ios_command:
       commands: show version
     when: ansible_network_os == 'cisco.ios.ios'
     register: version
@@ -30,7 +30,7 @@
     when: ansible_network_os == 'cisco.ios.ios'
 
   - name: Retrieve eos version
-    eos_command:
+    arista.eos.eos_command:
       commands: show version
     when: ansible_network_os == 'arista.eos.eos'
     register: version

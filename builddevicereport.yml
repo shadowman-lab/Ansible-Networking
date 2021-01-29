@@ -9,19 +9,19 @@
   tasks:
 
     - name: Grab vyos facts
-      vyos_facts:
+      vyos.vyos.vyos_facts:
         gather_subset: min
         gather_network_resources: all
       when: ansible_network_os == 'vyos.vyos.vyos'
 
     - name: Grab Cisco ios facts
-      ios_facts:
+      cisco.ios.ios_facts:
         gather_subset: min
         gather_network_resources: '!vlans'
       when: ansible_network_os == 'cisco.ios.ios'
 
     - name: Grab Arista eos facts
-      eos_facts:
+      arista.eos.eos_facts:
         gather_subset: min
         gather_network_resources: all
       when: ansible_network_os == 'arista.eos.eos'
