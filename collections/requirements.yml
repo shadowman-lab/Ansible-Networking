@@ -9,3 +9,5 @@ collections:
   - name: ansible.netcommon
 
   - name: ansible.tower
+
+  - name: f5networks.f5_modules

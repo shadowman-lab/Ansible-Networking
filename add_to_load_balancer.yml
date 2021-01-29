@@ -28,7 +28,7 @@
     when: inventory_hostname is match("appserver.*")
   
   - name: Create Nodes
-    bigip_node:
+    f5networks.f5_modules.bigip_node:
       provider: "{{ provider }}"
       host: "{{ ip_addr }}"
       name: "{{ inventory_hostname }}"
@@ -37,7 +37,7 @@
     delegate_to: localhost
 
   - name: Create Pool
-    bigip_pool:
+    f5networks.f5_modules.bigip_pool:
       provider: "{{ provider }}"
       name: "{{ pool_name }}"
       lb_method: "round-robin"
@@ -47,7 +47,7 @@
     delegate_to: localhost
 
   - name: Add Pool Members
-    bigip_pool_member:
+    f5networks.f5_modules.bigip_pool_member:
       provider: "{{ provider }}"
       state: "present"
       host: "{{ ip_addr }}"
@@ -57,7 +57,7 @@
     delegate_to: localhost
 
   - name: Add Virtual Server
-    bigip_virtual_server:
+    f5networks.f5_modules.bigip_virtual_server:
       provider: "{{ provider }}"
       name: "{{ virtual_server_name }}"
       destination: "{{ virtual_server_ip }}"
@@ -69,7 +69,7 @@
     notify: IDM_update
 
   - name: Save Running Config
-    bigip_config:
+    f5networks.f5_modules.bigip_config:
       provider: "{{ provider }}"
       save: yes
     delegate_to: localhost
