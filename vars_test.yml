@@ -21,7 +21,7 @@
 
     - name: Restore back to dict
       set_fact:
-        newjson: "{{ newjson | items2dict) }}"
+        newjson: "{{ newjson | items2dict }}"
 
     - name: Display JSON
       debug:
