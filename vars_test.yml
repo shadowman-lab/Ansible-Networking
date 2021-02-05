@@ -1,0 +1,26 @@
+---
+- name: Test JSON merge
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - name: Load stored vars for vyos
+      include_vars:
+        file: vars/vyos_base_config.json
+        name: ansible_network_resources
+
+    - name: Load stored vars for ios
+      include_vars:
+        file: vars/ios_base_config.json
+        name: ansible_network_resources2
+
+    - name: Perform JSON merge
+      set_fact:
+        newjson: "{{ ansible_network_resources + ansible_network_resources2 }}"
+
+    - name: Display JSON
+      debug:
+        var: newjson
+
+        
