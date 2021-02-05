@@ -21,6 +21,6 @@
 
     - name: Display JSON
       debug:
-        msg: "{{ newjson | to_nice_json }}"
+        msg: "{{ newjson | to_json }}"
 
         
