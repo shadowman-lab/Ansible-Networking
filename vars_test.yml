@@ -19,6 +19,10 @@
       set_fact:
         newjson: "{{ (ansible_network_resources | dict2items) + (ansible_network_resources2 | dict2items) }}"
 
+    - name: Restore back to dict
+      set_fact:
+        newjson: "{{ newjson | items2dict) }}"
+
     - name: Display JSON
       debug:
         var: newjson
