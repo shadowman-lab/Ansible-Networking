@@ -17,7 +17,7 @@
 
     - name: Perform JSON merge
       set_fact:
-        newjson: "{{ ansible_network_resources | combine (ansible_network_resources2, recursive=True) }}"
+        newjson: "{{ (ansible_network_resources | dict2items) + (ansible_network_resources2 | dict2items) }}"
 
     - name: Display JSON
       debug:
