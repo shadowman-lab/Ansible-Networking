@@ -21,6 +21,6 @@
 
     - name: Display JSON
       debug:
-        msg: "{{ newjson | items2dict }}"
+        msg: "{{ newjson }}"
 
         
