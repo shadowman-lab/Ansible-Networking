@@ -5,6 +5,10 @@
 
   tasks:
 
+    - name: Create empty list
+      set_fact:
+        finaloutput: []
+
     - name: Load stored vars for vyos
       include_vars:
         file: vars/vyos_base_config.json
@@ -17,7 +21,7 @@
 
     - name: Perform JSON merge
       set_fact:
-        newjson: "{{ ansible_network_resources + ansible_network_resources2 }}"
+        newjson: "{{ finaloutput + ansible_network_resources + ansible_network_resources2 }}"
 
     - name: Display JSON
       debug:
