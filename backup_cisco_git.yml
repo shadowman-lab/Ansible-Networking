@@ -65,7 +65,6 @@
     args:
       chdir: /home/network
     delegate_to: tower.shadowman.dev
-    ignore_errors: true
 
 - name: Create Tower Restore Job
   hosts: tower.shadowman.dev
