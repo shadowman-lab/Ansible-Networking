@@ -40,6 +40,7 @@
         copy:
           content: "{{ ansible_network_resources | to_nice_yaml }}"
           dest: "/home/network/{{ inventory_hostname }}.yml"
+        delegate_to: localhost
     when: ansible_network_os == 'vyos.vyos.vyos'
 
   - name: Backup ios
