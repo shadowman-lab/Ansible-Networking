@@ -11,7 +11,7 @@
       repo: 'https://github.com/shadowman-lab/Ansible-Networking.git'
       dest: /home/network
       force: yes
-    connection: tower.shadowman.dev
+    delegate_to: tower.shadowman.dev
 
   - name: Backup ios device
     cisco.ios.ios_config:
