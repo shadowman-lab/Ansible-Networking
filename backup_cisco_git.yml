@@ -61,7 +61,7 @@
       label: "{{ item.path }}"
 
   - name: Update git repo with backup
-    command: git add -A && git commit -m "Synching new backup to repo" && git push
+    command: "git add -A && git commit -m 'Synching new backup to repo' && git push"
     args:
       chdir: /home/network
     delegate_to: tower.shadowman.dev
