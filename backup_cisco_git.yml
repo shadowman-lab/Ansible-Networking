@@ -52,14 +52,6 @@
       age: 7d
     register: old_backups
 
-  - name: Delete backup files older than 7 days
-    file:
-      path: "{{ item.path }}"
-      state: absent
-    loop: "{{ old_backups.files }}"
-    loop_control:
-      label: "{{ item.path }}"
-
   - name: Update git repo with backup
     shell: git add -A && git commit -m "Synching new backup to repo" && git push
     args:
