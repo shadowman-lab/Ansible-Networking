@@ -13,9 +13,6 @@
       - name: Backup vyos device
         vyos.vyos.vyos_config:
           backup: yes
-          backup_options:
-            filename: "{{ inventory_hostname }}.cfg"
-            dir_path: /home/network
 
       - name: REMOVE encrypted password
         lineinfile:
