@@ -10,6 +10,7 @@
     git:
       repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
       dest: /home/network
+      key_file: "~/.ssh/id_ed25519"
       force: yes
     delegate_to: tower.shadowman.dev
 
