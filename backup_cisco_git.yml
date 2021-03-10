@@ -7,9 +7,10 @@
   tasks:
 
   - name: Sync with Gitrepo      
-    shell: git fetch --tags origin
-    args:
-      chdir: /home/network
+    git:
+      repo: 'https://github.com/shadowman-lab/Ansible-Networking.git'
+      dest: /home/network
+      force: yes
     delegate_to: tower.shadowman.dev
 
   - name: Backup ios device
