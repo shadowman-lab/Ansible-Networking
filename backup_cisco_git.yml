@@ -8,11 +8,9 @@
 
   - name: Sync with Gitrepo      
     git:
-      repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
+      repo: 'https://github.com/shadowman-lab/Ansible-Networking.git'
       dest: /home/network
-      key_file: "~/.ssh/id_ed25519"
       force: yes
-    sudo_user: root
     delegate_to: tower.shadowman.dev
 
   - name: Backup ios device
