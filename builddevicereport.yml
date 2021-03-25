@@ -35,4 +35,4 @@
 
     - name: build a report
       include_role:
-        name: build_report_network
+        name: shadowman.reports.build_report_network
