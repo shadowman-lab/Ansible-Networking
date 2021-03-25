@@ -9,3 +9,6 @@ collections:
   - name: ansible.netcommon
 
   - name: ansible.tower
+
+  - name: shadowman.reports
+    source: https://towerhub.shadowman.dev/api/galaxy/content/published/
