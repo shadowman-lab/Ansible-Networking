@@ -9,7 +9,7 @@
 
     - name: Load stored vars for ios
       include_vars:
-        file: vars/eos_base_config.json
+        file: vars/ios_base_config.json
         name: ansible_network_resources
 
     - name: Configure hostname on ios
