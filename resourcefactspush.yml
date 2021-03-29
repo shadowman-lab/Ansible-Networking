@@ -16,6 +16,5 @@
     
   - name: Push the network interfaces to ios
     cisco.ios.ios_interfaces:
-      config: "{{ interfacefacts.ansible_facts.ansible_network_resources['interfaces'] }}"
-    register: result
+      config: "{{ interfacefacts.ansible_network_resources['interfaces'] }}"
     when: ansible_network_os == 'cisco.ios.ios'
