@@ -23,18 +23,18 @@
         {
             "ipv4": [
                 {
-                    "address": "{{ gigabit1 }}/28"
+                    "address": "dhcp"
                 }
             ],
-            "name": "Ethernet1"
+            "name": "GigabitEthernet1"
         },
         {
             "ipv4": [
                 {
-                    "address": "{{ gigabit2 }}/28"
+                    "address": "{{ gigabit2 }} 255.255.255.240"
                 }
             ],
-            "name": "Ethernet2"
+            "name": "GigabitEthernet2"
         }
     ],
     "lldp_global": {},
