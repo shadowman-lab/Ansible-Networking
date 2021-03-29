@@ -1,4 +1,4 @@
-- name: Example of facts being pushed to different vendor
+- name: Example of facts being pushed right back to device.
   hosts: all
   gather_facts: false
   collections:
@@ -11,10 +11,38 @@
     vyos.vyos.vyos_facts:
       gather_subset: min
       gather_network_resources: interfaces
-    register: interfacefacts
     when: ansible_network_os == 'vyos.vyos.vyos'
+
+  - name: Push the network interfaces to vyos
+    vyos.vyos.vyos_interfaces:
+      config: "{{ ansible_network_resources['interfaces'] }}"
+    register: result
+    when: ansible_network_os == 'vyos.vyos.vyos'
+
+  - name: Grab Cisco ios interface facts
+    cisco.ios.ios_facts:
+      gather_subset: min
+      gather_network_resources: interfaces
+    when: ansible_network_os == 'cisco.ios.ios'
     
   - name: Push the network interfaces to ios
     cisco.ios.ios_interfaces:
-      config: "{{ interfacefacts.ansible_network_resources['interfaces'] }}"
+      config: "{{ ansible_network_resources['interfaces'] }}"
+    register: result
     when: ansible_network_os == 'cisco.ios.ios'
+
+  - name: Grab Arista interface facts
+    arista.eos.eos_facts:
+      gather_subset: min
+      gather_network_resources: interfaces
+    when: ansible_network_os == 'arista.eos.eos'
+    
+  - name: Push the network interfaces to eos
+    arista.eos.eos_interfaces:
+      config: "{{ ansible_network_resources['interfaces'] }}"
+    register: result
+    when: ansible_network_os == 'arista.eos.eos'
+
+  - name: Verify that the config did not change as expected
+    assert:
+      that: not result.changed
