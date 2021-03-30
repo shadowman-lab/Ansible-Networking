@@ -15,4 +15,3 @@
           description: "{{ description | default(omit) }}"
           mtu: "{{ mtu | default(omit)}}"
           enabled: "{{ enabled }}"
-          speed: "{{ speed | default(omit) }}"
