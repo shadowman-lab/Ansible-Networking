@@ -14,6 +14,5 @@
         - name: GigabitEthernet2
           description: "{{ description | default(omit) }}"
           mtu: "{{ mtu | default(omit)}}"
-          duplex: "{{ duplex | default(omit)}}"
           enabled: "{{ enabled }}"
           speed: "{{ speed | default(omit) }}"
