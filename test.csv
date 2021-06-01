@@ -1,0 +1,8 @@
+Host name, OSType, OSversion
+LOGS, RedHat, 7.9
+SPLUNK, RedHat, 8.3
+REPORT, RedHat, 7.9
+RHEL8, RedHat, 8.3
+PROMGRAF, RedHat, 7.9
+RHEL7, RedHat, 7.9
+CYBERARK, RedHat, 8.3
