@@ -12,7 +12,7 @@
   - name: Configure vyos
     block:
       - name: Load stored vars for vyos
-        include_vars:
+        ansible.builtin.include_vars:
           file: vars/vyos_base_config.json
           name: ansible_network_resources
 
@@ -65,7 +65,7 @@
   - name: Configure ios
     block:
       - name: Load stored vars for ios
-        include_vars:
+        ansible.builtin.include_vars:
           file: vars/ios_base_config.json
           name: ansible_network_resources
 
@@ -103,7 +103,7 @@
     block:
 
       - name: Load stored vars for eos
-        include_vars:
+        ansible.builtin.include_vars:
           file: vars/eos_base_config.json
           name: ansible_network_resources
 

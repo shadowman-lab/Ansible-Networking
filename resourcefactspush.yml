@@ -44,5 +44,5 @@
     when: ansible_network_os == 'arista.eos.eos'
 
   - name: Verify that the config did not change as expected
-    assert:
+    ansible.builtin.assert:
       that: not result.changed

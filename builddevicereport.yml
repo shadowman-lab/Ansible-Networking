@@ -34,5 +34,5 @@
   tasks:
 
     - name: build a report
-      include_role:
+      ansible.builtin.include_role:
         name: shadowman.reports.build_report_network

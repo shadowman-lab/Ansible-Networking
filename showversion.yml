@@ -14,7 +14,7 @@
     register: version
 
   - name: Output VyOS version
-    debug:
+    ansible.builtin.debug:
       var: version.stdout_lines
     when: ansible_network_os == 'vyos.vyos.vyos'
 
@@ -25,7 +25,7 @@
     register: version
 
   - name: Output ios version
-    debug:
+    ansible.builtin.debug:
       var: version.stdout_lines
     when: ansible_network_os == 'cisco.ios.ios'
 
@@ -36,6 +36,6 @@
     register: version
 
   - name: Output eos version
-    debug:
+    ansible.builtin.debug:
       var: version.stdout_lines
     when: ansible_network_os == 'arista.eos.eos'

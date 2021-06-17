@@ -7,7 +7,7 @@
   tasks:
 
   - name: Sync with Gitrepo      
-    git:
+    ansible.builtin.git:
       repo: 'https://github.com/shadowman-lab/Ansible-Networking.git'
       dest: /home/network
       force: yes
@@ -22,38 +22,38 @@
     register: config_output
 
   - name: REMOVE NON CONFIG LINES - REGEXP
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: "{{ config_output.backup_path }}"
       line: "Building configuration..."
       state: absent
 
   - name: REMOVE NON CONFIG LINES - REGEXP
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: "{{ config_output.backup_path }}"
       regexp: 'Current configuration.*'
       state: absent
 
   - name: REMOVE enable password
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: "{{ config_output.backup_path }}"
       regexp: 'enable password.*'
       state: absent
 
   - name: REMOVE username and password
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: "{{ config_output.backup_path }}"
       regexp: 'username.*'
       state: absent
 
   - name: Find backup files older than 7 days
-    find:
+    ansible.builtin.find:
       paths: /home/network/backup
       recurse: yes
       age: 7d
     register: old_backups
 
   - name: Delete backup files older than 7 days
-    file:
+    ansible.builtin.file:
       path: "{{ item.path }}"
       state: absent
     loop: "{{ old_backups.files }}"
@@ -61,7 +61,7 @@
       label: "{{ item.path }}"
 
   - name: Update git repo with backup
-    shell: git add -A && git commit -m "Synching new backup to repo" && git push
+    ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
     args:
       chdir: /home/network
     delegate_to: tower.shadowman.dev
@@ -72,7 +72,7 @@
 
   tasks:
     - name: Find Current Backups
-      find:
+      ansible.builtin.find:
         paths: /home/network/backup
       register: backups
       run_once: true

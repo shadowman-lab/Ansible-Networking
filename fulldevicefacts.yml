@@ -19,7 +19,7 @@
         register: vyosfacts
 
       - name: Display vyos Facts
-        debug:
+        ansible.builtin.debug:
           var: vyosfacts
     when: ansible_network_os == 'vyos.vyos.vyos'
 
@@ -34,7 +34,7 @@
         register: iosfacts
 
       - name: Display ios Facts
-        debug:
+        ansible.builtin.debug:
           var: iosfacts
     when: ansible_network_os == 'cisco.ios.ios'
 
@@ -47,6 +47,6 @@
         register: eosfacts
 
       - name: Display eos Facts
-        debug:
+        ansible.builtin.debug:
           var: eosfacts
     when: ansible_network_os == 'arista.eos.eos'
