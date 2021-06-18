@@ -8,7 +8,7 @@
 
   - name: Sync with Gitrepo      
     ansible.builtin.git:
-      repo: 'https://github.com/shadowman-lab/Ansible-Networking.git'
+      repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
       dest: /home/network
       force: yes
     delegate_to: tower.shadowman.dev
