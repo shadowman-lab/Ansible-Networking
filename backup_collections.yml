@@ -135,5 +135,5 @@
       dest: /home/network/
     delegate_to: aap.shadowman.dev
     remote_user: "{{ linuxuser }}"
-    ansible_password: "{{ linuxpassword }}"
+    remote_password: "{{ linuxpassword }}"
     become: false
