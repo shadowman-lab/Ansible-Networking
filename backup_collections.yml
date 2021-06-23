@@ -124,7 +124,7 @@
     when: ansible_network_os == 'arista.eos.eos'
 
 - name: Copy backup to host
-  hosts: localhost
+  hosts: report.shadowman.dev
   gather_facts: false
   
   tasks:
@@ -133,7 +133,3 @@
     ansible.builtin.copy:
       src: /home/network/
       dest: /home/network/
-    delegate_to: aap.shadowman.dev
-    remote_user: "{{ linuxuser }}"
-    remote_password: "{{ linuxpassword }}"
-    become: false
