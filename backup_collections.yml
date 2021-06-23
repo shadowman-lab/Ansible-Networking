@@ -123,7 +123,14 @@
           dest: "/home/network/{{ inventory_hostname }}.yml"
     when: ansible_network_os == 'arista.eos.eos'
 
+- name: Copy backup to host
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+
   - name: copy files to managed host
-    ansible.posix.synchronize:
+    ansible.builtin.copy:
       src: /home/network/
-      dest: rsync://aap.shadowman.dev/home/network
+      dest: /home/network/
+    delegate_to: aap.shadowman.dev
