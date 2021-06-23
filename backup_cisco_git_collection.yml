@@ -48,7 +48,7 @@
   - name: Copy files to aap      
     ansible.builtin.copy:
       src: /home/network/backup
-      dest: /home/network/backup
+      dest: /home/network/
     delegate_to: aap.shadowman.dev
 
   - name: Find backup files older than 7 days
