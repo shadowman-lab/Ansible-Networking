@@ -75,7 +75,7 @@
     delegate_to: aap.shadowman.dev
 
 - name: Create Tower Restore Job
-  hosts: tower.shadowman.dev
+  hosts: aap.shadowman.dev
   gather_facts: no
 
   tasks:
