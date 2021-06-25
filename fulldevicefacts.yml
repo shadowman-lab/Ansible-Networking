@@ -30,7 +30,7 @@
           gather_subset:
             - '!all'
             - '!min'
-          gather_network_resources: all
+          gather_network_resources: '!vlans'
         register: iosfacts
 
       - name: Display ios Facts
