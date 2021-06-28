@@ -1,0 +1,31 @@
+acl_interfaces:
+-   name: Ethernet1
+-   name: Ethernet2
+bgp_address_family: []
+bgp_global: []
+interfaces:
+-   enabled: true
+    name: Ethernet1
+-   enabled: true
+    name: Ethernet2
+l2_interfaces:
+-   name: Ethernet1
+-   access:
+        vlan: 30
+    name: Ethernet2
+l3_interfaces:
+-   ipv4:
+    -   address: 192.16.8.190/28
+    name: Ethernet1
+-   ipv4:
+    -   address: 192.16.7.190/28
+    name: Ethernet2
+lacp: {}
+lag_interfaces: []
+lldp_global: {}
+ospf_interfaces:
+-   name: Ethernet1
+-   name: Ethernet2
+ospfv2: {}
+ospfv3: []
+prefix_lists: []
