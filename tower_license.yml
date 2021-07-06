@@ -9,6 +9,10 @@
     ansible.tower.tower_license:
       manifest: "/home/manifest_Shadowman-full-lab_20210706T134451Z.zip"
       eula_accepted: yes
+      validate_certs: no
+      tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
+      tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+      tower_host: "{{ lookup('env', 'TOWER_HOST') }}"
     
       
 
