@@ -1,0 +1,9 @@
+---
+- name: Retrieve VyOS version
+  vyos.vyos.vyos_command:
+    commands: show version
+  register: version
+
+- name: Output VyOS version
+  ansible.builtin.debug:
+    var: version.stdout_lines

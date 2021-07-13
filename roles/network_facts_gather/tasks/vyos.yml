@@ -1,0 +1,12 @@
+---
+- name: Grab vyos facts
+  vyos.vyos.vyos_facts:
+    gather_subset: 
+      - '!all'
+      - '!min'
+    gather_network_resources: all
+  register: vyosfacts
+
+- name: Display vyos Facts
+  ansible.builtin.debug:
+    var: vyosfacts

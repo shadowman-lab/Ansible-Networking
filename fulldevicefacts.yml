@@ -1,52 +1,6 @@
 - name: Example of all facts gathered by Ansible
   hosts: all
   gather_facts: false
-  collections:
-    - vyos.vyos
-    - cisco.ios
-    - arista.eos
-
-  tasks:
-
-  - name: Vyos Facts
-    block: 
-      - name: Grab vyos facts
-        vyos.vyos.vyos_facts:
-          gather_subset: 
-            - '!all'
-            - '!min'
-          gather_network_resources: all
-        register: vyosfacts
-
-      - name: Display vyos Facts
-        ansible.builtin.debug:
-          var: vyosfacts
-    when: ansible_network_os == 'vyos.vyos.vyos'
-
-  - name: Ios Facts
-    block: 
-      - name: Grab Cisco ios facts
-        cisco.ios.ios_facts:
-          gather_subset:
-            - '!all'
-            - '!min'
-          gather_network_resources: '!vlans'
-        register: iosfacts
-
-      - name: Display ios Facts
-        ansible.builtin.debug:
-          var: iosfacts
-    when: ansible_network_os == 'cisco.ios.ios'
-
-  - name: Eos Facts
-    block: 
-      - name: Grab Arista eos facts
-        arista.eos.eos_facts:
-          gather_subset: 'min'
-          gather_network_resources: all
-        register: eosfacts
-
-      - name: Display eos Facts
-        ansible.builtin.debug:
-          var: eosfacts
-    when: ansible_network_os == 'arista.eos.eos'
+  
+  roles:
+    - network_facts_gather

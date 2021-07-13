@@ -1,0 +1,59 @@
+---
+- name: Configure hostname on vyos
+  vyos.vyos.vyos_system:
+    host_name: "{{ inventory_hostname }}"
+
+- name: Push min l3 interfaces to vyos
+  vyos.vyos.vyos_l3_interfaces:
+    state: overridden
+    config:
+    - name: eth0
+      ipv4:
+      - address: dhcp
+    - name: eth1
+      ipv4:
+      - address: "{{ gigabit1 }}/28"
+
+- name: Push min interfaces to vyos
+  vyos.vyos.vyos_interfaces:
+    state: overridden
+    config:
+    - name: eth0
+      enabled: true
+    - name: eth1
+      enabled: true
+    - name: lo
+      enabled: true
+
+- name: Delete firewall interfaces on vyos
+  vyos.vyos.vyos_firewall_interfaces:
+    state: deleted
+
+- name: Delete firewall rules on vyos
+  vyos.vyos.vyos_firewall_rules:
+    state: deleted
+
+- name: Delete firewall global attributes configuration on vyos
+  vyos.vyos.vyos_firewall_global:
+    config:
+      config_trap: 
+      log_martians:
+      syn_cookies: 
+      twa_hazards_protection: 
+      ping:
+      state_policy:
+      route_redirects:
+      group:
+    state: deleted
+
+- name: Delete lldp global on vyos
+  vyos.vyos.vyos_lldp_global:
+    state: deleted
+
+- name: Delete ospfv2 routes attributes configuration on vyos
+  vyos.vyos.vyos_ospfv2:
+    state: deleted
+
+- name: Delete ospfv3 routes attributes configuration on vyos
+  vyos.vyos.vyos_ospfv3:
+    state: deleted

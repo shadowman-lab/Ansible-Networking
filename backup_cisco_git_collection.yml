@@ -1,108 +1,13 @@
 - name: Device Backup
   hosts: os_cisco
   gather_facts: false
-  collections:
-    - cisco.ios
-
-  tasks:
-
-  - name: Sync with Gitrepo      
-    ansible.builtin.git:
-      repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
-      dest: /home/network
-      force: yes
-    delegate_to: aap.shadowman.dev
-
-  - name: Backup ios device
-    cisco.ios.ios_config:
-      backup: yes
-      backup_options:
-        dir_path: /home/network/backup
-    become: yes
-    register: config_output
-
-  - name: REMOVE NON CONFIG LINES - REGEXP
-    ansible.builtin.lineinfile:
-      path: "{{ config_output.backup_path }}"
-      line: "Building configuration..."
-      state: absent
-
-  - name: REMOVE NON CONFIG LINES - REGEXP
-    ansible.builtin.lineinfile:
-      path: "{{ config_output.backup_path }}"
-      regexp: 'Current configuration.*'
-      state: absent
-
-  - name: REMOVE enable password
-    ansible.builtin.lineinfile:
-      path: "{{ config_output.backup_path }}"
-      regexp: 'enable password.*'
-      state: absent
-
-  - name: REMOVE username and password
-    ansible.builtin.lineinfile:
-      path: "{{ config_output.backup_path }}"
-      regexp: 'username.*'
-      state: absent
-
-  - name: Copy files to aap      
-    ansible.builtin.copy:
-      src: /home/network/backup
-      dest: /home/network/
-    delegate_to: aap.shadowman.dev
-
-  - name: Find backup files older than 7 days
-    ansible.builtin.find:
-      paths: /home/network/backup
-      recurse: yes
-      age: 7d
-    register: old_backups
-    delegate_to: aap.shadowman.dev
-
-  - name: Delete backup files older than 7 days
-    ansible.builtin.file:
-      path: "{{ item.path }}"
-      state: absent
-    loop: "{{ old_backups.files }}"
-    loop_control:
-      label: "{{ item.path }}"
-    delegate_to: aap.shadowman.dev
-
-  - name: Update git repo with backup
-    ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
-    args:
-      chdir: /home/network
-    delegate_to: aap.shadowman.dev
+  
+  roles:
+    - network_backup_git_collection
 
 - name: Create Tower Restore Job
   hosts: aap.shadowman.dev
   gather_facts: no
 
-  tasks:
-    - name: Find Current Backups
-      ansible.builtin.find:
-        paths: /home/network/backup
-      register: backups
-      run_once: true
-      become: yes
-      delegate_to: aap.shadowman.dev
-
-    - name: Create Restore Job Template
-      ansible.tower.tower_job_template:
-        name: "Network Restore"
-        job_type: "run"
-        inventory: "Network Inventory"
-        project: "SSP Networking Project"
-        playbook: "network_restore.yml"
-        credentials: 
-          - "Cisco Credentials" 
-          - "VYOS Credentials"
-          - "Arista Credential"
-        limit: "os_cisco"
-        survey_enabled: true
-        become_enabled: yes
-        survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"
-        validate_certs: no
-        tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
-        tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
-        tower_host: "{{ lookup('env', 'TOWER_HOST') }}"
+  roles:
+    - network_create_restore

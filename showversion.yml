@@ -1,41 +1,6 @@
 - name: Pull version of device using command module
   hosts: all
   gather_facts: false
-  collections:
-    - vyos.vyos
-    - cisco.ios
-    - arista.eos
-
-  tasks:
-  - name: Retrieve VyOS version
-    vyos.vyos.vyos_command:
-      commands: show version
-    when: ansible_network_os == 'vyos.vyos.vyos'
-    register: version
-
-  - name: Output VyOS version
-    ansible.builtin.debug:
-      var: version.stdout_lines
-    when: ansible_network_os == 'vyos.vyos.vyos'
-
-  - name: Retrieve ios version
-    cisco.ios.ios_command:
-      commands: show version
-    when: ansible_network_os == 'cisco.ios.ios'
-    register: version
-
-  - name: Output ios version
-    ansible.builtin.debug:
-      var: version.stdout_lines
-    when: ansible_network_os == 'cisco.ios.ios'
-
-  - name: Retrieve eos version
-    arista.eos.eos_command:
-      commands: show version
-    when: ansible_network_os == 'arista.eos.eos'
-    register: version
-
-  - name: Output eos version
-    ansible.builtin.debug:
-      var: version.stdout_lines
-    when: ansible_network_os == 'arista.eos.eos'
+  
+  roles:
+    - network_version

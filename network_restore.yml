@@ -1,11 +1,6 @@
 - name: Device Restore
   hosts: os_cisco
   gather_facts: false
-  collections:
-    - cisco.ios
-
-  tasks:
-
-  - name: Restore ios device
-    cisco.ios.ios_config:
-      src: "backup/{{ rollback_date }}"
+  
+  roles:
+    - network_restore

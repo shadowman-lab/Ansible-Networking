@@ -1,0 +1,29 @@
+---
+- name: Load stored vars for eos
+  ansible.builtin.include_vars:
+    file: vars/eos_base_config.json
+    name: ansible_network_resources
+
+- name: Configure hostname on eos
+  arista.eos.eos_system:
+    hostname: "{{ inventory_hostname }}"
+
+- name: Configure VLAN on eos
+  arista.eos.eos_vlans: 
+    state: overridden
+    config: "{{ ansible_network_resources['vlans'] }}"
+
+- name: Update l3 interfaces on eos
+  arista.eos.eos_l3_interfaces:
+    state: overridden
+    config: "{{ ansible_network_resources['l3_interfaces'] }}"
+
+- name: Update l2 interfaces on eos
+  arista.eos.eos_l2_interfaces:
+    state: overridden
+    config: "{{ ansible_network_resources['l2_interfaces'] }}"
+    
+- name: Update interfaces on eos
+  arista.eos.eos_interfaces:
+    state: overridden
+    config: "{{ ansible_network_resources['interfaces'] }}"

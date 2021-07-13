@@ -1,0 +1,9 @@
+---
+- name: Update interfaces on ios
+  cisco.ios.ios_interfaces:
+    state: "{{ state }}"
+    config:
+    - name: GigabitEthernet2
+      description: "{{ description | default(omit) }}"
+      mtu: "{{ mtu | default(omit)}}"
+      enabled: "{{ enabled }}"

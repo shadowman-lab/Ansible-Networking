@@ -1,0 +1,31 @@
+---
+- name: Backup vyos device
+  vyos.vyos.vyos_config:
+    backup: yes
+    backup_options:
+      filename: "{{ inventory_hostname }}.cfg"
+      dir_path: /home/network
+
+- name: REMOVE encrypted password
+  ansible.builtin.lineinfile:
+    path: "/home/network/{{ inventory_hostname }}.cfg"
+    regexp: 'set system login user vyos authentication encrypted-password.*'
+    state: absent
+
+- name: REMOVE plaintext password
+  ansible.builtin.lineinfile:
+    path: "/home/network/{{ inventory_hostname }}.cfg"
+    regexp: 'set system login user vyos authentication plaintext-password.*'
+    state: absent
+
+- name: Grab vyos interface facts for new backup type
+  vyos.vyos.vyos_facts:
+    gather_subset: 
+      - '!all'
+      - '!min'
+    gather_network_resources: all
+
+- name: Backup using resource modules on vyos
+  ansible.builtin.copy:
+    content: "{{ ansible_network_resources | to_nice_yaml }}"
+    dest: "/home/network/{{ inventory_hostname }}.yml"

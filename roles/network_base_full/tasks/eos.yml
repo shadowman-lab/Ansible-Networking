@@ -1,0 +1,49 @@
+---
+- name: Configure hostname on eos
+  arista.eos.eos_system:
+    hostname: "{{ inventory_hostname }}"
+
+- name: Configure VLAN on eos
+  arista.eos.eos_vlans:
+    state: overridden
+    config:
+      - name: Desktop
+        vlan_id: 20
+        state: active
+      - name: Server
+        vlan_id: 30
+        state: active
+
+- name: Update l3 interfaces on eos
+  arista.eos.eos_l3_interfaces:
+    state: overridden
+    config:
+    - name: Ethernet1
+      ipv4:
+      - address: "{{ gigabit1 }}/28"
+    - name: Ethernet2
+      ipv4:
+      - address: "{{ gigabit2 }}/28"
+
+- name: Update l2 interfaces on eos
+  arista.eos.eos_l2_interfaces:
+    state: overridden
+    config:
+    - name: Ethernet1
+      trunk:
+        native_vlan: 20
+    - name: Ethernet2
+      access:
+        vlan: 30
+
+- name: Update interfaces on eos
+  arista.eos.eos_interfaces:
+    state: overridden
+    config:
+    - name: Ethernet1
+      description: "This is {{ configured_by }}"
+      enabled: true
+    - name: Ethernet2
+      description: "This is {{ configured_by }}"
+      enabled: true
+        

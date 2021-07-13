@@ -1,0 +1,10 @@
+---
+- name: Grab Arista eos facts
+  arista.eos.eos_facts:
+    gather_subset: 'min'
+    gather_network_resources: all
+  register: eosfacts
+
+- name: Display eos Facts
+  ansible.builtin.debug:
+    var: eosfacts

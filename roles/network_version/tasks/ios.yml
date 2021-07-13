@@ -1,0 +1,9 @@
+---
+- name: Retrieve ios version
+  cisco.ios.ios_command:
+    commands: show version
+  register: version
+
+- name: Output ios version
+  ansible.builtin.debug:
+    var: version.stdout_lines

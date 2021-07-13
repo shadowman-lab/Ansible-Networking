@@ -1,0 +1,12 @@
+---
+- name: Grab Cisco ios facts
+  cisco.ios.ios_facts:
+    gather_subset:
+      - '!all'
+      - '!min'
+    gather_network_resources: '!vlans'
+  register: iosfacts
+
+- name: Display ios Facts
+  ansible.builtin.debug:
+    var: iosfacts

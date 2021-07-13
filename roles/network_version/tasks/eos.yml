@@ -1,0 +1,9 @@
+---
+- name: Retrieve eos version
+  arista.eos.eos_command:
+    commands: show version
+  register: version
+
+- name: Output eos version
+  ansible.builtin.debug:
+    var: version.stdout_lines

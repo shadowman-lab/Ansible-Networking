@@ -1,0 +1,14 @@
+---
+- name: Grab vyos interface facts
+  vyos.vyos.vyos_facts:
+    gather_subset: min
+    gather_network_resources: interfaces
+
+- name: Push the network interfaces to vyos
+  vyos.vyos.vyos_interfaces:
+    config: "{{ ansible_network_resources['interfaces'] }}"
+  register: result
+
+- name: Verify that the config did not change as expected
+  ansible.builtin.assert:
+    that: not result.changed

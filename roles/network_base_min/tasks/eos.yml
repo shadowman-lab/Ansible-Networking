@@ -1,0 +1,39 @@
+---
+- name: Configure hostname on eos
+  arista.eos.eos_system:
+    hostname: "{{ inventory_hostname }}"
+
+- name: Set min l3 interfaces on eos
+  arista.eos.eos_l3_interfaces:
+    state: overridden
+    config:
+    - name: Ethernet1
+      ipv4:
+      - address: "{{ gigabit1 }}/28"
+    - name: Ethernet2
+      ipv4:
+      - address: "{{ gigabit2 }}/28"
+
+- name: Set min interfaces on eos
+  arista.eos.eos_interfaces:
+    state: overridden
+    config:
+    - name: Ethernet1
+      enabled: true
+    - name: Ethernet2
+      enabled: true
+
+- name: Delete l2 interfaces on eos
+  arista.eos.eos_l2_interfaces:
+    config:
+    - name: Ethernet1
+    state: deleted
+  ignore_errors: true
+
+- name: Delete VLAN on eos
+  arista.eos.eos_vlans:
+    config:
+    - vlan_id: 20
+    - vlan_id: 30
+    state: deleted
+  ignore_errors: true

@@ -2,16 +2,6 @@
 - name: Manage IOS Interface
   hosts: all
   gather_facts: false
-  collections:
-    - cisco.ios
-
-  tasks:
-
-    - name: Update interfaces on ios
-      cisco.ios.ios_interfaces:
-        state: "{{ state }}"
-        config:
-        - name: GigabitEthernet2
-          description: "{{ description | default(omit) }}"
-          mtu: "{{ mtu | default(omit)}}"
-          enabled: "{{ enabled }}"
+  
+  roles:
+    - network_interface_config

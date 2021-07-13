@@ -1,0 +1,49 @@
+---
+- name: Load stored vars for vyos
+  ansible.builtin.include_vars:
+    file: vars/vyos_base_config.json
+    name: ansible_network_resources
+
+- name: Configure hostname on vyos
+  vyos.vyos.vyos_system:
+    host_name: "{{ inventory_hostname }}"
+
+- name: Push base l3 interfaces to vyos
+  vyos.vyos.vyos_l3_interfaces:
+    state: overridden
+    config: "{{ ansible_network_resources['l3_interfaces'] }}"
+
+- name: Push base interfaces to vyos
+  vyos.vyos.vyos_interfaces:
+    state: overridden
+    config: "{{ ansible_network_resources['interfaces'] }}"
+
+- name: Push base firewall global attributes configuration to vyos
+  vyos.vyos.vyos_firewall_global:
+    config: "{{ ansible_network_resources['firewall_global'] }}"
+    state: replaced
+
+- name: Push base firewall rules to vyos
+  vyos.vyos.vyos_firewall_rules:
+    state: overridden
+    config: "{{ ansible_network_resources['firewall_rules'] }}"
+
+- name: Push base firewall interfaces to vyos
+  vyos.vyos.vyos_firewall_interfaces:
+    state: overridden
+    config: "{{ ansible_network_resources['firewall_interfaces'] }}"
+
+- name: Push base lldp global to vyos
+  vyos.vyos.vyos_lldp_global:
+    state: replaced
+    config: "{{ ansible_network_resources['lldp_global'] }}"
+
+- name: Push base ospfv2 routes attributes configuration to vyos
+  vyos.vyos.vyos_ospfv2:
+    config: "{{ ansible_network_resources['ospfv2'] }}"
+    state: replaced
+
+- name: Push base ospfv3 routes attributes configuration to vyos
+  vyos.vyos.vyos_ospfv3:
+    config: "{{ ansible_network_resources['ospfv3'] }}"
+    state: replaced

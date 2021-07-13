@@ -1,0 +1,27 @@
+---
+- name: Find Current Backups
+  ansible.builtin.find:
+    paths: /home/network/backup
+  register: backups
+  run_once: true
+  become: yes
+
+- name: Create Restore Job Template
+  ansible.tower.tower_job_template:
+    name: "Network Restore"
+    job_type: "run"
+    inventory: "Network Inventory"
+    project: "SSP Networking Project"
+    playbook: "network_restore.yml"
+    credentials: 
+      - "Cisco Credentials" 
+      - "VYOS Credentials"
+      - "Arista Credential"
+    limit: "os_cisco"
+    survey_enabled: true
+    become_enabled: yes
+    survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"
+    validate_certs: no
+    tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
+    tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
+    tower_host: "{{ lookup('env', 'TOWER_HOST') }}"
