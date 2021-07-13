@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 13:37:27 UTC Wed Jun 30 2021 by ios
+! Last configuration change at 14:02:48 UTC Thu Jul 1 2021 by ios
 !
 version 16.6
 service timestamps debug datetime msec
@@ -100,8 +100,7 @@ interface GigabitEthernet1
  lacp port-priority 10
 !
 interface GigabitEthernet2
- description Lunch-N-Learn
- mtu 3000
+ description Outbound to World
  ip address 192.18.7.190 255.255.255.240
  negotiation auto
  no mop enabled
