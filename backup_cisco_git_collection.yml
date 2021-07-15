@@ -10,4 +10,4 @@
   gather_facts: no
 
   roles:
-    - network_create_restore
+    - network_create_restore_collection
