@@ -1,6 +1,7 @@
 - name: Example of all facts gathered by Ansible
   hosts: all
   gather_facts: false
+  strategy: free
   
   roles:
     - network_facts_gather

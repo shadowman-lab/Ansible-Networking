@@ -1,6 +1,7 @@
 - name: Example of facts being pushed right back to device.
   hosts: all
   gather_facts: false
+  strategy: free
   
   roles:
     - network_facts_push

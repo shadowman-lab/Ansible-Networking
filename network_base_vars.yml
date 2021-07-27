@@ -2,6 +2,7 @@
 - name: Push Base config using resource modules and vars
   hosts: all
   gather_facts: false
+  strategy: free
   
   roles:
     - network_base_vars

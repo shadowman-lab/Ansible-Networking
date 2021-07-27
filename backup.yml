@@ -1,5 +1,6 @@
 - name: Device Backup
   hosts: tag_Router
+  strategy: free
   gather_facts: false
   
   roles:

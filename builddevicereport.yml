@@ -1,6 +1,7 @@
 - name: Gather facts for devices
   hosts: tag_Router
   gather_facts: false
+  strategy: free
   
   roles:
     - network_facts_gather
