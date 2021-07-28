@@ -1,9 +1,7 @@
 ---
 - name: Grab Cisco ios facts
   cisco.ios.ios_facts:
-    gather_subset:
-      - '!all'
-      - '!min'
+    gather_subset: 'min'
     gather_network_resources: '!vlans'
   register: iosfacts
 
