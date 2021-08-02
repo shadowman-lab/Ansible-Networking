@@ -4,17 +4,17 @@
     backup: yes
     backup_options:
       filename: "{{ inventory_hostname }}.cfg"
-      dir_path: /home/network
+      dir_path: /tmp/home/network
 
 - name: REMOVE username and password
   ansible.builtin.lineinfile:
-    path: "/home/network/{{ inventory_hostname }}.cfg"
+    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
     regexp: 'username.*'
     state: absent
 
 - name: REMOVE enable name
   ansible.builtin.lineinfile:
-    path: "/home/network/{{ inventory_hostname }}.cfg"
+    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
     regexp: 'enable.*'
     state: absent
 
@@ -28,5 +28,5 @@
 - name: Backup using resource modules on eos
   ansible.builtin.copy:
     content: "{{ ansible_network_resources | to_nice_yaml }}"
-    dest: "/home/network/{{ inventory_hostname }}.yml"
+    dest: "/tmp/home/network/{{ inventory_hostname }}.yml"
   
