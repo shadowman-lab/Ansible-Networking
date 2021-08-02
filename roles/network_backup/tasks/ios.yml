@@ -4,29 +4,29 @@
     backup: yes
     backup_options:
       filename: "{{ inventory_hostname }}.cfg"
-      dir_path: /home/network
+      dir_path: /tmp/home/network
 
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
-    path: "/home/network/{{ inventory_hostname }}.cfg"
+    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
     line: "Building configuration..."
     state: absent
 
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
-    path: "/home/network/{{ inventory_hostname }}.cfg"
+    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
     regexp: 'Current configuration.*'
     state: absent
 
 - name: REMOVE enable password
   ansible.builtin.lineinfile:
-    path: "/home/network/{{ inventory_hostname }}.cfg"
+    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
     regexp: 'enable password.*'
     state: absent
 
 - name: REMOVE username and password
   ansible.builtin.lineinfile:
-    path: "/home/network/{{ inventory_hostname }}.cfg"
+    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
     regexp: 'username.*'
     state: absent
 
@@ -40,4 +40,4 @@
 - name: Backup using resource modules on ios
   ansible.builtin.copy:
     content: "{{ ansible_network_resources | to_nice_yaml }}"
-    dest: "/home/network/{{ inventory_hostname }}.yml"
+    dest: "/tmp/home/network/{{ inventory_hostname }}.yml"
