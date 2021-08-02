@@ -2,7 +2,7 @@
 - name: Sync with Gitrepo      
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
-    dest: /home/network
+    dest: /tmp/home/network
     force: yes
   delegate_to: aap.shadowman.dev
 
@@ -10,7 +10,7 @@
   cisco.ios.ios_config:
     backup: yes
     backup_options:
-      dir_path: /home/network/backup
+      dir_path: /tmp/home/network/backup
   become: yes
   register: config_output
 
@@ -40,13 +40,13 @@
 
 - name: Copy files to aap      
   ansible.builtin.copy:
-    src: /home/network/backup
-    dest: /home/network/
+    src: /tmp/home/network/backup
+    dest: /tmp/home/network/
   delegate_to: aap.shadowman.dev
 
 - name: Find backup files older than 7 days
   ansible.builtin.find:
-    paths: /home/network/backup
+    paths: /tmp/home/network/backup
     recurse: yes
     age: 7d
   register: old_backups
@@ -64,5 +64,5 @@
 - name: Update git repo with backup
   ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
   args:
-    chdir: /home/network
+    chdir: /tmp/home/network
   delegate_to: aap.shadowman.dev
