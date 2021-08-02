@@ -14,5 +14,5 @@
 
   - name: copy files to managed host
     ansible.builtin.copy:
-      src: /home/network/
+      src: /tmp/home/network/
       dest: /home/network/
