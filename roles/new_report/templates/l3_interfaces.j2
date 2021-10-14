@@ -20,7 +20,11 @@
             <td>
 {% if interface.ipv4 is defined %}
 {% for address in interface.ipv4 %}
+{% if address['address'] is defined %}
 {{address['address']}}
+{% else %}
+dhcp
+{% endif %}
 {% if address['secondary'] is defined %}
 secondary
 {% endif %}
