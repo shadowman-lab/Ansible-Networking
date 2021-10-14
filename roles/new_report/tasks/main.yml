@@ -15,7 +15,7 @@
     dest: "{{ file_path }}"
     directory_mode: true
   loop:
-    - "webpage_logo.png"
+    - "webpage_logo.svg"
     - "redhat-ansible-logo.svg"
 
 - name: display link to inventory report
