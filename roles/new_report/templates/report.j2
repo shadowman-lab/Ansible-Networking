@@ -41,7 +41,7 @@ collapsible: true
             <td class="summary_info">
               <div id="hostname">
                 <p class="hostname"> 
-                  <img class="router_image" src="router.png"> {{ hostvars[network_switch]['ansible_net_hostname'] }}</p>
+                  <img class="router_image" src="router.png"> {{ hostvars[network_switch]['ansible_net_hostname'].split('.')[0] }}</p>
                 </div>
 {% include 'summary.j2' %}
 </td>
