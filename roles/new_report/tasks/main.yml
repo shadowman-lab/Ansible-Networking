@@ -17,6 +17,7 @@
   loop:
     - "webpage_logo.png"
     - "redhat-ansible-logo.svg"
+    - "router.png"
 
 - name: display link to inventory report
   ansible.builtin.debug:
