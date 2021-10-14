@@ -12,8 +12,8 @@
     </thead>
     <tbody>
         <tr>
-        {% if hostvars[network_switch]['ansible_network_resources']['lacp'['system'] is defined %}
-            <td>{{hostvars[network_switch]['ansible_network_resources']['lacp'['system']['priority']}}</td>
+        {% if hostvars[network_switch]['ansible_network_resources']['lacp']['system'] is defined %}
+            <td> {{hostvars[network_switch]['ansible_network_resources']['lacp'['system']['priority']}}</td>
         {% endif %}
         </tr>
     </tbody>
