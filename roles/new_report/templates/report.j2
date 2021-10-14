@@ -31,42 +31,36 @@ $("document").ready(function(){
 <table>
     <thead>
         <tr>
-            <th>Hostname</th>
-            <th>Transport</th>
-            <th>Platform</th>
-            <th>Code Version</th>
-            <th>Serial Number</th>
+            <th>Network Device</th>
+            <th>Layer 1</th>
+            <th>Layer 2</th>
+            <th>Layer 3</th>
         </tr>
     </thead>
     <tbody>
 {% for network_switch in groups['tag_Router']|sort %}
         <tr>
             <td><p class="hostname">{{hostvars[network_switch]['ansible_net_hostname']}}</p>
-{% include 'vlans.j2' %}
+
+</td>
+<td>
 {% include 'interfaces.j2' %}
+</td>
+{% include 'vlans.j2' %}
 {% include 'lldp_interfaces.j2' %}
 {% include 'l2_interfaces.j2' %}
+<td>
 {% include 'l3_interfaces.j2' %}
 {% include 'lacp.j2' %}
 {% include 'bgp.j2' %}
 {% include 'ospf.j2' %}
-
-            </td>
-<td>{{hostvars[network_switch]['ansible_net_api']}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_system']}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_version']}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
+</td>
+            
         </tr>
 {% endfor %}
     </tbody>
 </table>
 <center><p>Created with</p><br><img src="webpage_logo.png" width="300">
-<p>The source code to create this report can be found at <a href="https://github.com/network-automation/toolkit">https://github.com/network-automation/toolkit</a></br><br>
-If you are new to Ansible Automation check out the following links:<br>
-<a href="https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html">Getting Started</a"><br>
-<a target="_new" href="https://ansible.com/workshops">Free hands-on workshops</a><br>
-<a href="https://youtube.com/ansibleautomation">Youtube Videos</a><br>
-</p>
 </center>
 </section>
 </body>
