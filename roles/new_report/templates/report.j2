@@ -28,7 +28,7 @@ $("document").ready(function(){
 <center>
 <h1>Ansible Network Automation Example Report</h1>
 </center>
-<table>
+<table class="main_net_table">
     <thead>
         <tr>
             <th>Network Device</th>
@@ -40,7 +40,9 @@ $("document").ready(function(){
     <tbody>
 {% for network_switch in groups['tag_Router']|sort %}
         <tr>
-            <td><p class="hostname"> <img class="router_image" src="router.png"> {{hostvars[network_switch]['ansible_net_hostname']}}</p>
+            <td class="summary_info">
+              <div id="hostname">
+                <p class="hostname"> <img class="router_image" src="router.png"> {{hostvars[network_switch]['ansible_net_hostname']}}</p></div>
 {% include 'summary.j2' %}
 </td>
 <td>
