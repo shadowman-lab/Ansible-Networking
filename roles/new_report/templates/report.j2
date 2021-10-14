@@ -8,18 +8,15 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$("document").ready(function(){
-  $click =  $('.expandclass');   // Click selector
-  $click.click(function () {
-    $clicked = $(this);
-    $expand = $(this).parent('.expand').next();  // Expand and collapse content selector
-        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-        $expand.slideToggle(500, function () {
-            //execute this after slideToggle is done
-            //change text of expand based on visibility of content div
-        });
-    });
+
+$(function() {
+$( "#accordion > div" ).accordion({
+    header: "h3",
+    active: false,
+collapsible: true
 });
+});
+
 </script>
 </head>
 <body>
