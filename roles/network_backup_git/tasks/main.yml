@@ -4,7 +4,7 @@
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /home/network
     force: yes
-  delegate_to: localhost
+  delegate_to: tower1.shadowman.dev
 
 - name: Backup ios device
   cisco.ios.ios_config:
@@ -38,6 +38,12 @@
     regexp: 'username.*'
     state: absent
 
+- name: Copy files to tower1
+  ansible.builtin.copy:
+    src: /home/network/backup
+    dest: /home/network/backup
+  delegate_to: tower1.shadowman.dev
+
 - name: Find backup files older than 7 days
   ansible.builtin.find:
     paths: /home/network/backup
@@ -57,4 +63,4 @@
   ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
   args:
     chdir: /home/network
-  delegate_to: localhost
+  delegate_to: tower1.shadowman.dev
