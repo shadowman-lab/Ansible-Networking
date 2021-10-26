@@ -4,7 +4,7 @@
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /home/network
     force: yes
-  delegate_to: tower.shadowman.dev
+  delegate_to: tower1.shadowman.dev
 
 - name: Backup ios device
   cisco.ios.ios_config:
@@ -57,4 +57,4 @@
   ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
   args:
     chdir: /home/network
-  delegate_to: tower.shadowman.dev
+  delegate_to: tower1.shadowman.dev
