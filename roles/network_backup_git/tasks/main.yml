@@ -41,7 +41,7 @@
 - name: Copy files to tower1
   ansible.builtin.copy:
     src: /home/network/backup
-    dest: /home/network/backup
+    dest: /home/network/
   delegate_to: tower1.shadowman.dev
 
 - name: Find backup files older than 7 days
