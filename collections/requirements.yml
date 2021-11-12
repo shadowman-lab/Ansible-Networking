@@ -11,4 +11,3 @@ collections:
   - name: ansible.tower
 
   - name: shadowman.reports
-    source: https://towerpah.shadowman.dev/api/galaxy/content/published/
