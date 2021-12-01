@@ -4,7 +4,7 @@
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /tmp/home/network
     force: yes
-  delegate_to: aap.shadowman.dev
+  delegate_to: tower1.shadowman.dev
 
 - name: Backup ios device
   cisco.ios.ios_config:
@@ -42,7 +42,7 @@
   ansible.builtin.copy:
     src: /tmp/home/network/backup
     dest: /tmp/home/network/
-  delegate_to: aap.shadowman.dev
+  delegate_to: tower1.shadowman.dev
 
 - name: Find backup files older than 7 days
   ansible.builtin.find:
@@ -50,7 +50,7 @@
     recurse: yes
     age: 7d
   register: old_backups
-  delegate_to: aap.shadowman.dev
+  delegate_to: tower1.shadowman.dev
 
 - name: Delete backup files older than 7 days
   ansible.builtin.file:
@@ -59,10 +59,10 @@
   loop: "{{ old_backups.files }}"
   loop_control:
     label: "{{ item.path }}"
-  delegate_to: aap.shadowman.dev
+  delegate_to: tower1.shadowman.dev
 
 - name: Update git repo with backup
   ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
   args:
     chdir: /tmp/home/network
-  delegate_to: aap.shadowman.dev
+  delegate_to: tower1.shadowman.dev
