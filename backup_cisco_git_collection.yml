@@ -6,7 +6,7 @@
     - network_backup_git_collection
 
 - name: Create Tower Restore Job
-  hosts: aap.shadowman.dev
+  hosts: tower1.shadowman.dev
   gather_facts: no
 
   roles:
