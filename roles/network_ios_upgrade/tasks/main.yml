@@ -4,6 +4,7 @@
     src: "~/images/{{ image }}"
     dest: "/tmp/{{ image }}"
   delegate_to: tower1.shadowman.dev
+  run_once: true
 
 - name: Copy Image to device
   ansible.netcommon.net_put: 
