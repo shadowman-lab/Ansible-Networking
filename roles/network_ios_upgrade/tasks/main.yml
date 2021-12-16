@@ -1,5 +1,5 @@
 ---
-- name: Fetch image to central location
+- name: Fetch image to EE
   ansible.builtin.fetch:
     src: "/images/{{ image }}"
     dest: "/tmp/"
@@ -8,7 +8,7 @@
   become: false
   run_once: true
 
-- name: Copy Image to device
+- name: Copy Image to device from EE
   ansible.netcommon.net_put: 
     src: "/tmp/{{ image }}"
     dest: "flash:/{{ image }}"
