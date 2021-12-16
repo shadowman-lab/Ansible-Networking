@@ -1,5 +1,5 @@
 ---
-- name: Fetch image
+- name: Fetch image to central location
   ansible.builtin.fetch:
     src: "~/images/{{ image }}"
     dest: "/tmp/{{ image }}"
