@@ -4,25 +4,6 @@
 - name: Copy Image to device
   ansible.netcommon.net_get: 
     src: "running_cfg_eos1.txt"
-    protocol: sftp
   vars: 
     ansible_command_timeout: 600
 
-- name: Change Boot Variable to new image 
-  cisco.ios.ios_config: 
-    commands: 
-      - "boot system flash:{{ image }}"
-    save_when: always 
-
-- name: Reload the Device 
-  ansible.netcommon.cli_command:   
-    command: reload
-    prompt: 
-      - confirm
-    answer: 
-      - 'y'
-
-- name: Wait for device to come back online
-  ansible.builtin.wait_for_connection:
-    delay: 90
-  
