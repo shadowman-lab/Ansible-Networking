@@ -1,7 +1,7 @@
 ---
 - name: Copy Image to device
   ansible.netcommon.net_put: 
-    src: "~/network-programmability/images/{{ image }}"
+    src: "~/images/{{ image }}"
     dest: "flash:/{{ image }}"
   vars: 
     ansible_command_timeout: 600
