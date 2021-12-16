@@ -1,16 +1,9 @@
 ---
-- name: Fetch image to central location
-  ansible.builtin.fetch:
-    src: "/images/{{ image }}"
-    dest: "/tmp/{{ image }}"
-  delegate_to: tower1.shadowman.dev
-  become: false
-  run_once: true
+
 
 - name: Copy Image to device
-  ansible.netcommon.net_put: 
-    src: "/tmp/{{ image }}"
-    dest: "flash:/{{ image }}"
+  ansible.netcommon.net_get: 
+    src: "running_cfg_eos1.txt"
   vars: 
     ansible_command_timeout: 600
 
