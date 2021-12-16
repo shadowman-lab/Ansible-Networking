@@ -1,10 +1,11 @@
 ---
 - name: Copy Image to device
   ansible.netcommon.net_put: 
-    src: "/images/{{ image }}"
+    src: "~/images/{{ image }}"
     dest: "flash:/{{ image }}"
   vars: 
     ansible_command_timeout: 600
+  delegate_to: tower1.shadowman.dev
 
 - name: Change Boot Variable to new image 
   cisco.ios.ios_config: 
