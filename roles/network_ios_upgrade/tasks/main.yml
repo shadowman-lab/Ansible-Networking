@@ -4,6 +4,7 @@
 - name: Copy Image to device
   ansible.netcommon.net_get: 
     src: "running_cfg_eos1.txt"
+    protocol: sftp
   vars: 
     ansible_command_timeout: 600
 
