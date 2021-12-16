@@ -1,9 +1,34 @@
 ---
-
+- name: Fetch image to central location
+  ansible.builtin.fetch:
+    src: "/images/{{ image }}"
+    dest: "/tmp/{{ image }}"
+  delegate_to: tower1.shadowman.dev
+  become: false
+  run_once: true
 
 - name: Copy Image to device
-  ansible.netcommon.net_get: 
-    src: "running_cfg_eos1.txt"
+  ansible.netcommon.net_put: 
+    src: "/tmp/{{ image }}"
+    dest: "flash:/{{ image }}"
   vars: 
     ansible_command_timeout: 600
 
+- name: Change Boot Variable to new image 
+  cisco.ios.ios_config: 
+    commands: 
+      - "boot system flash:{{ image }}"
+    save_when: always 
+
+- name: Reload the Device 
+  ansible.netcommon.cli_command:   
+    command: reload
+    prompt: 
+      - confirm
+    answer: 
+      - 'y'
+
+- name: Wait for device to come back online
+  ansible.builtin.wait_for_connection:
+    delay: 90
+  
