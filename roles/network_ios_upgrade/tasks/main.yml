@@ -32,5 +32,5 @@
 - name: Wait for device to come back online
   ansible.builtin.wait_for_connection:
     delay: 90
-    timeout: 900
+    timeout: 1000
   
