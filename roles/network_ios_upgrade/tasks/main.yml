@@ -1,7 +1,13 @@
 ---
+- name: Fetch image
+  ansible.builtin.fetch:
+    src: "~/images/{{ image }}"
+    dest: "/tmp/{{ image }}"
+  delegate_to: tower1.shadowman.dev
+
 - name: Copy Image to device
   ansible.netcommon.net_put: 
-    src: "~/images/{{ image }}"
+    src: "/tmp/{{ image }}"
     dest: "flash:/{{ image }}"
   vars: 
     ansible_command_timeout: 600
