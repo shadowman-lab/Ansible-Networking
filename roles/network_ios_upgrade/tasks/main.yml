@@ -2,7 +2,8 @@
 - name: Fetch image to central location
   ansible.builtin.fetch:
     src: "/images/{{ image }}"
-    dest: "/tmp/{{ image }}"
+    dest: "/tmp/"
+    flat: yes
   delegate_to: tower1.shadowman.dev
   become: false
   run_once: true
