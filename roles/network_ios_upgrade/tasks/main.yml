@@ -11,6 +11,7 @@
   ansible.netcommon.net_put: 
     src: "/tmp/{{ image }}"
     dest: "flash:/{{ image }}"
+    protocol: sftp
   vars: 
     ansible_command_timeout: 600
 
