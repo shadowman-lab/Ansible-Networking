@@ -1,5 +1,5 @@
 ---
-- name: Copy Image // This could take up to 4 minutes
+- name: Copy Image to device
   ansible.netcommon.net_put: 
     src: "~/network-programmability/images/{{ image }}"
     dest: "flash:/{{ image }}"
