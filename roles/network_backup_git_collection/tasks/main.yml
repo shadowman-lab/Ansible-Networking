@@ -44,15 +44,15 @@
     dest: /tmp/home/network/
   delegate_to: tower1.shadowman.dev
 
-- name: Find backup files older than 7 days
+- name: Find backup files older than 30 days
   ansible.builtin.find:
     paths: /tmp/home/network/backup
     recurse: yes
-    age: 7d
+    age: 30d
   register: old_backups
   delegate_to: tower1.shadowman.dev
 
-- name: Delete backup files older than 7 days
+- name: Delete backup files older than 30 days
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
