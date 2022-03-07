@@ -5,8 +5,9 @@
     name: ansible_network_resources
 
 - name: Configure hostname on vyos
-  vyos.vyos.vyos_system:
-    host_name: "{{ inventory_hostname }}"
+  vyos.vyos.vyos_hostname:
+    config:
+      hostname: "{{ inventory_hostname }}"
 
 - name: Push base l3 interfaces to vyos
   vyos.vyos.vyos_l3_interfaces:

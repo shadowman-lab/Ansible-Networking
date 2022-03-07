@@ -5,8 +5,9 @@
     name: ansible_network_resources
 
 - name: Configure hostname on eos
-  arista.eos.eos_system:
-    hostname: "{{ inventory_hostname }}"
+  arista.eos.eos_hostname:
+    config:
+      hostname: "{{ inventory_hostname }}"
 
 - name: Configure VLAN on eos
   arista.eos.eos_vlans: 
