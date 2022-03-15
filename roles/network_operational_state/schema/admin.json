@@ -6,7 +6,7 @@
 			"properties": {
 				"oper_status": {
 					"type": "string",
-					"pattern": "up"
+					"pattern": "down"
 				},
                 "line_protocol": {
 					"type": "string",
