@@ -1,0 +1,11 @@
+---
+- name: "Fetch interface state and parse with pyats"
+  ansible.utils.cli_parse:
+    command: show interface
+    parser:
+      name: ansible.netcommon.pyats
+  register: pyats_show_interface
+
+- name: print structured interface state data
+  ansible.builtin.debug:
+    msg: "{{ pyats_show_interface['parsed'] }}"
