@@ -1,6 +1,6 @@
 ---
 - name: Perform Admin State Check
-  hosts: all
+  hosts: os_cisco
   gather_facts: false
   
   roles:

@@ -4,9 +4,17 @@
 		"^.*": {
 			"type": "object",
 			"properties": {
-				"admin_state": {
+				"oper_status": {
 					"type": "string",
 					"pattern": "up"
+				},
+                "line_protocol": {
+					"type": "string",
+					"pattern": "up"
+				},
+                "enabled": {
+					"type": "boolean",
+					"pattern": "true"
 				}
 			}
 		}
