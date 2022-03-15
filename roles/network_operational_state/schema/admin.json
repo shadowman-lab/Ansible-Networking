@@ -1,0 +1,14 @@
+{
+	"type": "object",
+	"patternProperties": {
+		"^.*": {
+			"type": "object",
+			"properties": {
+				"admin_state": {
+					"type": "string",
+					"pattern": "up"
+				}
+			}
+		}
+	}
+}

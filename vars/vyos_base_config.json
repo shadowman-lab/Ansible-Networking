@@ -66,12 +66,12 @@
     "interfaces": [
         {
             "enabled": true,
-            "description": "This is the {{ configured_by }}",
+            "description": "This is {{ configured_by }}",
             "name": "lo"
         },
         {
             "enabled": true,
-            "description": "This is the {{ configured_by }}",
+            "description": "This is {{ configured_by }}",
             "name": "eth1"
         },
         {
