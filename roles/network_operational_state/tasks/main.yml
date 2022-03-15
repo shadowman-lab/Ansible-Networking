@@ -10,7 +10,7 @@
   ansible.builtin.debug:
     msg: "{{ pyats_show_interfaces['parsed'] }}"
 
-- name: validate interface for admin state
+- name: validate interface for operational status
   ansible.utils.validate:
     data: "{{ pyats_show_interfaces['parsed'] }}"
     criteria:
