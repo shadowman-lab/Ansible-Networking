@@ -12,7 +12,7 @@
 
 - name: validate interface for admin state
   ansible.utils.validate:
-    data: "{{ pyats_show_interface['parsed'] }}"
+    data: "{{ pyats_show_interfaces['parsed'] }}"
     criteria:
       - "{{ lookup('file',  'schema/admin.json') | from_json }}"
     engine: ansible.utils.jsonschema
