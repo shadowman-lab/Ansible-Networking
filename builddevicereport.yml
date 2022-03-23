@@ -1,16 +1,15 @@
-- name: Gather facts for devices
-  hosts: tag_Router
+- name: Build Networking Device Report
+  hosts: all
   gather_facts: false
-  strategy: free
   
   roles:
     - network_facts_gather
 
-- name: Build report with facts
-  hosts: report.shadowman.dev
-  gather_facts: no
   tasks:
 
-    - name: build a report
+    - name: Build the report
       ansible.builtin.include_role:
         name: shadowman.reports.build_report_network
+        apply:
+          delegate_to: report.shadowman.dev
+          run_once: true
