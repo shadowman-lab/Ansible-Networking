@@ -58,16 +58,16 @@
       - address_families:
           - afi: ipv4
             routes:
-            - dest: 198.51.100.0/24
-              next_hops:
-              - forward_router_address: 198.51.101.1
-                name: merged_route_1
-                distance_metric: 110
-                tag: 40
-                multicast: true
-              - forward_router_address: 198.51.101.2
-                name: merged_route_2
-                distance_metric: 30
-              - forward_router_address: 198.51.101.3
-                name: merged_route_3
+              - dest: 198.51.100.0/24
+                next_hops:
+                  - forward_router_address: 198.51.101.1
+                    name: merged_route_1
+                    distance_metric: 110
+                    tag: 40
+                    multicast: true
+                  - forward_router_address: 198.51.101.2
+                    name: merged_route_2
+                    distance_metric: 30
+                  - forward_router_address: 198.51.101.3
+                    name: merged_route_3
     state: overridden

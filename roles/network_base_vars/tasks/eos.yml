@@ -10,7 +10,7 @@
       hostname: "{{ inventory_hostname }}"
 
 - name: Configure VLAN on eos
-  arista.eos.eos_vlans: 
+  arista.eos.eos_vlans:
     state: overridden
     config: "{{ ansible_network_resources['vlans'] }}"
 
