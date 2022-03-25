@@ -1,7 +1,6 @@
 exclude_paths:
   - ./vars/
   - ./.github/
-quiet: true
 warn_list:
   - no-changed-when
   - command-instead-of-module
