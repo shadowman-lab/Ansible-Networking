@@ -3,7 +3,7 @@
   arista.eos.eos_facts:
     gather_subset: min
     gather_network_resources: interfaces
-  
+
 - name: Push the network interfaces to eos
   arista.eos.eos_interfaces:
     config: "{{ ansible_network_resources['interfaces'] }}"

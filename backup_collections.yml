@@ -2,17 +2,17 @@
   hosts: tag_Router
   gather_facts: false
   strategy: free
-  
+
   roles:
     - network_backup
 
 - name: Copy backup to host
   hosts: report.shadowman.dev
   gather_facts: false
-  
+
   tasks:
 
-  - name: copy files to managed host
-    ansible.builtin.copy:
-      src: /tmp/home/network/
-      dest: /home/network/
+    - name: copy files to managed host
+      ansible.builtin.copy:
+        src: /tmp/home/network/
+        dest: /home/network/

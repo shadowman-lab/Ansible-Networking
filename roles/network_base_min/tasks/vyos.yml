@@ -8,23 +8,23 @@
   vyos.vyos.vyos_l3_interfaces:
     state: overridden
     config:
-    - name: eth0
-      ipv4:
-      - address: dhcp
-    - name: eth1
-      ipv4:
-      - address: "{{ gigabit1 }}/28"
+      - name: eth0
+        ipv4:
+          - address: dhcp
+      - name: eth1
+        ipv4:
+          - address: "{{ gigabit1 }}/28"
 
 - name: Push min interfaces to vyos
   vyos.vyos.vyos_interfaces:
     state: overridden
     config:
-    - name: eth0
-      enabled: true
-    - name: eth1
-      enabled: true
-    - name: lo
-      enabled: true
+      - name: eth0
+        enabled: true
+      - name: eth1
+        enabled: true
+      - name: lo
+        enabled: true
 
 - name: Delete firewall interfaces on vyos
   vyos.vyos.vyos_firewall_interfaces:
@@ -37,10 +37,10 @@
 - name: Delete firewall global attributes configuration on vyos
   vyos.vyos.vyos_firewall_global:
     config:
-      config_trap: 
+      config_trap:
       log_martians:
-      syn_cookies: 
-      twa_hazards_protection: 
+      syn_cookies:
+      twa_hazards_protection:
       ping:
       state_policy:
       route_redirects:

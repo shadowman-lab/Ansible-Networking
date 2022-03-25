@@ -1,7 +1,7 @@
 - name: Build Networking Device Report
   hosts: all
   gather_facts: false
-  
+
   roles:
     - network_facts_gather
 

@@ -8,21 +8,21 @@
   cisco.ios.ios_l3_interfaces:
     state: overridden
     config:
-    - name: GigabitEthernet1
-      ipv4:
-      - address: dhcp
-    - name: GigabitEthernet2
-      ipv4:
-      - address: "{{ gigabit2 }}/28"
+      - name: GigabitEthernet1
+        ipv4:
+          - address: dhcp
+      - name: GigabitEthernet2
+        ipv4:
+          - address: "{{ gigabit2 }}/28"
 
 - name: Set min interfaces on ios
   cisco.ios.ios_interfaces:
     state: overridden
     config:
-    - name: GigabitEthernet1
-      enabled: true
-    - name: GigabitEthernet2
-      enabled: true
+      - name: GigabitEthernet1
+        enabled: true
+      - name: GigabitEthernet2
+        enabled: true
 
 - name: Delete all lldp global on ios
   cisco.ios.ios_lldp_global:

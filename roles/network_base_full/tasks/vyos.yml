@@ -8,26 +8,26 @@
   vyos.vyos.vyos_l3_interfaces:
     state: overridden
     config:
-    - name: eth0
-      ipv4:
-      - address: dhcp
-    - name: eth1
-      ipv4:
-      - address: "{{ gigabit1 }}/28"
+      - name: eth0
+        ipv4:
+        - address: dhcp
+      - name: eth1
+        ipv4:
+        - address: "{{ gigabit1 }}/28"
 
 - name: Push base interfaces to vyos
   vyos.vyos.vyos_interfaces:
     state: overridden
     config:
-    - name: eth0
-      enabled: true
-      speed: auto
-      duplex: auto
-      description: This is the base config configured by Ansible
-    - name: eth1
-      enabled: true
-    - name: lo
-      enabled: true
+      - name: eth0
+        enabled: true
+        speed: auto
+        duplex: auto
+        description: This is the base config configured by Ansible
+      - name: eth1
+        enabled: true
+      - name: lo
+        enabled: true
 
 - name: Push base firewall global attributes configuration to vyos
   vyos.vyos.vyos_firewall_global:
@@ -41,101 +41,101 @@
         all: true
         broadcast: true
       state_policy:
-      - connection_type: established
-        action: accept
-        log: true
-      - connection_type: invalid
-        action: reject
+        - connection_type: established
+          action: accept
+          log: true
+        - connection_type: invalid
+          action: reject
       route_redirects:
-      - afi: ipv4
-        ip_src_route: true
-        icmp_redirects:
-          send: true
-          receive: false
+        - afi: ipv4
+          ip_src_route: true
+          icmp_redirects:
+            send: true
+            receive: false
       group:
         address_group:
-        - name: SALES-HOSTS
-          description: Sales office hosts address list
-          members:
-          - address: 192.0.2.1
-          - address: 192.0.2.2
-          - address: 192.0.2.3
-        - name: ENG-HOSTS
-          description: Sales office hosts address list
-          members:
-          - address: 192.0.3.1
-          - address: 192.0.3.2
+          - name: SALES-HOSTS
+            description: Sales office hosts address list
+            members:
+              - address: 192.0.2.1
+              - address: 192.0.2.2
+              - address: 192.0.2.3
+          - name: ENG-HOSTS
+            description: Sales office hosts address list
+            members:
+              - address: 192.0.3.1
+              - address: 192.0.3.2
         network_group:
-        - name: MGMT
-          description: This group has the Management network addresses
-          members:
-          - address: 192.0.1.0/24
+          - name: MGMT
+            description: This group has the Management network addresses
+            members:
+              - address: 192.0.1.0/24
     state: replaced
 
 - name: Push base firewall rules to vyos
   vyos.vyos.vyos_firewall_rules:
     state: overridden
     config:
-    - afi: ipv4
-      rule_sets:
-      - name: INBOUND
-        description: IPv4 INBOUND rule set
-        default_action: accept
-        rules:
-        - number: 101
-          action: accept
-          description: Rule 101 is configured by Ansible
-          ipsec: match-ipsec
-        - number: 102
-          action: reject
-          description: Rule 102 is configured by Ansible
-          ipsec: match-ipsec
-      - name: OUTBOUND
-        description: IPv4 OUTBOUND rule set
-        default_action: accept
-        rules:
-        - number: 201
-          action: accept
-          description: Rule 201 is configured by Ansible
-          ipsec: match-ipsec
-        - number: 202
-          action: reject
-          description: Rule 202 is configured by Ansible
-          ipsec: match-ipsec
-      - name: LOCAL
-        description: IPv4 LOCAL rule set
-        default_action: accept
-        rules:
-        - number: 301
-          action: accept
-          description: Rule 301 is configured by Ansible
-          ipsec: match-ipsec
-        - number: 302
-          action: reject
-          description: Rule 302 is configured by Ansible
-          ipsec: match-ipsec
+      - afi: ipv4
+        rule_sets:
+          - name: INBOUND
+            description: IPv4 INBOUND rule set
+            default_action: accept
+            rules:
+              - number: 101
+                action: accept
+                description: Rule 101 is configured by Ansible
+                ipsec: match-ipsec
+              - number: 102
+                action: reject
+                description: Rule 102 is configured by Ansible
+                ipsec: match-ipsec
+          - name: OUTBOUND
+            description: IPv4 OUTBOUND rule set
+            default_action: accept
+            rules:
+              - number: 201
+                action: accept
+                description: Rule 201 is configured by Ansible
+                ipsec: match-ipsec
+              - number: 202
+                action: reject
+                description: Rule 202 is configured by Ansible
+                ipsec: match-ipsec
+          - name: LOCAL
+            description: IPv4 LOCAL rule set
+            default_action: accept
+            rules:
+              - number: 301
+                action: accept
+                description: Rule 301 is configured by Ansible
+                ipsec: match-ipsec
+              - number: 302
+                action: reject
+                description: Rule 302 is configured by Ansible
+                ipsec: match-ipsec
 
 - name: Push base firewall interfaces to vyos
   vyos.vyos.vyos_firewall_interfaces:
     state: overridden
     config:
-    - access_rules:
-      - afi: ipv4
-        rules:
-        - name: INBOUND
-          direction: in
-        - name: OUTBOUND
-          direction: out
-        - name: LOCAL
-          direction: local
-      name: eth1      
-  
+      - access_rules:
+        - afi: ipv4
+          rules:
+            - name: INBOUND
+              direction: in
+            - name: OUTBOUND
+              direction: out
+            - name: LOCAL
+              direction: local
+        name: eth1
+
 
 - name: Push base lldp global to vyos
   vyos.vyos.vyos_lldp_global:
     state: replaced
     config:
-      legacy_protocols: 
+      legacy_protocols:
         - fdp
         - cdp
 
@@ -159,56 +159,56 @@
       auto_cost:
         reference_bandwidth: 2
       neighbor:
-      - neighbor_id: 192.0.11.12
-        poll_interval: 10
-        priority: 2
+        - neighbor_id: 192.0.11.12
+          poll_interval: 10
+          priority: 2
       redistribute:
-      - route_type: bgp
-        metric: 10
-        metric_type: 2
+        - route_type: bgp
+          metric: 10
+          metric_type: 2
       passive_interface:
-      - eth1
+        - eth1
       parameters:
         router_id: 192.0.1.1
         opaque_lsa: true
         rfc1583_compatibility: true
         abr_type: cisco
       areas:
-      - area_id: '2'
-        area_type:
-          normal: true
-        authentication: plaintext-password
-        shortcut: enable
-      - area_id: '4'
-        area_type:
-          stub:
-            default_cost: 20
-        network:
-        - address: 192.0.2.0/24
-        - address: 192.0.12.0/24
-        - address: 192.0.22.0/24
-        - address: 192.0.32.0/24
-        range:
-        - address: 192.0.42.0/24
-          cost: 10
+        - area_id: '2'
+          area_type:
+            normal: true
+          authentication: plaintext-password
+          shortcut: enable
+        - area_id: '4'
+          area_type:
+            stub:
+              default_cost: 20
+          network:
+            - address: 192.0.2.0/24
+            - address: 192.0.12.0/24
+            - address: 192.0.22.0/24
+            - address: 192.0.32.0/24
+          range:
+            - address: 192.0.42.0/24
+              cost: 10
     state: replaced
 
 - name: Push base ospfv3 routes attributes configuration to vyos
   vyos.vyos.vyos_ospfv3:
     config:
       redistribute:
-      - route_type: bgp
+        - route_type: bgp
       parameters:
         router_id: 192.0.2.10
       areas:
-      - area_id: '2'
-        export_list: export1
-        import_list: import1
-        range:
-        - address: 2001:db10::/32
-        - address: 2001:db30::/32
-        - address: 2001:db50::/32
-      - area_id: '4'
-        range:
-        - address: 2001:db60::/32
+        - area_id: '2'
+          export_list: export1
+          import_list: import1
+          range:
+            - address: 2001:db10::/32
+            - address: 2001:db30::/32
+            - address: 2001:db50::/32
+        - area_id: '4'
+          range:
+            - address: 2001:db60::/32
     state: replaced

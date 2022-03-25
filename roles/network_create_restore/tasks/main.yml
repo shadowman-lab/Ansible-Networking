@@ -4,7 +4,7 @@
     paths: /home/network/backup
   register: backups
   run_once: true
-  become: yes
+  become: true
 
 - name: Create Restore Job Template
   ansible.tower.tower_job_template:
@@ -13,15 +13,15 @@
     inventory: "Network Inventory"
     project: "SSP Networking Project"
     playbook: "network_restore.yml"
-    credentials: 
-      - "Cisco Credentials" 
+    credentials:
+      - "Cisco Credentials"
       - "VYOS Credentials"
       - "Arista Credential"
     limit: "os_cisco"
     survey_enabled: true
-    become_enabled: yes
+    become_enabled: true
     survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"
-    validate_certs: no
+    validate_certs: false
     tower_username: "{{ lookup('env', 'TOWER_USERNAME') }}"
     tower_password: "{{ lookup('env', 'TOWER_PASSWORD') }}"
     tower_host: "{{ lookup('env', 'TOWER_HOST') }}"

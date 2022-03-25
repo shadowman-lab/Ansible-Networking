@@ -1,13 +1,13 @@
 - name: Device Backup
   hosts: os_cisco
   gather_facts: false
-  
+
   roles:
     - network_backup_git_collection
 
 - name: Create Tower Restore Job
   hosts: tower1.shadowman.dev
-  gather_facts: no
+  gather_facts: false
 
   roles:
     - network_create_restore_collection

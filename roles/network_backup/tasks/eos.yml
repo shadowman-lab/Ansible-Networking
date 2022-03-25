@@ -1,7 +1,7 @@
 ---
 - name: Backup eos device
   arista.eos.eos_config:
-    backup: yes
+    backup: true
     backup_options:
       filename: "{{ inventory_hostname }}.cfg"
       dir_path: /tmp/home/network
@@ -29,4 +29,6 @@
   ansible.builtin.copy:
     content: "{{ ansible_network_resources | to_nice_yaml }}"
     dest: "/tmp/home/network/{{ inventory_hostname }}.yml"
-  
+    owner: root
+    group: root
+    mode: '0644'

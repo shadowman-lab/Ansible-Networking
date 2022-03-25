@@ -2,6 +2,6 @@
   hosts: "{{ device_name | default('all')}}"
   gather_facts: false
   strategy: free
-  
+
   roles:
     - network_base_config

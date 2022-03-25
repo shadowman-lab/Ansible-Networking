@@ -1,17 +1,18 @@
 ---
-- name: Sync with Gitrepo      
+- name: Sync with Gitrepo
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /tmp/home/network
-    force: yes
+    version: master
+    force: true
   delegate_to: tower1.shadowman.dev
 
 - name: Backup ios device
   cisco.ios.ios_config:
-    backup: yes
+    backup: true
     backup_options:
       dir_path: /tmp/home/network/backup
-  become: yes
+  become: true
   register: config_output
 
 - name: REMOVE NON CONFIG LINES - REGEXP
@@ -38,16 +39,19 @@
     regexp: 'username.*'
     state: absent
 
-- name: Copy files to aap      
+- name: Copy files to aap
   ansible.builtin.copy:
     src: /tmp/home/network/backup
     dest: /tmp/home/network/
+    owner: root
+    group: root
+    mode: '0644'
   delegate_to: tower1.shadowman.dev
 
 - name: Find backup files older than 30 days
   ansible.builtin.find:
     paths: /tmp/home/network/backup
-    recurse: yes
+    recurse: true
     age: 30d
   register: old_backups
   delegate_to: tower1.shadowman.dev

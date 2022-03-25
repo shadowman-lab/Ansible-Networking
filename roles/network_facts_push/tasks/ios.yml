@@ -3,7 +3,7 @@
   cisco.ios.ios_facts:
     gather_subset: min
     gather_network_resources: interfaces
-  
+
 - name: Push the network interfaces to ios
   cisco.ios.ios_interfaces:
     config: "{{ ansible_network_resources['interfaces'] }}"

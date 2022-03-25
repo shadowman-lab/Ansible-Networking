@@ -2,6 +2,6 @@
   hosts: all
   gather_facts: false
   strategy: free
-  
+
   roles:
     - network_facts_push
