@@ -1,8 +1,0 @@
-exclude_paths:
-  - ./vars/
-  - ./.github/
-warn_list:
-  - no-changed-when
-  - command-instead-of-module
-use_default_rules: true
-verbosity: 1
