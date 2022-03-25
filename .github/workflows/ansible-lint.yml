@@ -51,6 +51,4 @@ jobs:
         args: 
           - "--exclude=vars/"
           - "--exclude=.github/"
-          - skip_list:
-            - command-instead-of-module
-            - no-changed-when
+          - "w=command-instead-of-module"
