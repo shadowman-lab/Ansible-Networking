@@ -23,9 +23,6 @@ jobs:
         # targets: |
         #   playbook_1.yml
         #   playbook_2.yml
-        targets: "./"
-        override-deps: |
-          rich>=9.5.1,<11.0.0
         # [optional]
         # Arguments to be passed to the ansible-lint
 
@@ -48,4 +45,4 @@ jobs:
         #                         path to directories or files to skip. This option is
         #                         repeatable.
         #   -c C                  Specify configuration file to use. Defaults to ".ansible-lint"
-        args: "--exclude=vars/ --exclude=.github/ -w no-changed-when"
+        args: ""
