@@ -2,7 +2,7 @@
 - name: Push base vyos config
   vyos.vyos.vyos_config:
     src: templates/vyos_template.j2
-    save: yes
+    save: true
   when: ansible_network_os == 'vyos.vyos.vyos'
 
 - name: Push base ios config

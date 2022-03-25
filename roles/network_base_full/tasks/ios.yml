@@ -10,10 +10,10 @@
     config:
       - name: GigabitEthernet1
         ipv4:
-        - address: dhcp
+          - address: dhcp
       - name: GigabitEthernet2
         ipv4:
-        - address: "{{ gigabit2 }}/28"
+          - address: "{{ gigabit2 }}/28"
 
 - name: Update interfaces on ios
   cisco.ios.ios_interfaces:
@@ -56,18 +56,18 @@
   cisco.ios.ios_static_routes:
     config:
       - address_families:
-        - afi: ipv4
-          routes:
-          - dest: 198.51.100.0/24
-            next_hops:
-            - forward_router_address: 198.51.101.1
-              name: merged_route_1
-              distance_metric: 110
-              tag: 40
-              multicast: true
-            - forward_router_address: 198.51.101.2
-              name: merged_route_2
-              distance_metric: 30
-            - forward_router_address: 198.51.101.3
-              name: merged_route_3
+          - afi: ipv4
+            routes:
+            - dest: 198.51.100.0/24
+              next_hops:
+              - forward_router_address: 198.51.101.1
+                name: merged_route_1
+                distance_metric: 110
+                tag: 40
+                multicast: true
+              - forward_router_address: 198.51.101.2
+                name: merged_route_2
+                distance_metric: 30
+              - forward_router_address: 198.51.101.3
+                name: merged_route_3
     state: overridden

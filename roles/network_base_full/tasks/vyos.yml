@@ -10,10 +10,10 @@
     config:
       - name: eth0
         ipv4:
-        - address: dhcp
+          - address: dhcp
       - name: eth1
         ipv4:
-        - address: "{{ gigabit1 }}/28"
+          - address: "{{ gigabit1 }}/28"
 
 - name: Push base interfaces to vyos
   vyos.vyos.vyos_interfaces:
@@ -120,14 +120,14 @@
     state: overridden
     config:
       - access_rules:
-        - afi: ipv4
-          rules:
-            - name: INBOUND
-              direction: in
-            - name: OUTBOUND
-              direction: out
-            - name: LOCAL
-              direction: local
+          - afi: ipv4
+            rules:
+              - name: INBOUND
+                direction: in
+              - name: OUTBOUND
+                direction: out
+              - name: LOCAL
+                direction: local
         name: eth1
 
 

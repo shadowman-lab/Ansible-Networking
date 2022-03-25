@@ -21,10 +21,10 @@
     config:
       - name: Ethernet1
         ipv4:
-        - address: "{{ gigabit1 }}/28"
+          - address: "{{ gigabit1 }}/28"
       - name: Ethernet2
         ipv4:
-        - address: "{{ gigabit2 }}/28"
+          - address: "{{ gigabit2 }}/28"
 
 - name: Update l2 interfaces on eos
   arista.eos.eos_l2_interfaces:

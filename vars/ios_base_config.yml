@@ -1,67 +1,67 @@
 acl_interfaces:
-  - name: GigabitEthernet1
-  - access_groups:
-    - afi: ipv4
+-   name: GigabitEthernet1
+-   access_groups:
+    -   afi: ipv4
     name: GigabitEthernet2
-  - access_groups:
-    - afi: ipv4
+-   access_groups:
+    -   afi: ipv4
     name: GigabitEthernet1
-  - name: GigabitEthernet1
+-   name: GigabitEthernet1
 interfaces:
-  - description: This is configured by Ansible
+-   description: This is configured by Ansible
     enabled: true
     name: GigabitEthernet1
-  - description: This is configured by Ansible
+-   description: This is configured by Ansible
     enabled: true
     name: GigabitEthernet2
 l2_interfaces:
-  - name: GigabitEthernet1
-  - name: GigabitEthernet2
+-   name: GigabitEthernet1
+-   name: GigabitEthernet2
 l3_interfaces:
-  - ipv4:
-    - address: dhcp
+-   ipv4:
+    -   address: dhcp
     name: GigabitEthernet1
-  - ipv4:
-    - address: 192.16.9.190 255.255.255.240
+-   ipv4:
+    -   address: 192.16.9.190 255.255.255.240
     name: GigabitEthernet2
 lacp:
     system:
         priority: 32768
 lacp_interfaces:
-  - name: GigabitEthernet1
+-   name: GigabitEthernet1
     port_priority: 10
-  - name: GigabitEthernet2
+-   name: GigabitEthernet2
     port_priority: 20
 lag_interfaces:
-  - name: GigabitEthernet1
-  - name: GigabitEthernet2
+-   name: GigabitEthernet1
+-   name: GigabitEthernet2
 lldp_global:
     enabled: true
     holdtime: 10
     timer: 10
 lldp_interfaces:
-  - name: GigabitEthernet1
+-   name: GigabitEthernet1
     receive: true
     transmit: true
-  - name: GigabitEthernet2
+-   name: GigabitEthernet2
     receive: true
     transmit: true
 ospf_interfaces:
-  - name: GigabitEthernet1
-  - name: GigabitEthernet2
+-   name: GigabitEthernet1
+-   name: GigabitEthernet2
 static_routes:
-  - address_families:
-    - afi: ipv4
-      routes:
-        - dest: 198.51.100.0/24
-          next_hops:
-            - distance_metric: 110
-              forward_router_address: 198.51.101.1
-              multicast: true
-              name: merged_route_1
-              tag: 40
-            - distance_metric: 30
-              forward_router_address: 198.51.101.2
-              name: merged_route_2
-            - forward_router_address: 198.51.101.3
-              name: merged_route_3
+-   address_families:
+    -   afi: ipv4
+        routes:
+        -   dest: 198.51.100.0/24
+            next_hops:
+            -   distance_metric: 110
+                forward_router_address: 198.51.101.1
+                multicast: true
+                name: merged_route_1
+                tag: 40
+            -   distance_metric: 30
+                forward_router_address: 198.51.101.2
+                name: merged_route_2
+            -   forward_router_address: 198.51.101.3
+                name: merged_route_3

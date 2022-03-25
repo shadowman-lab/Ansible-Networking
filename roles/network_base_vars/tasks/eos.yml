@@ -23,7 +23,7 @@
   arista.eos.eos_l2_interfaces:
     state: overridden
     config: "{{ ansible_network_resources['l2_interfaces'] }}"
-    
+
 - name: Update interfaces on eos
   arista.eos.eos_interfaces:
     state: overridden
