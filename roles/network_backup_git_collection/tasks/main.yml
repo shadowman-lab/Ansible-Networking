@@ -3,6 +3,7 @@
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /tmp/home/network
+    version: master
     force: true
   delegate_to: tower1.shadowman.dev
 
