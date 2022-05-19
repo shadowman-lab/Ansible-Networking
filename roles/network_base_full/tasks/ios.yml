@@ -10,7 +10,8 @@
     config:
       - name: GigabitEthernet1
         ipv4:
-          - address: dhcp
+          - dhcp:
+              enable: true
       - name: GigabitEthernet2
         ipv4:
           - address: "{{ gigabit2 }}/28"
