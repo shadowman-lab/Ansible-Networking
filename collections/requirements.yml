@@ -7,7 +7,3 @@ collections:
   - name: arista.eos
 
   - name: ansible.netcommon
-
-  - name: ansible.tower
-
-  - name: shadowman.reports
