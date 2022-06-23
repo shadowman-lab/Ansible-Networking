@@ -1,5 +1,5 @@
 - name: Find newest file
-  hosts: tag_Router
+  hosts: report.shadowman.dev
   gather_facts: false
 
   tasks:
