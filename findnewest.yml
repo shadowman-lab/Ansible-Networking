@@ -8,14 +8,12 @@
       find:
         paths: /home/network
         patterns: "rtr*"
-        recurse: yes
+        recurse: true
       register: files_matched
 
     - name: test
       set_fact:
-        latest_files: "{{ latest_files | default([])  + [item.path] }}"
-      loop: "{{ files_matched.files | sort(attribute='mtime', reverse=true) }}"
-      when: "item.path | dirname not in latest_files | default([]) | map('dirname')"
+        latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) }}"
 
     - name: debug
       debug:
