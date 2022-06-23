@@ -7,14 +7,15 @@
     - name: Find pattern
       find:
         paths: /home/network
-        patterns: "rtr*"
+        patterns: "temp*"
         recurse: true
+        file_type: directory
       register: files_matched
 
     - name: Find most recently created
       set_fact:
         latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) | first }}"
 
-    - name: Output
+    - name: Output 
       debug:
         var: latest_files.path
