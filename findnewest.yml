@@ -7,9 +7,8 @@
     - name: Find pattern
       find:
         paths: /home/network
-        patterns: "temp*"
+        patterns: "rtr*"
         recurse: true
-        file_type: directory
       register: files_matched
 
     - name: Find most recently created
