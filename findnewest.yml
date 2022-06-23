@@ -17,4 +17,4 @@
 
     - name: debug
       debug:
-        var: latest_files
+        var: latest_files.path
