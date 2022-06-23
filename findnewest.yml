@@ -15,6 +15,6 @@
       set_fact:
         latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) | first }}"
 
-    - name: Output 
+    - name: Output
       debug:
         var: latest_files.path
