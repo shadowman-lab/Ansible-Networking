@@ -4,17 +4,17 @@
 
   tasks:
 
-    - name: copy files to managed host
+    - name: Find pattern
       find:
         paths: /home/network
         patterns: "rtr*"
         recurse: true
       register: files_matched
 
-    - name: test
+    - name: Find most recently created
       set_fact:
         latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) | first }}"
 
-    - name: debug
+    - name: Output
       debug:
         var: latest_files.path
