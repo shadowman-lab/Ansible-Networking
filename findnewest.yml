@@ -1,0 +1,22 @@
+- name: Find newest file
+  hosts: tag_Router
+  gather_facts: false
+
+  tasks:
+
+    - name: copy files to managed host
+      find:
+        paths: /home/network
+        patterns: "rtr*"
+        recurse: yes
+      register: files_matched
+
+    - name: test
+      set_fact:
+        latest_files: "{{ latest_files | default([])  + [item.path] }}"
+      loop: "{{ files_matched.files | sort(attribute='mtime', reverse=true) }}"
+      when: "item.path | dirname not in latest_files | default([]) | map('dirname')"
+
+    - name: debug
+      debug:
+        var: latest_files
