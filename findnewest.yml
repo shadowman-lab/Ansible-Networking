@@ -13,7 +13,7 @@
 
     - name: test
       set_fact:
-        latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) }}"
+        latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) | first }}"
 
     - name: debug
       debug:
