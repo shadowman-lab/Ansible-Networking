@@ -7,13 +7,13 @@
     - name: Find pattern
       find:
         paths: /home/network
-        patterns: "rtr*"
+        patterns: "java-1.8.0-openjdk-1.8.0.*"
         recurse: true
       register: files_matched
 
     - name: Find most recently created
       set_fact:
-        latest_files: "{{ files_matched.files | sort(attribute='mtime', reverse=true) | first }}"
+        latest_files: "{{ files_matched.files | sort(attribute='path', reverse=true) | first }}"
 
     - name: Output
       debug:
