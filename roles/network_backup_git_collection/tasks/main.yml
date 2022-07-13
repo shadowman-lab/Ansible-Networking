@@ -1,19 +1,11 @@
 ---
-
-- name: Sync with Gitrepo
-  ansible.builtin.find:
-    paths: '/'
-    patterns: 'id_ed25519'
-    recurse: true
-  delegate_to: localhost
-  
 - name: Sync with Gitrepo
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /tmp/home/network
     version: master
     force: true
-    key_file: ~/.ssh/id_ed25519
+    key_file: /certs/id_ed25519
   delegate_to: localhost
 
 - name: Backup ios device
