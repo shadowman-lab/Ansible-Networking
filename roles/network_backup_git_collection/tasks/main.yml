@@ -5,6 +5,7 @@
     dest: /tmp/home/network
     version: master
     force: true
+    key_file: ~/.ssh/id_ed25519
   delegate_to: localhost
 
 - name: Backup ios device
