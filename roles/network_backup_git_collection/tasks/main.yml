@@ -5,7 +5,7 @@
     dest: /tmp/home/network
     version: master
     force: true
-  delegate_to: tower1.shadowman.dev
+  delegate_to: localhost
 
 - name: Backup ios device
   cisco.ios.ios_config:
@@ -39,34 +39,8 @@
     regexp: 'username.*'
     state: absent
 
-- name: Copy files to aap
-  ansible.builtin.copy:
-    src: /tmp/home/network/backup
-    dest: /tmp/home/network/
-    owner: root
-    group: root
-    mode: '0644'
-  delegate_to: tower1.shadowman.dev
-
-- name: Find backup files older than 30 days
-  ansible.builtin.find:
-    paths: /tmp/home/network/backup
-    recurse: true
-    age: 30d
-  register: old_backups
-  delegate_to: tower1.shadowman.dev
-
-- name: Delete backup files older than 30 days
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: absent
-  loop: "{{ old_backups.files }}"
-  loop_control:
-    label: "{{ item.path }}"
-  delegate_to: tower1.shadowman.dev
-
 - name: Update git repo with backup
   ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git push
   args:
     chdir: /tmp/home/network
-  delegate_to: tower1.shadowman.dev
+  delegate_to: localhost
