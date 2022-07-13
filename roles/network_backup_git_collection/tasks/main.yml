@@ -1,4 +1,10 @@
 ---
+- name: Delete known hosts key_file
+  ansible.builtin.file:
+    path: ~/.ssh/known_hosts
+    state: absent
+  delegate_to: localhost
+
 - name: Sync with Gitrepo
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
