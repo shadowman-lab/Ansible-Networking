@@ -1,4 +1,12 @@
 ---
+
+- name: Sync with Gitrepo
+  ansible.builtin.find:
+    paths: '/'
+    patterns: 'id_ed25519'
+    recurse: true
+  delegate_to: localhost
+  
 - name: Sync with Gitrepo
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
