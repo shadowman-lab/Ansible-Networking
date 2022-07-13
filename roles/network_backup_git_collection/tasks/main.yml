@@ -10,6 +10,7 @@
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /tmp/home/network
     version: master
+    accept_hostkey: true
     force: true
     key_file: /certs/id_ed25519
   delegate_to: localhost
