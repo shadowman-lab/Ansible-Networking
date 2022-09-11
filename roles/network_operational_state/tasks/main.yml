@@ -6,20 +6,20 @@
       name: ansible.netcommon.pyats
   register: pyats_show_interfaces
 
-- name: print structured interface state data
+- name: Print structured interface state data
   ansible.builtin.debug:
     msg: "{{ pyats_show_interfaces['parsed'] }}"
 
-- name: validate interface for operational status
+- name: Validate interface for operational status
   ansible.utils.validate:
     data: "{{ pyats_show_interfaces['parsed'] }}"
     criteria:
-      - "{{ lookup('file',  'schema/admin.json') | from_json }}"
+      - "{{ lookup('file', 'schema/admin.json') | from_json }}"
     engine: ansible.utils.jsonschema
   ignore_errors: true
   register: result
 
-- name: print the interface names that does not satisfy the desired state
+- name: Print the interface names that does not satisfy the desired state
   ansible.builtin.debug:
     msg: "{{ item['data_path'].split('.')[0] }}"
   loop: "{{ result['errors'] }}"
