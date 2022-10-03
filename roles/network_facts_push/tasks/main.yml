@@ -4,7 +4,7 @@
   when: ansible_network_os == 'cisco.ios.ios'
 
 - name: Push EOS Facts
-  include_tasks: eos.yml
+  ansible.builtin.include_tasks: eos.yml
   when: ansible_network_os == 'arista.eos.eos'
 
 - name: Push VYOS Facts
