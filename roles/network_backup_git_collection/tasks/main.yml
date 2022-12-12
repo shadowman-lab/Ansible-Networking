@@ -3,7 +3,7 @@
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
     dest: /tmp/home/network
-    version: master
+    version: main
     accept_newhostkey: true
     key_file: /certs/id_ed25519
   delegate_to: localhost
