@@ -1,7 +1,7 @@
 ---
 - name: IDM_update
   community.general.ipa_host:
-    name: api.{{ vm_name }}.apps.hypershift
+    name: api.{{ vm_name }}.apps.hypershift.shadowman.dev
     ip_address: "{{ apiip }}"
     ipa_pass: "{{ IPA_PASS }}"
     ipa_host: "{{ IPA_HOST }}"
