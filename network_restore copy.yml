@@ -1,0 +1,6 @@
+- name: OCP DNS
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - ocp_dns
