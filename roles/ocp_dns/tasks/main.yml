@@ -1,4 +1,9 @@
 ---
+- name: Set vm_name
+  ansible.builtin.set_fact:
+    vm_name: cluster_name
+  when: cluster_name is define
+
 - name: API IDM_update
   community.general.ipa_dnsrecord:
     record_name: api.{{ vm_name }}.apps.hypershift
