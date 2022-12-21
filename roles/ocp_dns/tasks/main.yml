@@ -9,6 +9,7 @@
     ipa_host: "{{ IPA_HOST }}"
     ipa_user: "{{ IPA_USER }}"
     state: "{{ record_state | default('present') }}"
+  when: apiip is defined
 
 - name: Worker Node IDM_update
   community.general.ipa_dnsrecord:
@@ -20,3 +21,4 @@
     ipa_host: "{{ IPA_HOST }}"
     ipa_user: "{{ IPA_USER }}"
     state: "{{ record_state | default('present') }}"
+  when: workerip is defined
