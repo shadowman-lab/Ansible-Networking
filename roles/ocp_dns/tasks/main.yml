@@ -1,7 +1,7 @@
 ---
 - name: Set vm_name
   ansible.builtin.set_fact:
-    vm_name: cluster_name
+    vm_name: "{{ cluster_name }}"
   when: cluster_name is defined
 
 - name: API IDM_update
