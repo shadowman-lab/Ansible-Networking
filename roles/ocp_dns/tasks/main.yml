@@ -1,8 +1,4 @@
 ---
-- name: Set vm_name
-  ansible.builtin.set_fact:
-    vm_name: "{{ cluster_name }}"
-  when: cluster_name is defined
 
 - name: API IDM_update
   community.general.ipa_dnsrecord:
@@ -18,6 +14,20 @@
 
 - name: Worker Node IDM_update
   community.general.ipa_dnsrecord:
+    record_name: '*.apps.{{ cluster_name }}.apps.hypershift'
+    record_type: 'A'
+    record_value: "{{ workerip | default(omit) }}"
+    zone_name: "shadowman.dev."
+    ipa_pass: "{{ IPA_PASS }}"
+    ipa_host: "{{ IPA_HOST }}"
+    ipa_user: "{{ IPA_USER }}"
+    state: "{{ record_state | default('present') }}"
+  when: 
+    - workerip is defined
+    - cluster_name is defined
+
+- name: Worker Node IDM_update
+  community.general.ipa_dnsrecord:
     record_name: '*.apps.{{ vm_name }}.apps.hypershift'
     record_type: 'A'
     record_value: "{{ workerip | default(omit) }}"
@@ -26,4 +36,6 @@
     ipa_host: "{{ IPA_HOST }}"
     ipa_user: "{{ IPA_USER }}"
     state: "{{ record_state | default('present') }}"
-  when: workerip is defined
+  when: 
+    - workerip is defined
+    - cluster_name is not defined
