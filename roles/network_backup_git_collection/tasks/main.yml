@@ -1,12 +1,11 @@
 ---
 - name: Sync with Gitrepo
   ansible.builtin.git:
-    repo: 'git@github.com:shadowman-lab/Ansible-Networking.git'
+    repo: 'git@github.com:shadowman-lab/Ansible-Networkingbackup.git'
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
     key_file: /certs/id_ed25519
-  become: false
   delegate_to: localhost
 
 - name: Backup ios device
