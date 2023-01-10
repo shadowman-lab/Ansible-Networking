@@ -6,6 +6,7 @@
     version: main
     accept_newhostkey: true
     key_file: /certs/id_ed25519
+  become: false
   delegate_to: localhost
 
 - name: Backup ios device
