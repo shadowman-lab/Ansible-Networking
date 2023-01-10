@@ -15,8 +15,7 @@
     playbook: "network_restore.yml"
     credentials:
       - "Cisco Credentials"
-      - "VYOS Credentials"
-      - "Arista Credential"
+      - "Ansible Linux Service Account"
     limit: "os_cisco"
     survey_enabled: true
     become_enabled: true
