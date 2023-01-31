@@ -6,5 +6,4 @@ include .github/workflows/ansible-lint.yml
 recursive-exclude .git *
 recursive-include collections *.yml
 recursive-include roles *
-recursive-include backup *
 recursive-include vars *
