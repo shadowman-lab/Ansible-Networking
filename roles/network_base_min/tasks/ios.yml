@@ -10,7 +10,7 @@
     config:
       - name: GigabitEthernet1
         ipv4:
-          - dhcp: 
+          - dhcp:
               enable: true
       - name: GigabitEthernet2
         ipv4:
