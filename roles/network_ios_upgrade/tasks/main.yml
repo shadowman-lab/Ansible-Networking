@@ -11,14 +11,14 @@
 - name: Copy Image to device from EE
   ansible.netcommon.net_put:
     src: "/tmp/{{ network_image }}"
-    dest: "flash:/{{ network_image }}"
+    dest: "flash1:/{{ network_image }}"
   vars:
     ansible_command_timeout: 3000
 
 - name: Change Boot Variable to new image
   cisco.ios.ios_config:
     commands:
-      - "boot system flash:{{ network_image }}"
+      - "boot system flash1:{{ network_image }}"
     save_when: always
 
 - name: Reload the Device
