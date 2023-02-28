@@ -60,9 +60,7 @@
         "name": "GigabitEthernet1",
         "ipv4": [
           {
-            "dhcp": {
-              "enable": true
-            }
+            "address": "172.16.5.142/28"
           }
         ]
       },
