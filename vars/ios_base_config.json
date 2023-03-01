@@ -1,130 +1,73 @@
 {
-    "lacp_interfaces": [
-      {
-        "name": "GigabitEthernet1",
-        "port_priority": 10
-      },
-      {
-        "name": "GigabitEthernet2",
-        "port_priority": 20
-      }
-    ],
-    "static_routes": [
-      {
-        "address_families": [
-          {
-            "afi": "ipv4",
-            "routes": [
-              {
-                "dest": "198.51.100.0/24",
-                "next_hops": [
-                  {
-                    "forward_router_address": "198.51.101.1",
-                    "distance_metric": 110,
-                    "name": "merged_route_1",
-                    "multicast": true,
-                    "tag": 40
-                  },
-                  {
-                    "forward_router_address": "198.51.101.2",
-                    "distance_metric": 30,
-                    "name": "merged_route_2"
-                  },
-                  {
-                    "forward_router_address": "198.51.101.3",
-                    "name": "merged_route_3"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "lacp": {
-      "system": {
-        "priority": 32768
-      }
-    },
-    "ntp_global": {},
-    "lag_interfaces": [
-      {
-        "name": "GigabitEthernet1"
-      },
-      {
-        "name": "GigabitEthernet2"
-      }
-    ],
-    "l3_interfaces": [
-      {
-        "name": "GigabitEthernet1",
-        "ipv4": [
-          {
-            "dhcp": {
-              "enable": true
-            }
-          }
-        ]
-      },
-      {
-        "name": "GigabitEthernet2",
-        "ipv4": [
-          {
-            "address": "192.18.7.190/28"
-          }
-        ]
-      }
-    ],
-    "lldp_interfaces": [
-      {
-        "name": "GigabitEthernet1",
-        "transmit": true,
-        "receive": true
-      },
-      {
-        "name": "GigabitEthernet2",
-        "transmit": true,
-        "receive": true
-      }
-    ],
-    "lldp_global": {
-      "timer": 10,
-      "holdtime": 10,
+  "interfaces": [
+    {
+      "name": "GigabitEthernet1",
       "enabled": true
     },
-    "ospf_interfaces": [
-      {
-        "name": "GigabitEthernet1"
-      },
-      {
-        "name": "GigabitEthernet2"
-      }
-    ],
-    "logging_global": {},
-    "l2_interfaces": [
-      {
-        "name": "GigabitEthernet1"
-      },
-      {
-        "name": "GigabitEthernet2"
-      }
-    ],
-    "snmp_server": {},
-    "bgp_global": {},
-    "hostname": {
-      "hostname": "rtrc.shadowman.dev"
+    {
+      "name": "GigabitEthernet2",
+      "enabled": false
+    }
+  ],
+  "lacp_interfaces": [
+    {
+      "name": "GigabitEthernet1"
     },
-    "acl_interfaces": [],
-    "interfaces": [
-      {
-        "name": "GigabitEthernet1",
-        "description": "This is configured by Ansible",
-        "enabled": true
-      },
-      {
-        "name": "GigabitEthernet2",
-        "description": "This is configured by Ansible",
-        "enabled": true
-      }
-    ]
-  }
+    {
+      "name": "GigabitEthernet2"
+    }
+  ],
+  "ospf_interfaces": [
+    {
+      "name": "GigabitEthernet1"
+    },
+    {
+      "name": "GigabitEthernet2"
+    }
+  ],
+  "l2_interfaces": [
+    {
+      "name": "GigabitEthernet1"
+    },
+    {
+      "name": "GigabitEthernet2"
+    }
+  ],
+  "lacp": {
+    "system": {
+      "priority": 32768
+    }
+  },
+  "l3_interfaces": [
+    {
+      "name": "GigabitEthernet1",
+      "ipv4": [
+        {
+          "address": "172.16.5.142/24"
+        }
+      ]
+    },
+    {
+      "name": "GigabitEthernet2"
+    }
+  ],
+  "static_routes": [
+    {
+      "address_families": [
+        {
+          "afi": "ipv4",
+          "routes": [
+            {
+              "dest": "0.0.0.0/0",
+              "next_hops": [
+                {
+                  "forward_router_address": "172.16.5.1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
