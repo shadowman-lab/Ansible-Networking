@@ -21,9 +21,12 @@
   hosts: os_cisco
   gather_facts: false
 
-  vars:
-    ansible_network_os: cisco.ios.ios
+  tasks:
 
-  roles:
-    - network_ios_upgrade
-    - network_version
+    - name: run show version on remote devices
+      ansible.netcommon.cli_command:
+        command: show version
+
+#  roles:
+#    - network_ios_upgrade
+#    - network_version
