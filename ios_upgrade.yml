@@ -1,39 +1,21 @@
-# - name: Device Version and Backup
-#  hosts: os_cisco
-#  gather_facts: false
+- name: Device Version and Backup
+  hosts: os_cisco
+  gather_facts: false
 
-#  roles:
-#    - network_version
-#    - network_backup
+  roles:
+    - network_version
+    - network_backup
 
-# - name: Copy backup to host
-#  hosts: report.shadowman.dev
-#  gather_facts: false
-
-#  tasks:
-#
-#    - name: copy files to managed host
-#      ansible.builtin.copy:
-#        src: /tmp/home/network/
-#        dest: /home/network/
-
-- name: Test removing pylibssh
-  hosts: localhost
+- name: Copy backup to host
+  hosts: report.shadowman.dev
   gather_facts: false
 
   tasks:
 
-    - name: Remove pylibssh
-      ansible.builtin.pip:
-        name:
-          - ansible-pylibssh
-        state: absent
-
-    - name: Add paramiko
-      ansible.builtin.pip:
-        name:
-          - paramiko
-        state: present
+    - name: Copy files to managed host
+      ansible.builtin.copy:
+        src: /tmp/home/network/
+        dest: /home/network/
 
 - name: Upgrade and Verify Device Version
   hosts: os_cisco
