@@ -17,6 +17,24 @@
 #        src: /tmp/home/network/
 #        dest: /home/network/
 
+- name: Test removing pylibssh
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+    - name: Remove pylibssh
+      ansible.builtin.pip:
+        name:
+          - ansible-pylibssh
+        state: absent
+
+    - name: Add paramiko
+      ansible.builtin.pip:
+        name:
+          - paramiko
+        state: present
+
 - name: Upgrade and Verify Device Version
   hosts: os_cisco
   gather_facts: false
