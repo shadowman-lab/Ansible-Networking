@@ -2,10 +2,12 @@
   "interfaces": [
     {
       "name": "GigabitEthernet1",
+      "description": "This is {{ configured_by }}",
       "enabled": true
     },
     {
       "name": "GigabitEthernet2",
+      "description": "This is {{ configured_by }}",
       "enabled": false
     }
   ],
@@ -48,7 +50,12 @@
       ]
     },
     {
-      "name": "GigabitEthernet2"
+      "name": "GigabitEthernet2",
+      "ipv4": [
+        {
+          "address": "{{ gigabit2 }}/28"
+        }
+      ]
     }
   ],
   "static_routes": [
