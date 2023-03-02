@@ -21,6 +21,9 @@
   hosts: os_cisco
   gather_facts: false
 
+  vars:
+    ansible_network_os: cisco.ios.ios
+
   roles:
     - network_ios_upgrade
     - network_version
