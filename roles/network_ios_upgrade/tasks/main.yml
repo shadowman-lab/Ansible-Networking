@@ -19,6 +19,7 @@
 - name: Change Boot Variable to new image
   cisco.ios.ios_config:
     commands:
+      - "no boot system"
       - "boot system flash:{{ network_image }}"
     save_when: always
 
