@@ -19,6 +19,23 @@
       "name": "GigabitEthernet2"
     }
   ],
+  "lldp_interfaces": [
+    {
+      "name": "GigabitEthernet1",
+      "transmit": true,
+      "receive": true
+    },
+    {
+      "name": "GigabitEthernet2",
+      "transmit": true,
+      "receive": true
+    }
+  ],
+  "lldp_global": {
+    "timer": 10,
+    "holdtime": 10,
+    "enabled": true
+  },
   "ospf_interfaces": [
     {
       "name": "GigabitEthernet1"
