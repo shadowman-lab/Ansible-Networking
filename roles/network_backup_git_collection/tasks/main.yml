@@ -7,6 +7,7 @@
     accept_newhostkey: true
     key_file: /certs/id_ed25519
   delegate_to: localhost
+  run_once: true
 
 - name: Backup ios device
   cisco.ios.ios_config:
@@ -45,3 +46,4 @@
   args:
     chdir: /tmp/home/network
   delegate_to: localhost
+  run_once: true
