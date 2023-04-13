@@ -108,89 +108,89 @@
         ]
     },
     "ospfv2": {
-        "mpls_te": {
-            "router_address": "192.0.22.22"
-        },
-        "redistribute": [
-            {
-                "metric_type": 2,
-                "route_type": "bgp",
-                "metric": 10
-            }
-        ],
-        "neighbor": [
-            {
-                "priority": 2,
-                "poll_interval": 10,
-                "neighbor_id": "192.0.11.12"
-            }
-        ],
-        "parameters": {
-            "router_id": "192.0.1.1",
-            "opaque_lsa": true,
-            "abr_type": "cisco",
-            "rfc1583_compatibility": true
-        },
-        "default_information": {
-            "originate": {
-                "metric_type": 2,
-                "always": true,
-                "metric": 10,
-                "route_map": "ingress"
-            }
-        },
-        "max_metric": {
-            "router_lsa": {
-                "on_startup": 10,
-                "administrative": true,
-                "on_shutdown": 10
-            }
-        },
         "log_adjacency_changes": "detail",
         "auto_cost": {
-            "reference_bandwidth": 2
+          "reference_bandwidth": 2
         },
-        "passive_interface": [
-            "eth1"
-        ],
+        "max_metric": {
+          "router_lsa": {
+            "administrative": true,
+            "on_shutdown": 10,
+            "on_startup": 10
+          }
+        },
+        "default_information": {
+          "originate": {
+            "always": true,
+            "metric": 10,
+            "metric_type": 2,
+            "route_map": "ingress"
+          }
+        },
+        "mpls_te": {
+          "router_address": "192.0.22.22"
+        },
         "areas": [
-            {
-                "area_id": "2",
-                "authentication": "plaintext-password",
-                "shortcut": "enable",
-                "area_type": {
-                    "normal": true
-                }
+          {
+            "shortcut": "enable",
+            "authentication": "plaintext-password",
+            "area_type": {
+              "normal": true
             },
-            {
-                "area_id": "4",
-                "range": [
-                    {
-                        "cost": 10,
-                        "address": "192.0.42.0/24"
-                    }
-                ],
-                "network": [
-                    {
-                        "address": "192.0.12.0/24"
-                    },
-                    {
-                        "address": "192.0.2.0/24"
-                    },
-                    {
-                        "address": "192.0.22.0/24"
-                    },
-                    {
-                        "address": "192.0.32.0/24"
-                    }
-                ],
-                "area_type": {
-                    "stub": {
-                        "default_cost": 20,
-                        "set": true
-                    }
-                }
-            }
+            "area_id": "2"
+          },
+          {
+            "area_type": {
+              "stub": {
+                "set": true,
+                "default_cost": 20
+              }
+            },
+            "network": [
+              {
+                "address": "192.0.12.0/24"
+              },
+              {
+                "address": "192.0.2.0/24"
+              },
+              {
+                "address": "192.0.22.0/24"
+              },
+              {
+                "address": "192.0.32.0/24"
+              }
+            ],
+            "range": [
+              {
+                "cost": 10,
+                "address": "192.0.42.0/24"
+              }
+            ],
+            "area_id": "4"
+          }
+        ],
+        "parameters": {
+          "abr_type": "cisco",
+          "opaque_lsa": true,
+          "router_id": "192.0.1.1",
+          "rfc1583_compatibility": true
+        },
+        "neighbor": [
+          {
+            "priority": 2,
+            "poll_interval": 10,
+            "neighbor_id": "192.0.11.12"
+          }
+        ],
+        "passive_interface": [
+          "eth1"
+        ],
+        "redistribute": [
+          {
+            "metric": 10,
+            "metric_type": 2,
+            "route_type": "bgp"
+          }
         ]
     },
     "ospfv3": {
