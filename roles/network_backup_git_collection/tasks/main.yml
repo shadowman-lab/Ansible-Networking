@@ -7,10 +7,10 @@
   become: true
   run_once: true
   delegate_to: localhost
- 
+
 - name: Create the ssh key file based on the supplied cred
   ansible.builtin.copy:
-    dest: ~/.ssh/id_rsa
+    dest: /root/.ssh/id_rsa
     content: "{{ cert_key }}"
     mode: '0600'
   become: true
@@ -23,7 +23,7 @@
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
-    key_file: ~/.ssh/id_rsa
+    key_file: /root/.ssh/id_rsa
   delegate_to: localhost
   run_once: true
 
