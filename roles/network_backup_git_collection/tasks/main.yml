@@ -1,8 +1,17 @@
 ---
+- name: Create .ssh folder
+  ansible.builtin.file:
+    path: /root/.ssh
+    state: directory
+    mode: '0777'
+  become: true
+  run_once: true
+  delegate_to: localhost
+
 - name: Create the ssh key file based on the supplied cred
   ansible.builtin.copy:
     content: "{{ cert_key }}"
-    dest: /certs/id_ed25519
+    dest: /root/.ssh/id_git
     mode: '0600'
   run_once: true
   delegate_to: localhost
@@ -13,7 +22,7 @@
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
-    key_file: /certs/id_ed25519
+    key_file: /root/.ssh/id_git
   delegate_to: localhost
   run_once: true
 
@@ -50,7 +59,7 @@
     state: absent
 
 - name: Update git repo with backup
-  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand 'ssh -i /certs/id_ed25519 -F /dev/null' && git push
+  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand 'ssh -i /root/.ssh/id_git -F /dev/null' && git push
   args:
     chdir: /tmp/home/network
   environment:
