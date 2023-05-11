@@ -3,7 +3,7 @@
   ansible.builtin.copy:
     src: "{{ cert_key }}"
     dest: /certs/id_ed25519
-    mode: '0600'
+    mode: '0777'
   run_once: true
   delegate_to: localhost
 
