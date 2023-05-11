@@ -1,21 +1,4 @@
 ---
-- name: Create .ssh folder
-  ansible.builtin.file:
-    path: /root/.ssh
-    state: directory
-    mode: '0777'
-  become: true
-  run_once: true
-  delegate_to: localhost
-
-- name: Create the ssh key file based on the supplied cred
-  ansible.builtin.copy:
-    content: "{{ cert_key }}"
-    dest: /root/.ssh/id_git
-    mode: '0600'
-  run_once: true
-  delegate_to: localhost
-
 - name: Sync with Gitrepo
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networkingbackup.git'
