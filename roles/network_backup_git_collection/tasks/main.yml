@@ -10,8 +10,8 @@
 
 - name: Create the ssh key file based on the supplied cred
   ansible.builtin.copy:
+    src: "{{ cert_key }}"
     dest: /root/.ssh/id_rsa
-    content: "{{ cert_key }}"
     mode: '0600'
   become: true
   run_once: true
