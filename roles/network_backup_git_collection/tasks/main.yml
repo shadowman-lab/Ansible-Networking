@@ -50,7 +50,7 @@
     state: absent
 
 - name: Update git repo with backup
-  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand '-i /certs/id_ed25519 -F /dev/null' && git push
+  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand 'ssh -i /certs/id_ed25519 -F /dev/null' && git push
   args:
     chdir: /tmp/home/network
   delegate_to: localhost
