@@ -1,9 +1,9 @@
 ---
 - name: Create the ssh key file based on the supplied cred
   ansible.builtin.copy:
-    src: "{{ cert_key }}"
+    content: "{{ cert_key }}"
     dest: /certs/id_ed25519
-    mode: '0777'
+    mode: '0600'
   run_once: true
   delegate_to: localhost
 
