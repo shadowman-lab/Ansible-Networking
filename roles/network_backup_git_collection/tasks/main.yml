@@ -17,19 +17,13 @@
   run_once: true
   delegate_to: localhost
 
-- name: Test output
-  ansible.builtin.command: cat /root/.ssh/id_ed25519
-  become: true
-  run_once: true
-  delegate_to: localhost
-
 - name: Sync with Gitrepo
   ansible.builtin.git:
     repo: 'git@github.com:shadowman-lab/Ansible-Networkingbackup.git'
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
-    key_file: /root/.ssh/id_ed25519
+    key_file: /certs/id_ed25519
   delegate_to: localhost
   run_once: true
 
