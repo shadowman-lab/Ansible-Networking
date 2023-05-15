@@ -19,3 +19,4 @@ warn_list:
   - no-changed-when
   - git-latest
   - template-instead-of-copy
+  - yaml[line-length]
