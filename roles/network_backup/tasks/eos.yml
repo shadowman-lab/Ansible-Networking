@@ -8,27 +8,27 @@
 
 - name: REMOVE username and password
   ansible.builtin.lineinfile:
-    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
-    regexp: 'username.*'
+    path: /tmp/home/network/{{ inventory_hostname }}.cfg
+    regexp: username.*
     state: absent
 
 - name: REMOVE enable name
   ansible.builtin.lineinfile:
-    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
-    regexp: 'enable.*'
+    path: /tmp/home/network/{{ inventory_hostname }}.cfg
+    regexp: enable.*
     state: absent
 
 - name: Grab eos interface facts for new backup type
   arista.eos.eos_facts:
     gather_subset:
-      - '!all'
-      - '!min'
+      - "!all"
+      - "!min"
     gather_network_resources: all
 
 - name: Backup using resource modules on eos
   ansible.builtin.copy:
     content: "{{ ansible_network_resources | to_nice_yaml }}"
-    dest: "/tmp/home/network/{{ inventory_hostname }}.yml"
+    dest: /tmp/home/network/{{ inventory_hostname }}.yml
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"

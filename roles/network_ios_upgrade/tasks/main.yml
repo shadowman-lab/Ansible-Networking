@@ -1,8 +1,8 @@
 ---
 - name: Fetch image to EE
   ansible.builtin.fetch:
-    src: "/images/{{ network_image }}"
-    dest: "/tmp/"
+    src: /images/{{ network_image }}
+    dest: /tmp/
     flat: true
   delegate_to: tower1.shadowman.dev
   become: false
@@ -10,8 +10,8 @@
 
 - name: Copy Image to device from EE
   ansible.netcommon.net_put:
-    src: "/tmp/{{ network_image }}"
-    dest: "flash:/{{ network_image }}"
+    src: /tmp/{{ network_image }}
+    dest: flash:/{{ network_image }}
   vars:
     ansible_command_timeout: 3000
     ansible_network_cli_ssh_type: paramiko
@@ -19,8 +19,8 @@
 - name: Change Boot Variable to new image
   cisco.ios.ios_config:
     commands:
-      - "no boot system"
-      - "boot system flash:{{ network_image }}"
+      - no boot system
+      - boot system flash:{{ network_image }}
     save_when: always
 
 - name: Reload the Device
@@ -29,7 +29,7 @@
     prompt:
       - confirm
     answer:
-      - 'y'
+      - "y"
 
 - name: Wait for device to come back online
   ansible.builtin.wait_for_connection:

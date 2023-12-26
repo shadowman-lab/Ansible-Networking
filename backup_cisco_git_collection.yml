@@ -1,3 +1,4 @@
+---
 - name: Device Backup
   hosts: os_cisco
   gather_facts: false

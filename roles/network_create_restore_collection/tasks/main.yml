@@ -8,15 +8,15 @@
 
 - name: Create Restore Job Template
   ansible.controller.job_template:
-    name: "Network Restore"
-    job_type: "run"
-    inventory: "Network Inventory"
-    project: "SSP Networking Project"
-    playbook: "network_restore.yml"
+    name: Network Restore
+    job_type: run
+    inventory: Network Inventory
+    project: SSP Networking Project
+    playbook: network_restore.yml
     credentials:
-      - "Cisco Credentials"
-      - "Ansible Linux Service Account"
-    limit: "os_cisco"
+      - Cisco Credentials
+      - Ansible Linux Service Account
+    limit: os_cisco
     survey_enabled: true
     become_enabled: true
     survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"

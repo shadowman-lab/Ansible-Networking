@@ -1,3 +1,4 @@
+---
 - name: Device Backup
   hosts: tag_Router
   gather_facts: false
@@ -11,7 +12,6 @@
   gather_facts: false
 
   tasks:
-
     - name: copy files to managed host
       ansible.builtin.copy:
         src: /tmp/home/network/

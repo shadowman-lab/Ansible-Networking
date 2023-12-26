@@ -1,7 +1,7 @@
 ---
 - name: Sync with Gitrepo
   ansible.builtin.git:
-    repo: 'git@github.com:shadowman-lab/Ansible-Networkingbackup.git'
+    repo: git@github.com:shadowman-lab/Ansible-Networkingbackup.git
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
@@ -20,29 +20,30 @@
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
     path: "{{ config_output.backup_path }}"
-    line: "Building configuration..."
+    line: Building configuration...
     state: absent
 
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
     path: "{{ config_output.backup_path }}"
-    regexp: 'Current configuration.*'
+    regexp: Current configuration.*
     state: absent
 
 - name: REMOVE enable password
   ansible.builtin.lineinfile:
     path: "{{ config_output.backup_path }}"
-    regexp: 'enable password.*'
+    regexp: enable password.*
     state: absent
 
 - name: REMOVE username and password
   ansible.builtin.lineinfile:
     path: "{{ config_output.backup_path }}"
-    regexp: 'username.*'
+    regexp: username.*
     state: absent
 
 - name: Update git repo with backup
-  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand 'ssh -i {{ cert_key_file }} -F /dev/null' && git push
+  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand 'ssh -i {{ cert_key_file }} -F /dev/null'
+    && git push
   args:
     chdir: /tmp/home/network
   environment:

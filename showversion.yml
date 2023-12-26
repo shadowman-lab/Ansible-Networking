@@ -1,3 +1,4 @@
+---
 - name: Pull version of device
   hosts: all
   gather_facts: false

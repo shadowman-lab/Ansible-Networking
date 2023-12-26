@@ -1,7 +1,7 @@
 ---
 - name: Sync with Gitrepo
   ansible.builtin.git:
-    repo: 'git@github.com:shadowman-lab/Ansible-Networkingbackup.git'
+    repo: git@github.com:shadowman-lab/Ansible-Networkingbackup.git
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
@@ -10,4 +10,4 @@
 
 - name: Restore ios device
   cisco.ios.ios_config:
-    src: "/tmp/home/network/backup/{{ rollback_date }}"
+    src: /tmp/home/network/backup/{{ rollback_date }}

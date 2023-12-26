@@ -1,13 +1,14 @@
+---
 - name: Restart Docker service and container for EOS
   hosts: all
   gather_facts: false
 
   tasks:
 
-  - name: Restart Docker service
-    ansible.builtin.command:
-      cmd: systemctl start docker
+    - name: Restart Docker service
+      ansible.builtin.command:
+        cmd: systemctl start docker
 
-  - name: Start docker container with EOS
-    ansible.builtin.command:
-      cmd: docker start ceos1
+    - name: Start docker container with EOS
+      ansible.builtin.command:
+        cmd: docker start ceos1

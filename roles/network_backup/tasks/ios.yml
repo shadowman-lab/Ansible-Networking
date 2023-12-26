@@ -8,39 +8,39 @@
 
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
-    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
-    line: "Building configuration..."
+    path: /tmp/home/network/{{ inventory_hostname }}.cfg
+    line: Building configuration...
     state: absent
 
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
-    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
-    regexp: 'Current configuration.*'
+    path: /tmp/home/network/{{ inventory_hostname }}.cfg
+    regexp: Current configuration.*
     state: absent
 
 - name: REMOVE enable password
   ansible.builtin.lineinfile:
-    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
-    regexp: 'enable password.*'
+    path: /tmp/home/network/{{ inventory_hostname }}.cfg
+    regexp: enable password.*
     state: absent
 
 - name: REMOVE username and password
   ansible.builtin.lineinfile:
-    path: "/tmp/home/network/{{ inventory_hostname }}.cfg"
-    regexp: 'username.*'
+    path: /tmp/home/network/{{ inventory_hostname }}.cfg
+    regexp: username.*
     state: absent
 
 - name: Grab ios interface facts for new backup type
   cisco.ios.ios_facts:
     gather_subset:
-      - '!all'
-      - '!min'
-    gather_network_resources: '!vlans'
+      - "!all"
+      - "!min"
+    gather_network_resources: "!vlans"
 
 - name: Backup using resource modules on ios
   ansible.builtin.copy:
     content: "{{ ansible_network_resources | to_nice_yaml }}"
-    dest: "/tmp/home/network/{{ inventory_hostname }}.yml"
+    dest: /tmp/home/network/{{ inventory_hostname }}.yml
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"

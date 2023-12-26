@@ -1,3 +1,4 @@
+---
 - name: Example of all facts gathered by Ansible
   hosts: all
   gather_facts: false

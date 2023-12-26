@@ -130,7 +130,6 @@
                 direction: local
         name: eth1
 
-
 - name: Push base lldp global to vyos
   vyos.vyos.vyos_lldp_global:
     state: replaced
@@ -174,12 +173,12 @@
         rfc1583_compatibility: true
         abr_type: cisco
       areas:
-        - area_id: '2'
+        - area_id: "2"
           area_type:
             normal: true
           authentication: plaintext-password
           shortcut: enable
-        - area_id: '4'
+        - area_id: "4"
           area_type:
             stub:
               default_cost: 20
@@ -201,14 +200,14 @@
       parameters:
         router_id: 192.0.2.10
       areas:
-        - area_id: '2'
+        - area_id: "2"
           export_list: export1
           import_list: import1
           range:
             - address: 2001:db10::/32
             - address: 2001:db30::/32
             - address: 2001:db50::/32
-        - area_id: '4'
+        - area_id: "4"
           range:
             - address: 2001:db60::/32
     state: replaced

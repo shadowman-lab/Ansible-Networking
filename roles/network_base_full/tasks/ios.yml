@@ -10,7 +10,7 @@
     config:
       - name: GigabitEthernet1
         ipv4:
-          - address: "172.16.5.142/24"
+          - address: 172.16.5.142/24
       - name: GigabitEthernet2
         ipv4:
           - address: "{{ gigabit2 }}/28"
@@ -20,10 +20,10 @@
     state: overridden
     config:
       - name: GigabitEthernet1
-        description: "This is {{ configured_by }}"
+        description: This is {{ configured_by }}
         enabled: true
       - name: GigabitEthernet2
-        description: "This is {{ configured_by }}"
+        description: This is {{ configured_by }}
         enabled: true
 
 - name: Update lldp global on ios

@@ -1,7 +1,7 @@
 ---
 - name: Grab vyos facts
   vyos.vyos.vyos_facts:
-    gather_subset: 'min'
+    gather_subset: min
     gather_network_resources: all
   register: vyosfacts
 
