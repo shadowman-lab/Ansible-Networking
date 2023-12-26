@@ -1,8 +1,6 @@
 include README.md
 include *.yml
 include .DS_Store
-include .config/ansible-lint.yml
-include .github/workflows/ansible-lint.yml
 include .vscode/extensions.json
 include devfile.yaml
 recursive-exclude .git *
