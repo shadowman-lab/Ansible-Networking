@@ -1,7 +1,7 @@
 ---
 - name: Grab Arista eos facts
   arista.eos.eos_facts:
-    gather_subset: 'min'
+    gather_subset: min
     gather_network_resources: all
   register: eosfacts
 

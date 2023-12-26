@@ -42,8 +42,8 @@
     state: overridden
     config:
       - name: Ethernet1
-        description: "This is {{ configured_by }}"
+        description: This is {{ configured_by }}
         enabled: true
       - name: Ethernet2
-        description: "This is {{ configured_by }}"
+        description: This is {{ configured_by }}
         enabled: true

@@ -10,7 +10,7 @@
     config:
       - name: GigabitEthernet1
         ipv4:
-          - address: "172.16.5.142/24"
+          - address: 172.16.5.142/24
       - name: GigabitEthernet2
         ipv4:
           - address: "{{ gigabit2 }}/28"

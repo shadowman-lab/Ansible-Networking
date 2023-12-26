@@ -1,5 +1,5 @@
 ---
-- name: "Fetch interface state and parse with pyats"
+- name: Fetch interface state and parse with pyats
   ansible.utils.cli_parse:
     command: show interfaces
     parser:
