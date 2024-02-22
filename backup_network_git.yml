@@ -1,0 +1,8 @@
+---
+- name: Device Backup
+  hosts: all
+  serial: 1
+  gather_facts: false
+
+  roles:
+    - network_backup_git_collection

@@ -1,0 +1,55 @@
+---
+- name: Sync with Gitrepo
+  ansible.builtin.git:
+    repo: git@github.com:shadowman-lab/Ansible-Networkingbackup.git
+    dest: /tmp/home/network
+    version: main
+    accept_newhostkey: true
+    key_file: "{{ cert_key_file }}"
+  delegate_to: localhost
+  run_once: true
+
+- name: Backup ios device
+  cisco.ios.ios_config:
+    backup: true
+    backup_options:
+      dir_path: /tmp/home/network/cisco_backup
+  become: true
+  register: config_output
+
+- name: REMOVE NON CONFIG LINES - REGEXP
+  ansible.builtin.lineinfile:
+    path: "{{ config_output.backup_path }}"
+    line: Building configuration...
+    state: absent
+
+- name: REMOVE NON CONFIG LINES - REGEXP
+  ansible.builtin.lineinfile:
+    path: "{{ config_output.backup_path }}"
+    regexp: Current configuration.*
+    state: absent
+
+- name: REMOVE enable password
+  ansible.builtin.lineinfile:
+    path: "{{ config_output.backup_path }}"
+    regexp: enable password.*
+    state: absent
+
+- name: REMOVE username and password
+  ansible.builtin.lineinfile:
+    path: "{{ config_output.backup_path }}"
+    regexp: username.*
+    state: absent
+
+- name: Update git repo with backup
+  ansible.builtin.shell: git add -A && git commit -m "Synching new backup to repo" && git config --global core.sshCommand 'ssh -i {{ cert_key_file }} -F /dev/null'
+    && git push
+  args:
+    chdir: /tmp/home/network
+  environment:
+    GIT_COMMITTER_NAME: "{{ git_name | default(omit) }}"
+    GIT_COMMITTER_EMAIL: "{{ git_email | default(omit) }}"
+    GIT_AUTHOR_NAME: "{{ git_name | default(omit) }}"
+    GIT_AUTHOR_EMAIL: "{{ git_email | default(omit) }}"
+  run_once: true
+  delegate_to: localhost
