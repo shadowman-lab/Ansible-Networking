@@ -1,7 +1,7 @@
 ---
 - name: Find Current Backups
   ansible.builtin.find:
-    paths: /tmp/home/network/backup
+    paths: /tmp/home/network/cisco_backup
   register: backups
   run_once: true
   become: true
