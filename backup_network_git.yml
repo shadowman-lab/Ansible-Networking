@@ -6,3 +6,10 @@
 
   roles:
     - network_backup_git_collection
+
+- name: Create Controller Restore Job
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - network_create_restore_collection

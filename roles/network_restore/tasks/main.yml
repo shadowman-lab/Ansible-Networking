@@ -12,3 +12,14 @@
 - name: Restore ios device
   cisco.ios.ios_config:
     src: /tmp/home/network/cisco_backup/{{ inventory_hostname }}/{{ rollback_date }}
+  when: ansible_network_os == 'cisco.ios.ios'
+
+- name: Restore eos device
+  arista.eos.eos_config:
+    src: /tmp/home/network/arista_backup/{{ inventory_hostname }}/{{ rollback_date }}
+  when: ansible_network_os == 'arista.eos.eos'
+
+- name: Restore vyos device
+  vyos.vyos.vyos_config:
+    src: /tmp/home/network/vyos_backup/{{ inventory_hostname }}/{{ rollback_date }}
+  when: ansible_network_os == 'vyos.vyos.vyos'

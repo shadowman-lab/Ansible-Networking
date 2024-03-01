@@ -1,12 +1,13 @@
 ---
 - name: Device Backup
   hosts: os_cisco
+  serial: 1
   gather_facts: false
 
   roles:
     - network_backup_git_collection
 
-- name: Create Tower Restore Job
+- name: Create Controller Restore Job
   hosts: os_cisco
   gather_facts: false
 

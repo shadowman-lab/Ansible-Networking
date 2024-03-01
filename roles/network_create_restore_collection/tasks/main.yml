@@ -16,7 +16,9 @@
     playbook: network_restore.yml
     credentials:
       - Cisco Credentials
-      - Ansible Linux Service Account
+      - Arista Credential
+      - VYOS Credentials
+      - Alex SSH Git Credential
     limit: os_cisco
     survey_enabled: true
     become_enabled: true
