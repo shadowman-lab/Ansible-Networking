@@ -1,7 +1,7 @@
 ---
 - name: Find Current Backups
   ansible.builtin.find:
-    paths: /tmp/home/network/cisco_backup/{{ inventory_hostname }}
+    paths: /tmp/home/network/{{ ansible_network_os.split('.')[0] }}_backup/{{ inventory_hostname }}
   register: backups
   delegate_to: localhost
   run_once: true
