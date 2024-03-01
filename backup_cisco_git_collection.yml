@@ -7,7 +7,7 @@
     - network_backup_git_collection
 
 - name: Create Tower Restore Job
-  hosts: localhost
+  hosts: os_cisco
   gather_facts: false
 
   roles:

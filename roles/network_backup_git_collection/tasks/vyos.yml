@@ -13,7 +13,8 @@
   vyos.vyos.vyos_config:
     backup: true
     backup_options:
-      dir_path: /tmp/home/network/vyos_backup
+      filename: "{{ lookup('pipe', 'date +%Y-%m-%d') }}.cfg"
+      dir_path: /tmp/home/network/vyos_backup/{{ inventory_hostname }}
   become: true
   register: config_output
 

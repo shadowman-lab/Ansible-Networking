@@ -13,7 +13,8 @@
   arista.eos.eos_config:
     backup: true
     backup_options:
-      dir_path: /tmp/home/network/arista_backup
+      filename: "{{ lookup('pipe', 'date +%Y-%m-%d') }}.cfg"
+      dir_path: /tmp/home/network/arista_backup/{{ inventory_hostname }}
   become: true
   register: config_output
 

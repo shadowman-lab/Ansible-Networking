@@ -1,8 +1,9 @@
 ---
 - name: Find Current Backups
   ansible.builtin.find:
-    paths: /tmp/home/network/cisco_backup
+    paths: /tmp/home/network/cisco_backup/{{ inventory_hostname }}
   register: backups
+  delegate_to: localhost
   run_once: true
   become: true
 
@@ -20,3 +21,5 @@
     survey_enabled: true
     become_enabled: true
     survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"
+  run_once: true
+  delegate_to: localhost
