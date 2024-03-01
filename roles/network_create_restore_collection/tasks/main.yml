@@ -5,7 +5,6 @@
   register: backups
   delegate_to: localhost
   run_once: true
-  become: true
 
 - name: Create Restore Job Template
   ansible.controller.job_template:
