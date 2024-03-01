@@ -5,7 +5,7 @@
     dest: /tmp/home/network
     version: main
     accept_newhostkey: true
-    key_file: /certs/id_ed25519
+    key_file: "{{ cert_key_file }}"
   delegate_to: localhost
   run_once: true
 
