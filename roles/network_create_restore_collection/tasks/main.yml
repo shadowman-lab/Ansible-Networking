@@ -18,7 +18,7 @@
       - Arista Credential
       - VYOS Credentials
       - Alex SSH Git Credential
-    limit: os_cisco
+    limit: tag_Router
     survey_enabled: true
     become_enabled: true
     survey_spec: "{{ lookup('template', 'templates/backup.j2') }}"
