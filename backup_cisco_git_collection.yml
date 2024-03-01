@@ -1,7 +1,6 @@
 ---
 - name: Device Backup
   hosts: os_cisco
-  serial: 1
   gather_facts: false
 
   roles:
