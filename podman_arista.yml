@@ -1,0 +1,7 @@
+---
+- name: Set up Arista podman
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - network_arista_podman

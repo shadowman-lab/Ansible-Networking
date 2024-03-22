@@ -1,0 +1,74 @@
+---
+- name: Ensure podman, podman plugins are installed
+  ansible.builtin.dnf:
+    name:
+      - podman
+      - podman-plugins
+    state: present
+
+- name: Open Firewalld for host1
+  ansible.posix.firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+
+- name: Open Firewalld for host2
+  ansible.posix.firewalld:
+    port: 8081/tcp
+    permanent: true
+    state: enabled
+
+- name: Restart Firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted
+
+- name: Ensure "net1" network exists
+  containers.podman.podman_network:
+    name: net1
+    state: present
+
+- name: Ensure "net2" network exists
+  containers.podman.podman_network:
+    name: net2
+    state: present
+
+- name: Start the eos1 container
+  containers.podman.podman_container:
+    name: ceos1
+    image: ceosimage:4.23.2F
+    privileged: true
+    state: started
+    command: '/sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman' # noqa yaml[line-length]
+    interactive: true
+    tty: true
+    env:
+      INTFTYPE: 'eth'
+      ETBA: '1'
+      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: '1'
+      CEOS: '1'
+      EOS_PLATFORM: 'ceoslab'
+      container: 'podman'
+    ports:
+      - "8080:22"
+    network: net1
+
+- name: Start the eos2 container
+  containers.podman.podman_container:
+    name: ceos2
+    image: ceosimage:4.23.2F
+    privileged: true
+    state: started
+    command: '/sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman' # noqa yaml[line-length]
+    interactive: true
+    tty: true
+    env:
+      INTFTYPE: 'eth'
+      ETBA: '1'
+      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: '1'
+      CEOS: '1'
+      EOS_PLATFORM: 'ceoslab'
+      container: 'podman'
+    ports:
+      - "8081:22"
+    network: net2
