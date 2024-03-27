@@ -1,0 +1,44 @@
+---
+- name: Add new vlan
+  cisco.nxos.nxos_vlans:
+    config:
+      - vlan_id: "{{ vlan_id }}"
+        name: "{{ vlan_name }}"
+        mapped_vni: "{{ vni_number }}"
+    state: merged
+
+- name: Add new member vni
+  cisco.nxos.nxos_vxlan_vtep_vni:
+    interface: nve1
+    vni: "{{ vni_number }}"
+    multicast_group: 232.1.1.1
+
+- name: Ensure interface-vlan is enabled
+  cisco.nxos.nxos_feature:
+    feature: interface-vlan
+    state: enabled
+
+- name: Configure new SVI
+  cisco.nxos.nxos_l3_interfaces:
+    config:
+      - name: "vlan{{ vlan_id }}"
+        redirects: false
+        ipv4:
+          - address: "{{ svi_address }}/24"
+            tag: "{{ vlan_id }}"
+        ipv6_redirects: false
+    state: merged
+
+- name: Add description and forwarding mode to SVI
+  cisco.nxos.nxos_interfaces:
+    config:
+      - name: "vlan{{ vlan_id }}"
+        description: "{{ vlan_name }}"
+        fabric_forwarding_anycast_gateway: true
+        enabled: true
+    state: merged
+
+- name: Save hostname to pass to restore node in workflow
+  ansible.builtin.set_stats:
+    data:
+      target_switch: "{{ inventory_hostname }}"

@@ -1,0 +1,7 @@
+---
+- name: Configure new vxlan
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - network_vxlan_config
