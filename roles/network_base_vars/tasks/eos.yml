@@ -28,3 +28,10 @@
   arista.eos.eos_interfaces:
     state: overridden
     config: "{{ ansible_network_resources['interfaces'] }}"
+
+- name: Ensure gnmi is enabled
+  arista.eos.eos_config:
+    lines:
+      - transport grpc default
+      - provider eos-native
+    parents: management api gnmi
