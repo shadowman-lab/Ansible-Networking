@@ -51,6 +51,7 @@
       container: 'podman'
     ports:
       - "8080:22"
+      - "8082:6030"
     network: net1
 
 - name: Start the eos2 container
@@ -71,4 +72,5 @@
       container: 'podman'
     ports:
       - "8081:22"
+      - "8083:6030"
     network: net2
