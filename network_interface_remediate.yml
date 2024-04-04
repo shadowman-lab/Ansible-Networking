@@ -1,6 +1,6 @@
 ---
 - name: Remediate Downed Interface
-  hosts: all
+  hosts: "{{ device | default('all') }}"
   gather_facts: false
 
   roles:
