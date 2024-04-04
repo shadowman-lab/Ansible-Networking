@@ -1,0 +1,7 @@
+---
+- name: Remediate Downed Interface
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - network_interface_remediate

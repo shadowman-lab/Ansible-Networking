@@ -1,0 +1,7 @@
+---
+- name: Enable downed interface
+  cisco.ios.ios_interfaces:
+    config:
+      - name: "{{ downinterface }}"
+        enabled: true
+    state: merged

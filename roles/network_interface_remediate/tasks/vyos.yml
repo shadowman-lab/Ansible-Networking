@@ -1,0 +1,7 @@
+---
+- name: Enable downed interface
+  vyos.vyos.vyos_interfaces:
+    config:
+      - name: "{{ downinterface }}"
+        enabled: true
+    state: merged
