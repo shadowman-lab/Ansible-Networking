@@ -1,12 +1,12 @@
 ---
-- name: Push IOS Facts
+- name: Correct IOS Interface
   ansible.builtin.include_tasks: ios.yml
   when: ansible_network_os == 'cisco.ios.ios'
 
-- name: Push EOS Facts
+- name: Correct EOS Interface
   ansible.builtin.include_tasks: eos.yml
   when: ansible_network_os == 'arista.eos.eos'
 
-- name: Push VYOS Facts
+- name: Correct VYOS Interface
   ansible.builtin.include_tasks: vyos.yml
   when: ansible_network_os == 'vyos.vyos.vyos'
