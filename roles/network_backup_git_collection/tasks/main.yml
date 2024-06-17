@@ -6,7 +6,6 @@
     version: main
     accept_newhostkey: true
     key_file: "{{ cert_key_file }}"
-    depth: 5
   delegate_to: localhost
   run_once: true
 
