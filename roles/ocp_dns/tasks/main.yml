@@ -22,3 +22,15 @@
     ipa_user: "{{ IPA_USER }}"
     state: "{{ record_state | default('present') }}"
   when: workerip is defined
+
+- name: Application IDM_update
+  community.general.ipa_dnsrecord:
+    record_name: "{{ app_route.result.metadata.name }}-{{ app_route.result.metadata.namespace }}.apps.hypershift"
+    record_type: A
+    record_value: "{{ appip | default(omit) }}"
+    zone_name: shadowman.dev.
+    ipa_pass: "{{ IPA_PASS }}"
+    ipa_host: "{{ IPA_HOST }}"
+    ipa_user: "{{ IPA_USER }}"
+    state: "{{ record_state | default('present') }}"
+  when: app_route is defined
