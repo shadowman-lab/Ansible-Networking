@@ -42,3 +42,4 @@
   ansible.builtin.file:
     path: "{{ backups.files[0].path }}"
     state: absent
+  when: backups.files | length > 2
