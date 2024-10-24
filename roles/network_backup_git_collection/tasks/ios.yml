@@ -31,3 +31,14 @@
     path: "{{ config_output.backup_path }}"
     regexp: username.*
     state: absent
+
+- name: Find all Cisco backups
+  ansible.builtin.find:
+    paths: /tmp/home/network/cisco_backup/{{ inventory_hostname }}
+    recurse: true
+  register: backups
+
+- name: Delete oldest backup
+  ansible.builtin.file:
+    path: "{{ backups.files[0].path }}"
+    state: absent
