@@ -6,15 +6,27 @@
       - podman-plugins
     state: present
 
-- name: Open Firewalld for host1
+- name: Open Firewalld for host1 ssh
   ansible.posix.firewalld:
     port: 8080/tcp
     permanent: true
     state: enabled
 
-- name: Open Firewalld for host2
+- name: Open Firewalld for host2 ssh
   ansible.posix.firewalld:
     port: 8081/tcp
+    permanent: true
+    state: enabled
+
+- name: Open Firewalld for telegraf host1
+  ansible.posix.firewalld:
+    port: 8082/tcp
+    permanent: true
+    state: enabled
+
+- name: Open Firewalld for telegraf host2
+  ansible.posix.firewalld:
+    port: 8083/tcp
     permanent: true
     state: enabled
 
@@ -33,44 +45,30 @@
     name: net2
     state: present
 
-- name: Start the eos1 container
-  containers.podman.podman_container:
-    name: ceos1
-    image: ceosimage:4.23.2F
-    privileged: true
-    state: started
-    command: '/sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman' # noqa yaml[line-length]
-    interactive: true
-    tty: true
-    env:
-      INTFTYPE: 'eth'
-      ETBA: '1'
-      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: '1'
-      CEOS: '1'
-      EOS_PLATFORM: 'ceoslab'
-      container: 'podman'
-    ports:
-      - "8080:22"
-      - "8082:6030"
-    network: net1
+- name: Deploy Ceos1 Service file
+  ansible.builtin.copy:
+    src: files/ceos1.service
+    dest: /etc/systemd/system/container-ceos1.service
+    mode: "0644"
+    group: root
+    owner: root
 
-- name: Start the eos2 container
-  containers.podman.podman_container:
-    name: ceos2
-    image: ceosimage:4.23.2F
-    privileged: true
+- name: Start and enable Ceos1 podman service
+  ansible.builtin.service:
+    name: container-ceos1.service
     state: started
-    command: '/sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman' # noqa yaml[line-length]
-    interactive: true
-    tty: true
-    env:
-      INTFTYPE: 'eth'
-      ETBA: '1'
-      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: '1'
-      CEOS: '1'
-      EOS_PLATFORM: 'ceoslab'
-      container: 'podman'
-    ports:
-      - "8081:22"
-      - "8083:6030"
-    network: net2
+    enabled: true
+
+- name: Deploy Ceos2 Service file
+  ansible.builtin.copy:
+    src: files/ceos2.service
+    dest: /etc/systemd/system/container-ceos2.service
+    mode: "0644"
+    group: root
+    owner: root
+
+- name: Start and enable Ceos2 podman service
+  ansible.builtin.service:
+    name: container-ceos2.service
+    state: started
+    enabled: true

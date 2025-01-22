@@ -1,0 +1,43 @@
+[Unit]
+Description=Podman container-ceos2.service
+Documentation=man:podman-generate-systemd(1)
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=%t/containers
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+TimeoutStopSec=70
+ExecStart=/usr/bin/podman container run \
+        --cidfile=%t/%n.ctr-id \
+        --cgroups=no-conmon \
+        --rm \
+        --sdnotify=conmon \
+        --replace \
+        --name ceos2 \
+        --privileged=True \
+        --interactive=True \
+        --tty=True \
+        --env INTFTYPE=eth \
+        --env ETBA=1 \
+        --env SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 \
+        --env CEOS=1 \
+        --env EOS_PLATFORM=ceoslab \
+        --env container=podman \
+        --network net2 \
+        --publish 8081:22 \
+        --publish 8083:6030 \
+        --detach=True ceosimage:4.23.2F /sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman
+ExecStop=/usr/bin/podman stop \
+        --ignore -t 10 \
+        --cidfile=%t/%n.ctr-id
+ExecStopPost=/usr/bin/podman rm \
+        -f \
+        --ignore -t 10 \
+        --cidfile=%t/%n.ctr-id
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=default.target
