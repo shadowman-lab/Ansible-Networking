@@ -28,6 +28,6 @@
 
 - name: Delete oldest backup
   ansible.builtin.file:
-    path: "{{ backups.files[0].path }}"
+    path: "{{ backups.files | sort(attribute='path') | map(attribute='path') | first }}"
     state: absent
   when: backups.files | length > 2
