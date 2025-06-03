@@ -1,14 +1,15 @@
 schemaVersion: 2.3.0
 metadata:
-  name: ansible-networking-development
+  name: ansible-ephemeral-devspace
+  displayName: Ansible DevSpace with Ephemeral Storage
+  description: "DevSpace environment for Ansible development with Private Automation Hub integration and ephemeral container storage"
+  version: 1.0.0
 components:
-  - container:
-      args: ['tail', '-f', '/dev/null']
-      image: 'tower.shadowman.dev/devcontainer:latest'
-      memoryRequest: 256M
-      memoryLimit: 6Gi
-      cpuRequest: 250m
-      cpuLimit: 2000m
+  - name: developer-image
+    container:
+      image: quay.io/tk-de/udi-ansible:latest
+      memoryLimit: 4Gi
+      cpuLimit: "2"
       env:
         - name: KUBEDOCK_ENABLED
           value: 'true'
@@ -35,7 +36,6 @@ components:
       volumeMounts:
         - name: container-storage
           path: /.local/share/containers/storage
-    name: ansible
   - name: container-storage
     volume:
       ephemeral: true
