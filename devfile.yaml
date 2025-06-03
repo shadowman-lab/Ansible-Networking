@@ -31,3 +31,8 @@ components:
           value: tcp://127.0.0.1:2475
         - name: SSL_CERT_DIR
           value: /var/run/secrets/kubernetes.io/serviceaccount
+      endpoints:
+        - exposure: none
+          name: kubedock
+          protocol: tcp
+          targetPort: 2475
