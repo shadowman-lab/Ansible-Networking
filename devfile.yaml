@@ -9,4 +9,33 @@ components:
       memoryLimit: 6Gi
       cpuRequest: 250m
       cpuLimit: 2000m
+      env:
+        - name: KUBEDOCK_ENABLED
+          value: 'true'
+        - name: PULL_POLICY
+          value: always
+        - name: INIT_IMAGE
+          value: docker.io/joyrex2001/kubedock:0.18.1
+        - name: REAPER_KEEPMAX
+          value: '30m'
+        - name: REQUEST_CPU
+          value: 500m,2
+        - name: REQUEST_MEMORY
+          value: 256Mi,4Gi
+        - name: KUBEDOCK_TIMEOUT
+          value: '120'
+        - name: KUBECONFIG
+          value: /home/user/.kube/config
+        - name: DOCKER_HOST
+          value: tcp://127.0.0.1:2475
+        - name: SSL_CERT_DIR
+          value: /var/run/secrets/kubernetes.io/serviceaccount
+        - name: XDG_DATA_HOME
+          value: /.local/share/containers/storage
+      volumeMounts:
+        - name: container-storage
+          path: /.local/share/containers/storage
     name: ansible
+  - name: container-storage
+    volume:
+      ephemeral: true
