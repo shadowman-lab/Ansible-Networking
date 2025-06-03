@@ -1,12 +1,33 @@
 schemaVersion: 2.3.0
 metadata:
-  name: ansible-networking-development
+  name: ansible-devspace
+  displayName: Ansible DevSpace
+  description: "DevSpace environment for Ansible development with Private Automation Hub integration"
+  version: 1.0.0
 components:
-  - container:
-      args: ['tail', '-f', '/dev/null']
-      image: 'tower.shadowman.dev/devee:latest'
-      memoryRequest: 256M
-      memoryLimit: 6Gi
-      cpuRequest: 250m
-      cpuLimit: 2000m
-    name: ansible
+  - name: developer-image
+    container:
+      image: quay.io/tk-de/udi-ansible:latest
+      memoryLimit: 4Gi
+      cpuLimit: "2"
+      env:
+        - name: KUBEDOCK_ENABLED
+          value: 'true'
+        - name: PULL_POLICY
+          value: always
+        - name: INIT_IMAGE
+          value: docker.io/joyrex2001/kubedock:0.18.1
+        - name: REAPER_KEEPMAX
+          value: '30m'
+        - name: REQUEST_CPU
+          value: 500m,2
+        - name: REQUEST_MEMORY
+          value: 256Mi,4Gi
+        - name: KUBEDOCK_TIMEOUT
+          value: '120'
+        - name: KUBECONFIG
+          value: /home/user/.kube/config
+        - name: DOCKER_HOST
+          value: tcp://127.0.0.1:2475
+        - name: SSL_CERT_DIR
+          value: /var/run/secrets/kubernetes.io/serviceaccount
