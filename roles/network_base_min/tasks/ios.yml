@@ -4,26 +4,6 @@
     config:
       hostname: "{{ inventory_hostname }}"
 
-- name: Set min l3 interfaces on ios
-  cisco.ios.ios_l3_interfaces:
-    state: overridden
-    config:
-      - name: GigabitEthernet1
-        ipv4:
-          - address: 172.16.5.142/24
-      - name: GigabitEthernet2
-        ipv4:
-          - address: "{{ gigabit2 }}/28"
-
-- name: Set min interfaces on ios
-  cisco.ios.ios_interfaces:
-    state: overridden
-    config:
-      - name: GigabitEthernet1
-        enabled: true
-      - name: GigabitEthernet2
-        enabled: true
-
 - name: Delete all lldp global on ios
   cisco.ios.ios_lldp_global:
     state: deleted
@@ -31,8 +11,3 @@
 - name: Delete all lacp interfaces on ios
   cisco.ios.ios_lacp_interfaces:
     state: deleted
-
-- name: Delete all static_routes on ios
-  cisco.ios.ios_static_routes:
-    state: deleted
-  ignore_errors: true

@@ -4,17 +4,6 @@
     config:
       hostname: "{{ inventory_hostname }}"
 
-- name: Push min l3 interfaces to vyos
-  vyos.vyos.vyos_l3_interfaces:
-    state: overridden
-    config:
-      - name: eth0
-        ipv4:
-          - address: dhcp
-      - name: eth1
-        ipv4:
-          - address: "{{ gigabit1 }}/28"
-
 - name: Push min interfaces to vyos
   vyos.vyos.vyos_interfaces:
     state: overridden
@@ -25,14 +14,6 @@
         enabled: true
       - name: lo
         enabled: true
-
-- name: Delete firewall interfaces on vyos
-  vyos.vyos.vyos_firewall_interfaces:
-    state: deleted
-
-- name: Delete firewall rules on vyos
-  vyos.vyos.vyos_firewall_rules:
-    state: deleted
 
 - name: Delete firewall global attributes configuration on vyos
   vyos.vyos.vyos_firewall_global:
