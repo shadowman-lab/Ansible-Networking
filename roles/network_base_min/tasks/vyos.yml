@@ -15,19 +15,6 @@
       - name: lo
         enabled: true
 
-- name: Delete firewall global attributes configuration on vyos
-  vyos.vyos.vyos_firewall_global:
-    config:
-      config_trap:
-      log_martians:
-      syn_cookies:
-      twa_hazards_protection:
-      ping:
-      state_policy:
-      route_redirects:
-      group:
-    state: deleted
-
 - name: Delete lldp global on vyos
   vyos.vyos.vyos_lldp_global:
     state: deleted
