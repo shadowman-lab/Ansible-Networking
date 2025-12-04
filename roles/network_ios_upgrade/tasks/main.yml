@@ -8,14 +8,6 @@
   become: false
   run_once: true
 
-# - name: Copy Image to device from EE
-#   ansible.netcommon.net_put:
-#     src: /tmp/{{ network_image }}
-#     dest: flash:/{{ network_image }}
-#   vars:
-#     ansible_command_timeout: 3000
-#     ansible_network_cli_ssh_type: paramiko
-
 - name: Change Boot Variable to new image
   cisco.ios.ios_config:
     commands:
