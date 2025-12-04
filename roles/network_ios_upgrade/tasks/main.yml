@@ -13,7 +13,7 @@
     src: /tmp/{{ network_image }}
     dest: flash:/{{ network_image }}
   vars:
-    ansible_command_timeout: 3000
+    ansible_command_timeout: 9000
     ansible_network_cli_ssh_type: paramiko
 
 - name: Change Boot Variable to new image
