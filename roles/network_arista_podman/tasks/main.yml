@@ -3,7 +3,6 @@
   ansible.builtin.dnf:
     name:
       - podman
-      - podman-plugins
     state: present
 
 - name: Open Firewalld for host1 ssh
