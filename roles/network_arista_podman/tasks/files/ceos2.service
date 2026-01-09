@@ -18,7 +18,6 @@ ExecStart=/usr/bin/podman run \
 	-d \
 	--name=ceos2 \
 	--privileged \
-	--network net1 \
 	--network net2 \
 	--publish 8081:22 \
 	--publish 8083:6030 \
