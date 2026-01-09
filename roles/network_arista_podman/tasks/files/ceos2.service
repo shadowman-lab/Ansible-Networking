@@ -28,7 +28,7 @@ ExecStart=/usr/bin/podman container run \
         --network net2 \
         --publish 8081:22 \
         --publish 8083:6030 \
-        --detach=True ceosimage:4.23.2F /sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman
+        --detach=True ceosimage:4.35.1F /sbin/init systemd.setenv=INTFTYPE=eth systemd.setenv=ETBA=1 systemd.setenv=SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT=1 systemd.setenv=CEOS=1 systemd.setenv=EOS_PLATFORM=ceoslab systemd.setenv=container=podman
 ExecStop=/usr/bin/podman stop \
         --ignore -t 10 \
         --cidfile=%t/%n.ctr-id
