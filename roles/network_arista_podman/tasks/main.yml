@@ -34,15 +34,15 @@
     name: firewalld
     state: restarted
 
-- name: Ensure "net1" network exists
+- name: Ensure networks exist
   containers.podman.podman_network:
-    name: net1
+    name: "{{ item }}"
     state: present
-
-- name: Ensure "net2" network exists
-  containers.podman.podman_network:
-    name: net2
-    state: present
+  loop:
+    - net1
+    - net2
+    - net3
+    - net4
 
 - name: Deploy Ceos1 Service file
   ansible.builtin.copy:

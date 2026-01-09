@@ -18,7 +18,8 @@ ExecStart=/usr/bin/podman run \
 	-d \
 	--name=ceos2 \
 	--privileged \
-	--network net2 \
+	--network net3 \
+        --network net4 \
 	--publish 8081:22 \
 	--publish 8083:6030 \
 	-e INTFTYPE=eth \
