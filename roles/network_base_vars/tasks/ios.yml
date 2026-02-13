@@ -35,7 +35,7 @@
     state: overridden
 
 - name: Apply the provided configuration
-  cisco.ios .ios_logging_global:
+  cisco.ios.ios_logging_global:
     state: overridden
     config:
       hosts:
