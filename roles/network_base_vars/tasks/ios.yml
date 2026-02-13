@@ -33,3 +33,13 @@
   cisco.ios.ios_static_routes:
     config: "{{ ansible_network_resources['static_routes'] }}"
     state: overridden
+
+- name: Apply the provided configuration
+  cisco.ios .ios_logging_global:
+    state: overridden
+    config:
+      hosts:
+        - hostname: 172.16.2.101
+          transport:
+            tcp:
+              port: 5514
