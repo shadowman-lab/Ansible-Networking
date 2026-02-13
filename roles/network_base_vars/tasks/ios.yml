@@ -34,7 +34,7 @@
     config: "{{ ansible_network_resources['static_routes'] }}"
     state: overridden
 
-- name: Apply the provided configuration
+- name: Apply the logging configuration to Splunk
   cisco.ios.ios_logging_global:
     state: overridden
     config:
