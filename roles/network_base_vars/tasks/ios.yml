@@ -34,6 +34,11 @@
     config: "{{ ansible_network_resources['static_routes'] }}"
     state: overridden
 
+- name: Set timezone
+  cisco.ios.ios_config:
+    lines:
+      - clock timezone EST -5
+
 - name: Ensure timestamps configured
   cisco.ios.ios_service:
     state: overridden
@@ -44,11 +49,13 @@
           timestamp: datetime
           datetime_options:
             msec: true
+            localtime: true
         - msg: log
           enable: true
           timestamp: datetime
           datetime_options:
             msec: true
+            localtime: true
 
 - name: Apply the logging configuration to Splunk
   cisco.ios.ios_logging_global:
