@@ -11,3 +11,7 @@
 - name: Delete all lacp interfaces on ios
   cisco.ios.ios_lacp_interfaces:
     state: deleted
+
+- name: Delete all logging on ios
+  cisco.ios.ios_logging_global:
+    state: deleted
