@@ -1,0 +1,4 @@
+---
+- name: Delete all logging on ios
+  cisco.ios.ios_logging_global:
+    state: deleted

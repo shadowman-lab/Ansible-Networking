@@ -1,0 +1,7 @@
+---
+- name: Remove all loggings
+  hosts: os_cisco
+  gather_facts: false
+
+  roles:
+    - network_ios_remove_syslog
