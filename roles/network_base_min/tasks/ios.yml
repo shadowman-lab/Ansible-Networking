@@ -12,6 +12,10 @@
   cisco.ios.ios_lacp_interfaces:
     state: deleted
 
+- name: Delete all timestamps
+  cisco.ios.ios_service:
+    state: deleted
+
 - name: Delete all logging on ios
   cisco.ios.ios_logging_global:
     state: deleted
