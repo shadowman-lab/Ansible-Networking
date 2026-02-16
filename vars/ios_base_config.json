@@ -8,7 +8,7 @@
     {
       "name": "GigabitEthernet2",
       "description": "This is {{ configured_by }}",
-      "enabled": false
+      "enabled": true
     }
   ],
   "lacp_interfaces": [
