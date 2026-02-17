@@ -77,6 +77,44 @@
       ]
     }
   ],
+  "service": {
+  "slave_log": true,
+  "timestamps": [
+    {
+      "msg": "debug",
+      "timestamp": "datetime",
+      "datetime_options": {
+        "msec": true,
+        "localtime": true
+      }
+    },
+    {
+      "msg": "log",
+      "timestamp": "datetime",
+      "datetime_options": {
+        "msec": true,
+        "localtime": true
+      }
+    }
+  ],
+  "prompt": true,
+  "counters": 0,
+  "dhcp": true,
+  "password_recovery": true
+  },
+  "logging_global": {
+        "trap": "informational",
+        "hosts": [
+          {
+            "host": "172.16.2.101",
+            "transport": {
+              "tcp": {
+                "port": 5514
+              }
+            }
+          }
+        ]
+      },
   "static_routes": [
     {
       "address_families": [

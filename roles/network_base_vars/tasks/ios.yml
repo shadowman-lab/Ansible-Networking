@@ -42,28 +42,9 @@
 - name: Ensure timestamps configured
   cisco.ios.ios_service:
     state: overridden
-    config:
-      timestamps:
-        - msg: debug
-          enable: true
-          timestamp: datetime
-          datetime_options:
-            msec: true
-            localtime: true
-        - msg: log
-          enable: true
-          timestamp: datetime
-          datetime_options:
-            msec: true
-            localtime: true
+    config: "{{ ansible_network_resources['service'] }}"
 
 - name: Apply the logging configuration to Splunk
   cisco.ios.ios_logging_global:
     state: overridden
-    config:
-      hosts:
-        - hostname: 172.16.2.101
-          transport:
-            tcp:
-              port: 5514
-      trap: informational
+    config: "{{ ansible_network_resources['logging_global'] }}"

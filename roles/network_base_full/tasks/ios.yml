@@ -71,3 +71,37 @@
                   - forward_router_address: 198.51.101.3
                     name: merged_route_3
     state: overridden
+
+- name: Set timezone
+  cisco.ios.ios_config:
+    lines:
+      - clock timezone EST -5
+
+- name: Ensure timestamps configured
+  cisco.ios.ios_service:
+    state: overridden
+    config:
+      timestamps:
+        - msg: debug
+          enable: true
+          timestamp: datetime
+          datetime_options:
+            msec: true
+            localtime: true
+        - msg: log
+          enable: true
+          timestamp: datetime
+          datetime_options:
+            msec: true
+            localtime: true
+
+- name: Apply the logging configuration to Splunk
+  cisco.ios.ios_logging_global:
+    state: overridden
+    config:
+      hosts:
+        - hostname: 172.16.2.101
+          transport:
+            tcp:
+              port: 5514
+      trap: informational
