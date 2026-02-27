@@ -7,3 +7,4 @@ recursive-exclude .git *
 recursive-include collections *.yml
 recursive-include roles *
 recursive-include vars *
+include .code-workspace
