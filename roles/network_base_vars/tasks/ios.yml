@@ -38,6 +38,7 @@
   cisco.ios.ios_config:
     lines:
       - clock timezone EST -5
+      - clock summer-time EDT recurring
 
 - name: Ensure timestamps configured
   cisco.ios.ios_service:
