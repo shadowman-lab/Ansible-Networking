@@ -108,6 +108,9 @@
   },
   "logging_global": {
         "trap": "informational",
+        "origin_id": {
+          "tag": "hostname"
+        },
         "hosts": [
           {
             "host": "172.16.2.101",
