@@ -32,6 +32,12 @@
     regexp: username.*
     state: absent
 
+- name: REMOVE SNMP user configuration
+  ansible.builtin.lineinfile:
+    path: "{{ config_output.backup_path }}"
+    regexp: snmp-server user.*
+    state: absent
+
 - name: Find all NX-OS backups
   ansible.builtin.find:
     paths: /tmp/home/network/nxos_backup/{{ inventory_hostname }}

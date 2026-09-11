@@ -1,10 +1,10 @@
 ---
-- name: Backup eos device
+- name: Backup EOS device
   arista.eos.eos_config:
     backup: true
     backup_options:
       filename: "{{ lookup('pipe', 'date +%Y-%m-%d') }}.cfg"
-      dir_path: /tmp/home/network/arista_backup/{{ inventory_hostname }}
+      dir_path: /tmp/home/network/eos_backup/{{ inventory_hostname }}
   become: true
   register: config_output
 
@@ -20,9 +20,9 @@
     regexp: enable.*
     state: absent
 
-- name: Find all Arista backups
+- name: Find all EOS backups
   ansible.builtin.find:
-    paths: /tmp/home/network/arista_backup/{{ inventory_hostname }}
+    paths: /tmp/home/network/eos_backup/{{ inventory_hostname }}
     recurse: true
   register: backups
 

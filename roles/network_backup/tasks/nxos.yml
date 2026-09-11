@@ -30,6 +30,12 @@
     regexp: username.*
     state: absent
 
+- name: REMOVE SNMP user configuration
+  ansible.builtin.lineinfile:
+    path: "{{ config_output.backup_path }}"
+    regexp: snmp-server user.*
+    state: absent
+
 - name: Grab NXOS interface facts for new backup type
   cisco.nxos.nxos_facts:
     gather_subset:
