@@ -9,19 +9,19 @@
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
     path: /tmp/home/network/{{ inventory_hostname }}.cfg
-    line: Building configuration...
+    line: '!Command: show running-config'
     state: absent
 
 - name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
     path: /tmp/home/network/{{ inventory_hostname }}.cfg
-    regexp: Current configuration.*
+    regexp: '!Running configuration last done at.*'
     state: absent
 
-- name: REMOVE enable password
+- name: REMOVE NON CONFIG LINES - REGEXP
   ansible.builtin.lineinfile:
     path: /tmp/home/network/{{ inventory_hostname }}.cfg
-    regexp: enable password.*
+    regexp: '!Time.*'
     state: absent
 
 - name: REMOVE username and password
