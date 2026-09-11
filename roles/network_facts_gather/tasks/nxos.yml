@@ -1,0 +1,10 @@
+---
+- name: Grab Cisco NXOS facts
+  cisco.nxos.nxos_facts:
+    gather_subset: min
+    gather_network_resources: all
+  register: nxosfacts
+
+- name: Display NXOS Facts
+  ansible.builtin.debug:
+    var: nxosfacts

@@ -3,6 +3,10 @@
   ansible.builtin.include_tasks: ios.yml
   when: ansible_network_os == 'cisco.ios.ios'
 
+- name: Gather NXOS Facts
+  ansible.builtin.include_tasks: nxos.yml
+  when: ansible_network_os == 'cisco.nxos.nxos'
+
 - name: Gather EOS Facts
   ansible.builtin.include_tasks: eos.yml
   when: ansible_network_os == 'arista.eos.eos'

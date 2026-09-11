@@ -1,0 +1,9 @@
+---
+- name: Retrieve NXOS version
+  cisco.nxos.nxos_command:
+    commands: show version
+  register: version
+
+- name: Output NXOS version
+  ansible.builtin.debug:
+    var: version.stdout_lines

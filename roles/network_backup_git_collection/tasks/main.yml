@@ -13,6 +13,10 @@
   ansible.builtin.include_tasks: ios.yml
   when: ansible_network_os == 'cisco.ios.ios'
 
+- name: Perform NX-OS backup
+  ansible.builtin.include_tasks: nxos.yml
+  when: ansible_network_os == 'cisco.nxos.nxos'
+
 - name: Perform EOS backup
   ansible.builtin.include_tasks: eos.yml
   when: ansible_network_os == 'arista.eos.eos'

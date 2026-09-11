@@ -1,10 +1,10 @@
 ---
-- name: Backup IOS device
-  cisco.ios.ios_config:
+- name: Backup nxos device
+  cisco.nxos.nxos_config:
     backup: true
     backup_options:
       filename: "{{ lookup('pipe', 'date +%Y-%m-%d') }}.cfg"
-      dir_path: /tmp/home/network/ios_backup/{{ inventory_hostname }}
+      dir_path: /tmp/home/network/nxos_backup/{{ inventory_hostname }}
   become: true
   register: config_output
 
@@ -32,9 +32,9 @@
     regexp: username.*
     state: absent
 
-- name: Find all IOS backups
+- name: Find all NX-OS backups
   ansible.builtin.find:
-    paths: /tmp/home/network/ios_backup/{{ inventory_hostname }}
+    paths: /tmp/home/network/nxos_backup/{{ inventory_hostname }}
     recurse: true
   register: backups
 
